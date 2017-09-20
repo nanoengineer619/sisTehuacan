@@ -161,9 +161,8 @@ if (strlen(session_id()) < 1)
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="usuario.php"><i class="fa fa-circle-o"></i> Departamento</a></li>
-                <li><a href="proveedor.php"><i class="fa fa-circle-o"></i> Area</a></li>
-                <li><a href="permiso.php"><i class="fa fa-circle-o"></i> Edificio</a></li>
+                <li><a href="proveedor.php"><i class="fa fa-circle-o"></i>Exterior</a></li>
+                <li><a href="permiso.php"><i class="fa fa-circle-o"></i> Enterior</a></li>
               </ul>
             </li>';
             }
