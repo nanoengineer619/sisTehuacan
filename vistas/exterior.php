@@ -34,8 +34,8 @@ if ($_SESSION['compras']==1)
                           <thead>
                             <th>Opciones</th>
                             <th>Edificio</th>
-                            <th>Consumo Mensual</th>
                             <th>Consumo Semanal</th>
+                            <th>Consumo Mensual</th>
                             <th>Consumo semestral</th>
                             <th>Total</th>
                           </thead>
@@ -44,8 +44,8 @@ if ($_SESSION['compras']==1)
                           <tfoot>
                            <th>Opciones</th>
                             <th>Edificio</th>
-                            <th>Consumo Mensual</th>
                             <th>Consumo Semanal</th>
+                            <th>Consumo Mensual</th>
                             <th>Consumo semestral</th>
                             <th>Total</th>
                           </tfoot>
@@ -54,7 +54,7 @@ if ($_SESSION['compras']==1)
                     <div class="panel-body" style="height: 400px;" id="formularioregistros">
                         <form name="formulario" id="formulario" method="POST">
                           <div class="form-group col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                            <label>Proveedor(*):</label>
+                            <label>Edificio:</label>
                             <input type="hidden" name="idingreso" id="idingreso">
                             <select id="idproveedor" name="idproveedor" class="form-control selectpicker" data-live-search="true" required>
                               

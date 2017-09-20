@@ -36,6 +36,8 @@ if ($_SESSION['compras']==1)
                             <th>Fecha</th>
                             <th>Proveedor</th>
                             <th>Usuario</th>
+                            <th>Comprobante</th>
+                            <th>Serie</th>
                             <th>Total Compra</th>
                             <th>Estado</th>
                           </thead>
@@ -46,6 +48,8 @@ if ($_SESSION['compras']==1)
                             <th>Fecha</th>
                             <th>Proveedor</th>
                             <th>Usuario</th>
+                            <th>Comprobante</th>
+                            <th>Serie</th>
                             <th>Total Compra</th>
                             <th>Estado</th>
                           </tfoot>

@@ -152,17 +152,32 @@ if (strlen(session_id()) < 1)
             </li>';
             }
             ?>
-              <?php 
+            <?php 
             if ($_SESSION['areas']==1)
             {
               echo '<li class="treeview">
               <a href="#">
-                <i class="fa fa-folder"></i> <span>Areas</span>
+                <i class="fa fa-folder"></i> <span>Edificios</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="proveedor.php"><i class="fa fa-circle-o"></i>Exterior</a></li>
-                <li><a href="permiso.php"><i class="fa fa-circle-o"></i> Enterior</a></li>
+                <li><a href="exterior.php"><i class="fa fa-circle-o"></i>Edificios</a></li>
+                <li><a href="interior.php"><i class="fa fa-circle-o"></i> Departamentos</a></li>
+              </ul>
+            </li>';
+            }
+            ?>
+              <?php 
+            if ($_SESSION['diagnostico']==1)
+            {
+              echo '<li class="treeview">
+              <a href="#">
+                <i class="fa fa-folder"></i> <span>Diagnostico</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="exterior.php"><i class="fa fa-circle-o"></i>Exterior</a></li>
+                <li><a href="interior.php"><i class="fa fa-circle-o"></i> Interior</a></li>
               </ul>
             </li>';
             }

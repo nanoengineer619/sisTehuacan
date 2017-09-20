@@ -19,7 +19,7 @@ $total_compra=isset($_POST["total_compra"])? limpiarCadena($_POST["total_compra"
 switch ($_GET["op"]){
 	case 'guardaryeditar':
 		if (empty($idingreso)){
-			$rspta=$ingreso->insertar($idproveedor,$idusuario,$tipo_comprobante,$serie_comprobante,$num_comprobante,$fecha_hora,$impuesto,$total_compra,$_POST["idarticulo"],$_POST["cantidad"],$_POST["precio_compra"],$_POST["precio_venta"]);
+			$rspta=$ingreso->insertar($idproveedor,$idusuario,$tipo_comprobante,$serie_comprobante,$num_comprobante,$fecha_hora,$impuesto,$total_compra,$_POST["idarticulo"],$_POST["cantidad"],$_POST["precio_compra"]);
 			echo $rspta ? "Ingreso registrado" : "No se pudieron registrar todos los datos del ingreso";
 		}
 		else {
