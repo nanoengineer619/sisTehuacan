@@ -34,28 +34,40 @@ if ($_SESSION['compras']==1)
                         <table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
                           <thead>
                             <th>Opciones</th>
-                            <th>Edificio</th>
-                            <th>Consumo Semanal</th>
-                            <th>Consumo Mensual</th>
-                            <th>Consumo semestral</th>
-                            <th>Total</th>
+                            <th>Nom.Elemento</th>
+                            <th>Cantidad</th>
+                            <th>Potencia</th>
+                            <th>Potencia Total</th>
+                            <th>Capacidad</th>
+                            <th>T. Operación</th>
+                            <th>Consumo</th>
+                            <th>Funcionando</th>
+                            <th>Fundidas</th>
+                            <th>Fecha</th>
+                            <th>Descripcion</th>
                           </thead>
                           <tbody>
                           </tbody>
                           <tfoot>
-                           <th>Opciones</th>
-                            <th>Edificio</th>
-                            <th>Consumo Semanal</th>
-                            <th>Consumo Mensual</th>
-                            <th>Consumo semestral</th>
-                            <th>Total</th>
+                            <th>Opciones</th>
+                            <th>Nom.Elemento</th>
+                            <th>Cantidad</th>
+                            <th>Potencia</th>
+                            <th>Potencia Total</th>
+                            <th>Capacidad</th>
+                            <th>T. Operación</th>
+                            <th>Consumo</th>
+                            <th>Funcionando</th>
+                            <th>Fundidas</th>
+                            <th>Fecha</th>
+                            <th>Descripcion</th>
                           </tfoot>
                         </table>
                     </div>
                     <div class="panel-body" style="height: 400px;" id="formularioregistros">
                         <form name="formulario" id="formulario" method="POST">
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <label>Nombre(*):</label>
+                            <label>Nombre Elemento:</label>
                             <input type="text" class="form-control" name="nombre" id="nombre" required="">
                           </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -118,45 +130,6 @@ if ($_SESSION['compras']==1)
 
     </div><!-- /.content-wrapper -->
   <!--Fin-Contenido-->
-
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Seleccione un Artículo</h4>
-        </div>
-        <div class="modal-body">
-          <table id="tblarticulos" class="table table-striped table-bordered table-condensed table-hover">
-            <thead>
-                <th>Opciones</th>
-                <th>Nombre</th>
-                <th>Categoría</th>
-                <th>Código</th>
-                <th>Stock</th>
-                <th>Imagen</th>
-            </thead>
-            <tbody>
-
-            </tbody>
-            <tfoot>
-              <th>Opciones</th>
-                <th>Nombre</th>
-                <th>Categoría</th>
-                <th>Código</th>
-                <th>Stock</th>
-                <th>Imagen</th>
-            </tfoot>
-          </table>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Fin modal -->
 <?php
 }
 else
@@ -166,7 +139,7 @@ else
 
 require 'footer.php';
 ?>
-<script type="text/javascript" src="scripts/ingreso.js"></script>
+<script type="text/javascript" src="scripts/exterior.js"></script>
 <?php
 }
 ob_end_flush();
