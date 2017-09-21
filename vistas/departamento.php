@@ -100,7 +100,7 @@ if ($_SESSION['compras']==1)
                           <div class="form-group col-lg-8 col-md-8 col-sm-6 col-xs-12">
                             <label>Descripción:</label>
                             <textarea class="form-control" name="descripcion" id="descripcion" required=""></textarea>
-                          </div>         
+                          </div>
 
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <button class="btn btn-primary" type="submit" id="btnGuardar"><i class="fa fa-save"></i> Guardar</button>
