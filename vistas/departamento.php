@@ -34,21 +34,33 @@ if ($_SESSION['compras']==1)
                         <table id="tbldepartamento" class="table table-striped table-bordered table-condensed table-hover">
                           <thead>
                             <th>Opciones</th>
-                            <th>Nombre</th>
+                            <th>Edificio</th>
+                            <th>Departamento</th>
                             <th>Elemento</th>
                             <th>Cantidad</th>
                             <th>Potencia</th>
                             <th>P. Total</th>
+                            <th>Capacidad</th>
+                            <th>Funcionando</th>
+                            <th>Fundidos</th>
+                            <th>Descripcion</th>
+                            <th>Fecha</th>
                           </thead>
                           <tbody>
                           </tbody>
                           <tfoot>
                             <th>Opciones</th>
-                            <th>Nombre</th>
+                            <th>Edificio</th>
+                            <th>Departamento</th>
                             <th>Elemento</th>
                             <th>Cantidad</th>
                             <th>Potencia</th>
                             <th>P. Total</th>
+                            <th>Capacidad</th>
+                            <th>Funcionando</th>
+                            <th>Fundidos</th>
+                            <th>Descripcion</th>
+                            <th>Fecha</th>
                           </tfoot>
                         </table>
                     </div>
@@ -62,43 +74,43 @@ if ($_SESSION['compras']==1)
                             </select>
                           </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <label>Departamento(*):</label>
-                            <input type="text" class="form-control" name="nombre" id="nombre" required="">
+                            <label>Departamento(*)</label>
+                            <input type="text" class="form-control" name="nombre" id="nombre" required="" placeholder="Departamento">
                           </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <label>Elemento del Departamento(*):</label>
-                              <input type="text" class="form-control" name="elemento" id="elemento" maxlength="7" placeholder="Elemento">
+                            <label>Elemento del Departamento(*)</label>
+                              <input type="text" class="form-control"  name="elemento" id="elemento" maxlength="7" placeholder="Elemento">
                           </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <label>Numero de Elementos:</label>
-                            <input type="number" class="form-control" name="cantidad" id="cantidad" maxlength="7" placeholder="Cantidad">
+                            <label>Numero de Elementos</label>
+                            <input type="text" class="form-control" name="cantidad" onkeyup="calcular();" id="cantidad" maxlength="7" placeholder="Cantidad" value="">
                           </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <label>Potencia:</label>
-                            <input type="number" class="form-control" name="potencia" id="potencia" maxlength="10" placeholder="Número" required="">
+                            <label>Potencia</label>
+                            <input type="text" class="form-control" name="potencia" onkeyup="calcular();" id="potencia" maxlength="10" placeholder="Número" value="" required="">
                           </div>
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
-                            <label>Pot.Total:</label>
-                            <input type="number" class="form-control" name="potencia_total" id="potencia_total" required="">
+                            <label>Potencia Total</label>
+                            <input type="text" class="form-control" name="potencia_total" id="potencia_total" value="" placeholder="Total">
                           </div>
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
-                            <label>Capacidad:</label>
-                            <input type="number" class="form-control" name="capacidad" id="capacidad" required="">
+                            <label>Capacidad</label>
+                            <input type="text" class="form-control" name="capacidad" maxlength="7" id="capacidad" required="">
                           </div>
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
-                            <label>Funcionando:</label>
+                            <label>Funcionando</label>
                             <input type="number" class="form-control" name="funcionando" id="funcionando" required="">
                           </div>
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
-                            <label>Fundidas:</label>
+                            <label>Fundidas</label>
                             <input type="number" class="form-control" name="fundidas" id="fundidas" required="">
                           </div>
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
-                            <label>Fecha:</label>
-                            <input type="date" class="form-control" name="fecha_hora" id="fecha_hora" required="">
+                            <label>Fecha</label>
+                            <input type="text" class="form-control" name="fecha_hora" id="fecha_hora" required="" readonly="">
                           </div>
                           <div class="form-group col-lg-8 col-md-8 col-sm-6 col-xs-12">
-                            <label>Descripción:</label>
+                            <label>Descripción</label>
                             <textarea class="form-control" name="descripcion" id="descripcion" required=""></textarea>
                           </div>         
 

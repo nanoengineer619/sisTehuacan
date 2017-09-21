@@ -4,7 +4,6 @@ var tabla;
 function init(){
 	mostrarform(false);
 	listar();
-
 	$("#formulario").on("submit",function(e)
 	{
 		guardaryeditar(e);
@@ -34,8 +33,13 @@ function limpiar()
 	$("#fecha_hora").val("");
 	$("#descripcion").val("");
 	$("#idedificio").val("");
-}
 
+	var now = new Date();
+	var day = ("0" + now.getDate()).slice(-2);
+	var month = ("0" + (now.getMonth() + 1)).slice(-2);
+	var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+    $('#fecha_hora').val(today);
+}
 //Función mostrar formulario
 function mostrarform(flag)
 {
@@ -166,5 +170,12 @@ function activar(iddepartamento)
         }
 	})
 }
-
+function calcular(){
+	var cant=0;
+	var  pot =0;
+	cant = $("#cantidad").val();
+	pot = $("#potencia").val();
+	total = cant * pot;
+	$("#potencia_total").val(total);
+}
 init();

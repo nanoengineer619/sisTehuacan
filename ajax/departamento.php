@@ -37,15 +37,12 @@ switch ($_GET["op"]){
 	case 'listar':
 		$rspta=$departamento->listar();
  		//Vamos a declarar un array
- 		$data= Array();
+ 		$data=Array();
 
  		while ($reg=$rspta->fetch_object()){
  			$data[]=array(
- 				"0"=>($reg->condicion)?'<button class="btn btn-warning" onclick="mostrar('.$reg->iddepartamento.')"><i class="fa fa-pencil"></i></button>'.
- 					' <button class="btn btn-danger" onclick="desactivar('.$reg->iddepartamento.')"><i class="fa fa-close"></i></button>':
- 					'<button class="btn btn-warning" onclick="mostrar('.$reg->iddepartamento.')"><i class="fa fa-pencil"></i></button>'.
- 					' <button class="btn btn-primary" onclick="activar('.$reg->iddepartamento.')"><i class="fa fa-check"></i></button>',
- 				"1"=>$reg->edificio_nom,
+ 				"0"=>'<button class="btn btn-warning" onclick="mostrar('.$reg->iddepartamento.')"><i class="fa fa-pencil"></i></button>',
+ 				"1"=>$reg->edificio,
  				"2"=>$reg->nombre,
  				"3"=>$reg->elemento,
  				"4"=>$reg->cantidad,
@@ -55,7 +52,7 @@ switch ($_GET["op"]){
                 "8"=>$reg->funcionando,
                 "9"=>$reg->fundidas,
                 "10"=>$reg->descripcion,
-                "11"=>$reg->fecha,
+                "11"=>$reg->fecha_hora
  				);
  		}
  		$results = array(
