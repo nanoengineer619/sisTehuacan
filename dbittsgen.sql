@@ -154,6 +154,15 @@ CREATE TABLE `edificio` (
   `nombre` VARCHAR(80) NOT NULL,
   `condicion` TINYINT(1) NOT NULL)
 ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table.`departamento`
+-- -----------------------------------------------------
+CREATE TABLE `modulo` (
+  `idmodulo` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `nombre` VARCHAR(80) NOT NULL,
+  `condicion` TINYINT(1) NOT NULL)
+ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `departamento`
 -- -----------------------------------------------------

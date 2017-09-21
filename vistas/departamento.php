@@ -49,19 +49,7 @@ if ($_SESSION['compras']==1)
                           <tbody>
                           </tbody>
                           <tfoot>
-                            <th>Opciones</th>
-                            <th>Edificio</th>
-                            <th>Departamento</th>
-                            <th>Elemento</th>
-                            <th>Cantidad</th>
-                            <th>Potencia</th>
-                            <th>P. Total</th>
-                            <th>Capacidad</th>
-                            <th>Funcionando</th>
-                            <th>Fundidos</th>
-                            <th>Descripcion</th>
-                            <th>Fecha</th>
-                          </tfoot>
+                            
                         </table>
                     </div>
                     <div class="panel-body" style="height: 400px;" id="formularioregistros">
@@ -74,20 +62,26 @@ if ($_SESSION['compras']==1)
                             </select>
                           </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <label>Departamento(*):</label>
+                            <select id="departamen" name="departamen" class="form-control selectpicker" data-live-search="true" required>
+
+                            </select>
+                          </div>
+                          <!--<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <label>Departamento(*)</label>
                             <input type="text" class="form-control" name="nombre" id="nombre" required="" placeholder="Departamento">
-                          </div>
+                          </div>-->
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <label>Elemento del Departamento(*)</label>
-                              <input type="text" class="form-control"  name="elemento" id="elemento" maxlength="7" placeholder="Elemento">
+                              <input type="text" class="form-control"  name="elemento" id="elemento" placeholder="Elemento">
                           </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <label>Numero de Elementos</label>
-                            <input type="text" class="form-control" name="cantidad" onkeyup="calcular();" id="cantidad" maxlength="7" placeholder="Cantidad" value="" required="">
+                            <input type="text" class="form-control" name="cantidad" onchange="calcular();" on id="cantidad" maxlength="7" placeholder="Cantidad" value="" required="">
                           </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <label>Potencia</label>
-                            <input type="text" class="form-control" name="potencia" onkeyup="calcular();" id="potencia" maxlength="10" placeholder="Número" value="" required="">
+                            <input type="text" class="form-control" name="potencia" onchange="calcular();" id="potencia" maxlength="10" placeholder="Número" value="" required="">
                           </div>
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
                             <label>Potencia Total</label>

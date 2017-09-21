@@ -5,7 +5,7 @@ $departamento=new Departamento();
 
 $iddepartamento=isset($_POST["iddepartamento"])? limpiarCadena($_POST["iddepartamento"]):"";
 $idedificio=isset($_POST["idedificio"])? limpiarCadena($_POST["idedificio"]):"";
-$nombre=isset($_POST["nombre"])? limpiarCadena($_POST["nombre"]):"";
+$nombre=isset($_POST["departamen"])? limpiarCadena($_POST["departamen"]):"";
 $elemento=isset($_POST["elemento"])? limpiarCadena($_POST["elemento"]):"";
 $cantidad=isset($_POST["cantidad"])? limpiarCadena($_POST["cantidad"]):"";
 $potencia=isset($_POST["potencia"])? limpiarCadena($_POST["potencia"]):"";
@@ -73,6 +73,17 @@ switch ($_GET["op"]){
 		while ($reg = $rspta->fetch_object())
 				{
 					echo '<option value=' . $reg->idedificio . '>' . $reg->nombre . '</option>';
+				}
+	break;
+	case "selectDepartamento":
+		require_once "../modelos/modulo.php";
+		$modulo = new Modulo();
+
+		$rspta = $modulo->select();
+
+		while ($reg = $rspta->fetch_object())
+				{
+					echo '<option value=' . $reg->nombre . '>' . $reg->nombre . '</option>';
 				}
 	break;
 }

@@ -15,6 +15,12 @@ function init(){
 	            $('#idedificio').selectpicker('refresh');
 
 	});
+
+	$.post("../ajax/departamento.php?op=selectDepartamento", function(d){
+	            $("#departamen").html(d);
+	            $('#departamen').selectpicker('refresh');
+
+	});
 	$("#imagenmuestra").hide();
 }
 
@@ -22,7 +28,7 @@ function init(){
 function limpiar()
 {
 	$("#iddepartamento").val("");
-	$("#nombre").val("");
+	$("#departamen").val("");
 	$("#elemento").val("");
 	$("#cantidad").val("");
 	$("#potencia").val("");
@@ -129,9 +135,10 @@ function mostrar(iddepartamento)
 
 		$("#idedificio").val(data.idedificio);
 		$('#idedificio').selectpicker('refresh');
-		$("#nombre").val(data.nombre);
+		$("#departamen").val(data.nombre);
+		$('#departamen').selectpicker('refresh');
 		$("#elemento").val(data.elemento);
-		$("#cantidad").val(data.cantidada);
+		$("#cantidad").val(data.cantidad);
 		$("#potencia").val(data.potencia);
 		$("#potencia_total").val(data.potencia_total);
 		$("#capacidad").val(data.capacidad);
