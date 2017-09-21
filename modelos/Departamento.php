@@ -24,6 +24,11 @@ Class Departamento
 		$sql="UPDATE departamento SET idedificio='$idedificio',nombre='$nombre',elemento='$elemento',cantidad='$cantidad',potencia='$potencia',potencia_total='$potencia_total',capacidad='$capacidad',funcionando='$funcionando',fundidas='$fundidas',descripcion='$descripcion',fecha_hora='$fecha_hora' WHERE iddepartamento='$iddepartamento'";
 		return ejecutarConsulta($sql);
 	}
+	public function desactivar($iddepartamento)
+	{
+		$sql="DELETE FROM departamento  WHERE iddepartamento='$iddepartamento'";
+		return ejecutarConsulta($sql);
+	}
 	//Implementar un método para mostrar los datos de un registro a modificar
 	public function mostrar($iddepartamento)
 	{

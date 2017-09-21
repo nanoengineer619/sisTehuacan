@@ -146,7 +146,7 @@ function mostrar(iddepartamento)
 //Función para desactivar registros
 function desactivar(iddepartamento)
 {
-	bootbox.confirm("¿Está Seguro de desactivar el artículo?", function(result){
+	bootbox.confirm("¿Está Seguro de desactivar eliminar este departamento?", function(result){
 		if(result)
         {
         	$.post("../ajax/departamento.php?op=desactivar", {iddepartamento : iddepartamento}, function(e){
