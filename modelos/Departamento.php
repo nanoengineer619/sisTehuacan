@@ -2,7 +2,7 @@
 //Incluímos inicialmente la conexión a la base de datos
 require "../config/Conexion.php";
 
-Class Articulo
+Class Departamento
 {
 	//Implementamos nuestro constructor
 	public function __construct()
@@ -11,59 +11,37 @@ Class Articulo
 	}
 
 	//Implementamos un método para insertar registros
-	public function insertar($idcategoria,$codigo,$nombre,$stock,$descripcion,$imagen)
+	public function insertar($idedificio,$nombre,$elemento,$cantidad,$potencia,$potencia_total,$capacidad,$funcionando,$fundidas,$descripcion,$fecha_hora)
 	{
-		$sql="INSERT INTO articulo (idcategoria,codigo,nombre,stock,descripcion,imagen,condicion)
-		VALUES ('$idcategoria','$codigo','$nombre','$stock','$descripcion','$imagen','1')";
+		$sql="INSERT INTO departamento (idedificio,nombre,elemento,cantidad,potencia,potencia_total,capacidad,funcionando,fundidas,descripcion,fecha_hora)
+		VALUES ('$idedificio','$nombre','$elemento','$cantidad','$potencia','$potencia_total','$capacidad','$funcionando','$fundidas','$descripcion','$fecha_hora')";
 		return ejecutarConsulta($sql);
 	}
 
 	//Implementamos un método para editar registros
-	public function editar($idarticulo,$idcategoria,$codigo,$nombre,$stock,$descripcion,$imagen)
+	public function editar($iddepertamento,$idedificio,$nombre,$elemento,$cantidad,$potencia,$potencia_total,$capacidad,$funcionando,$fundidas,$descripcion,$fecha_hora)
 	{
-		$sql="UPDATE articulo SET idcategoria='$idcategoria',codigo='$codigo',nombre='$nombre',stock='$stock',descripcion='$descripcion',imagen='$imagen' WHERE idarticulo='$idarticulo'";
+		$sql="UPDATE departamento SET idedificio='$idedificio',nombre='$nombre',elemento='$elemento',cantidad='$cantidad',potencia='$potencia',potencia_total='$potencia_total',capacidad='$capacidad',funcionando='$funcionando',fundidas='$fundidas',descripcion='$descripcion',fecha_hora='$fecha_hora' WHERE iddepertamento='$iddepertamento'";
 		return ejecutarConsulta($sql);
 	}
-
-	//Implementamos un método para desactivar registros
-	public function desactivar($idarticulo)
-	{
-		$sql="UPDATE articulo SET condicion='0' WHERE idarticulo='$idarticulo'";
-		return ejecutarConsulta($sql);
-	}
-
-	//Implementamos un método para activar registros
-	public function activar($idarticulo)
-	{
-		$sql="UPDATE articulo SET condicion='1' WHERE idarticulo='$idarticulo'";
-		return ejecutarConsulta($sql);
-	}
-
 	//Implementar un método para mostrar los datos de un registro a modificar
-	public function mostrar($idarticulo)
+	public function mostrar($iddepertamento)
 	{
-		$sql="SELECT * FROM articulo WHERE idarticulo='$idarticulo'";
+		$sql="SELECT * FROM departamento WHERE iddepertamento='$iddepertamento'";
 		return ejecutarConsultaSimpleFila($sql);
 	}
 
 	//Implementar un método para listar los registros
 	public function listar()
 	{
-		$sql="SELECT a.idarticulo,a.idcategoria,c.nombre as categoria,a.codigo,a.nombre,a.stock,a.descripcion,a.imagen,a.condicion FROM articulo a INNER JOIN categoria c ON a.idcategoria=c.idcategoria";
+		$sql="SELECT d.iddepertamento,d.idedificio,e.nombre as edificio,d.codigo,d.nombre,d.stock,d.descripcion,d.imagen,d.condicion FROM departamento p INNER JOIN edificio e ON d.idedificio=e.idedificio";
 		return ejecutarConsulta($sql);		
 	}
 
 	//Implementar un método para listar los registros activos
 	public function listarActivos()
 	{
-		$sql="SELECT a.idarticulo,a.idcategoria,c.nombre as categoria,a.codigo,a.nombre,a.stock,a.descripcion,a.imagen,a.condicion FROM articulo a INNER JOIN categoria c ON a.idcategoria=c.idcategoria WHERE a.condicion='1'";
-		return ejecutarConsulta($sql);		
-	}
-
-	//Implementar un método para listar los registros activos, su último precio y el stock (vamos a unir con el último registro de la tabla detalle_ingreso)
-	public function listarActivosVenta()
-	{
-		$sql="SELECT a.idarticulo,a.idcategoria,c.nombre as categoria,a.codigo,a.nombre,a.stock,(SELECT precio_venta FROM detalle_ingreso WHERE idarticulo=a.idarticulo order by iddetalle_ingreso desc limit 0,1) as precio_venta,a.descripcion,a.imagen,a.condicion FROM articulo a INNER JOIN categoria c ON a.idcategoria=c.idcategoria WHERE a.condicion='1'";
+		$sql="SELECT d.iddepertamento,d.idedificio,e.nombre as edificio_nom,d.nombre,d.elemento,d.cantidad,d.potencia,d.potencia_total,d.capacidad,d.funcionando,d.fundidas,d.descripcion,d.fecha_hora FROM departamento a INNER JOIN edificio e ON d.idedificio=e.idedificio";
 		return ejecutarConsulta($sql);		
 	}
 }

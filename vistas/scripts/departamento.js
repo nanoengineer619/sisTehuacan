@@ -12,8 +12,8 @@ function init(){
 
 	//Cargamos los items al select categoria
 	$.post("../ajax/departamento.php?op=selectEdificio", function(r){
-	            $("#iddepartamento").html(r);
-	            $('#iddepartamento').selectpicker('refresh');
+	            $("#idedificio").html(r);
+	            $('#idedificio').selectpicker('refresh');
 
 	});
 	$("#imagenmuestra").hide();
@@ -65,7 +65,7 @@ function cancelarform()
 //Función Listar
 function listar()
 {
-	tabla=$('#tbllistado').dataTable(
+	tabla=$('#tbldepartamento').dataTable(
 	{
 		"aProcessing": true,//Activamos el procesamiento del datatables
 	    "aServerSide": true,//Paginación y filtrado realizados por el servidor
@@ -78,7 +78,7 @@ function listar()
 		        ],
 		"ajax":
 				{
-					url: '../ajax/articulo.php?op=listar',
+					url: '../ajax/departamento.php?op=listar',
 					type : "get",
 					dataType : "json",
 					error: function(e){
@@ -99,7 +99,7 @@ function guardaryeditar(e)
 	var formData = new FormData($("#formulario")[0]);
 
 	$.ajax({
-		url: "../ajax/articulo.php?op=guardaryeditar",
+		url: "../ajax/departamento.php?op=guardaryeditar",
 	    type: "POST",
 	    data: formData,
 	    contentType: false,
@@ -116,35 +116,36 @@ function guardaryeditar(e)
 	limpiar();
 }
 
-function mostrar(idarticulo)
+function mostrar(iddepartamento)
 {
-	$.post("../ajax/articulo.php?op=mostrar",{idarticulo : idarticulo}, function(data, status)
+	$.post("../ajax/departamento.php?op=mostrar",{iddepartamento : iddepartamento}, function(data, status)
 	{
 		data = JSON.parse(data);
 		mostrarform(true);
 
-		$("#idcategoria").val(data.idcategoria);
-		$('#idcategoria').selectpicker('refresh');
-		$("#codigo").val(data.codigo);
+		$("#idedificio").val(data.idedificio);
+		$('#idedificio').selectpicker('refresh');
 		$("#nombre").val(data.nombre);
-		$("#stock").val(data.stock);
+		$("#elemento").val(data.elemento);
+		$("#cantidad").val(data.cantidada);
+		$("#potencia").val(data.potencia);
+		$("#potencia_total").val(data.potencia_total);
+		$("#capacidad").val(data.capacidad);
+		$("#funcionando").val(data.funcionando);
+		$("#fundidas").val(data.fundidas);
+		$("#fecha_hora").val(data.fecha_hora);
 		$("#descripcion").val(data.descripcion);
-		$("#imagenmuestra").show();
-		$("#imagenmuestra").attr("src","../files/articulos/"+data.imagen);
-		$("#imagenactual").val(data.imagen);
- 		$("#idarticulo").val(data.idarticulo);
- 		generarbarcode();
-
+ 		$("#iddepartamento").val(data.iddepartamento);
  	})
 }
 
 //Función para desactivar registros
-function desactivar(idarticulo)
+function desactivar(iddepartamento)
 {
 	bootbox.confirm("¿Está Seguro de desactivar el artículo?", function(result){
 		if(result)
         {
-        	$.post("../ajax/articulo.php?op=desactivar", {idarticulo : idarticulo}, function(e){
+        	$.post("../ajax/departamento.php?op=desactivar", {iddepartamento : iddepartamento}, function(e){
         		bootbox.alert(e);
 	            tabla.ajax.reload();
         	});
@@ -153,31 +154,17 @@ function desactivar(idarticulo)
 }
 
 //Función para activar registros
-function activar(idarticulo)
+function activar(iddepartamento)
 {
 	bootbox.confirm("¿Está Seguro de activar el Artículo?", function(result){
 		if(result)
         {
-        	$.post("../ajax/articulo.php?op=activar", {idarticulo : idarticulo}, function(e){
+        	$.post("../ajax/departamento.php?op=activar", {iddepartamento : iddepartamento}, function(e){
         		bootbox.alert(e);
 	            tabla.ajax.reload();
         	});
         }
 	})
-}
-
-//función para generar el código de barras
-function generarbarcode()
-{
-	codigo=$("#codigo").val();
-	JsBarcode("#barcode", codigo);
-	$("#print").show();
-}
-
-//Función para imprimir el Código de barras
-function imprimir()
-{
-	$("#print").printArea();
 }
 
 init();

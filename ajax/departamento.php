@@ -1,76 +1,61 @@
 <?php
-require_once "../modelos/Articulo.php";
+require_once "../modelos/Departamento.php";
 
-$articulo=new Articulo();
+$departamento=new Departamento();
 
-$idarticulo=isset($_POST["idarticulo"])? limpiarCadena($_POST["idarticulo"]):"";
-$idcategoria=isset($_POST["idcategoria"])? limpiarCadena($_POST["idcategoria"]):"";
-$codigo=isset($_POST["codigo"])? limpiarCadena($_POST["codigo"]):"";
+$iddepartamento=isset($_POST["iddepartamento"])? limpiarCadena($_POST["iddepartamento"]):"";
+$idedificio=isset($_POST["idedificio"])? limpiarCadena($_POST["idedificio"]):"";
 $nombre=isset($_POST["nombre"])? limpiarCadena($_POST["nombre"]):"";
-$stock=isset($_POST["stock"])? limpiarCadena($_POST["stock"]):"";
+$elemento=isset($_POST["elemento"])? limpiarCadena($_POST["elemento"]):"";
+$cantidad=isset($_POST["cantidad"])? limpiarCadena($_POST["cantidad"]):"";
+$potencia=isset($_POST["potencia"])? limpiarCadena($_POST["potencia"]):"";
+$potencia_total=isset($_POST["potencia_total"])? limpiarCadena($_POST["potencia_total"]):"";
+$capacidad=isset($_POST["capacidad"])? limpiarCadena($_POST["capacidad"]):"";
+$funcionando=isset($_POST["funcionando"])? limpiarCadena($_POST["funcionando"]):"";
+$fundidas=isset($_POST["fundidas"])? limpiarCadena($_POST["fundidas"]):"";
 $descripcion=isset($_POST["descripcion"])? limpiarCadena($_POST["descripcion"]):"";
-$imagen=isset($_POST["imagen"])? limpiarCadena($_POST["imagen"]):"";
+$fecha_hora=isset($_POST["fecha_hora"])? limpiarCadena($_POST["fecha_hora"]):"";
 
 switch ($_GET["op"]){
 	case 'guardaryeditar':
 
-		if (!file_exists($_FILES['imagen']['tmp_name']) || !is_uploaded_file($_FILES['imagen']['tmp_name']))
-		{
-			$imagen=$_POST["imagenactual"];
-		}
-		else
-		{
-			$ext = explode(".", $_FILES["imagen"]["name"]);
-			if ($_FILES['imagen']['type'] == "image/jpg" || $_FILES['imagen']['type'] == "image/jpeg" || $_FILES['imagen']['type'] == "image/png")
-			{
-				$imagen = round(microtime(true)) . '.' . end($ext);
-				move_uploaded_file($_FILES["imagen"]["tmp_name"], "../files/articulos/" . $imagen);
-			}
-		}
-		if (empty($idarticulo)){
-			$rspta=$articulo->insertar($idcategoria,$codigo,$nombre,$stock,$descripcion,$imagen);
+		if (empty($iddepartamento)){
+			$rspta=$departamento->insertar($idedificio,$nombre,$elemento,$cantidad,$potencia,$potencia_total,$capacidad,$funcionando,$fundidas,$descripcion,$fecha_hora);
 			echo $rspta ? "Artículo registrado" : "Artículo no se pudo registrar";
 		}
 		else {
-			$rspta=$articulo->editar($idarticulo,$idcategoria,$codigo,$nombre,$stock,$descripcion,$imagen);
+			$rspta=$departamento->editar($iddepartamento,$idedificio,$nombre,$elemento,$cantidad,$potencia,$potencia_total,$capacidad,$funcionando,$fundidas,$descripcion,$fecha_hora);
 			echo $rspta ? "Artículo actualizado" : "Artículo no se pudo actualizar";
 		}
 	break;
-
-	case 'desactivar':
-		$rspta=$articulo->desactivar($idarticulo);
- 		echo $rspta ? "Artículo Desactivado" : "Artículo no se puede desactivar";
-	break;
-
-	case 'activar':
-		$rspta=$articulo->activar($idarticulo);
- 		echo $rspta ? "Artículo activado" : "Artículo no se puede activar";
-	break;
-
 	case 'mostrar':
-		$rspta=$articulo->mostrar($idarticulo);
+		$rspta=$departamento->mostrar($iddepartamento);
  		//Codificar el resultado utilizando json
  		echo json_encode($rspta);
 	break;
 
 	case 'listar':
-		$rspta=$articulo->listar();
+		$rspta=$departamento->listar();
  		//Vamos a declarar un array
  		$data= Array();
 
  		while ($reg=$rspta->fetch_object()){
  			$data[]=array(
- 				"0"=>($reg->condicion)?'<button class="btn btn-warning" onclick="mostrar('.$reg->idarticulo.')"><i class="fa fa-pencil"></i></button>'.
- 					' <button class="btn btn-danger" onclick="desactivar('.$reg->idarticulo.')"><i class="fa fa-close"></i></button>':
- 					'<button class="btn btn-warning" onclick="mostrar('.$reg->idarticulo.')"><i class="fa fa-pencil"></i></button>'.
- 					' <button class="btn btn-primary" onclick="activar('.$reg->idarticulo.')"><i class="fa fa-check"></i></button>',
- 				"1"=>$reg->nombre,
- 				"2"=>$reg->categoria,
- 				"3"=>$reg->codigo,
- 				"4"=>$reg->stock,
- 				"5"=>"<img src='../files/articulos/".$reg->imagen."' height='50px' width='50px' >",
- 				"6"=>($reg->condicion)?'<span class="label bg-green">Activado</span>':
- 				'<span class="label bg-red">Desactivado</span>'
+ 				"0"=>($reg->condicion)?'<button class="btn btn-warning" onclick="mostrar('.$reg->iddepartamento.')"><i class="fa fa-pencil"></i></button>'.
+ 					' <button class="btn btn-danger" onclick="desactivar('.$reg->iddepartamento.')"><i class="fa fa-close"></i></button>':
+ 					'<button class="btn btn-warning" onclick="mostrar('.$reg->iddepartamento.')"><i class="fa fa-pencil"></i></button>'.
+ 					' <button class="btn btn-primary" onclick="activar('.$reg->iddepartamento.')"><i class="fa fa-check"></i></button>',
+ 				"1"=>$reg->edificio_nom,
+ 				"2"=>$reg->nombre,
+ 				"3"=>$reg->elemento,
+ 				"4"=>$reg->cantidad,
+ 				"5"=>$reg->potencia,
+ 				"6"=>$reg->potencia_total,
+                "7"=>$reg->capacidad,
+                "8"=>$reg->funcionando,
+                "9"=>$reg->fundidas,
+                "10"=>$reg->descripcion,
+                "11"=>$reg->fecha,
  				);
  		}
  		$results = array(
@@ -83,14 +68,14 @@ switch ($_GET["op"]){
 	break;
 
 	case "selectEdificio":
-		require_once "../modelos/Departamento.php";
-		$departamento = new Departamento();
+		require_once "../modelos/Edificio.php";
+		$edificio = new Edificio();
 
-		$rspta = $departamento->select();
+		$rspta = $edificio->select();
 
 		while ($reg = $rspta->fetch_object())
 				{
-					echo '<option value=' . $reg->iddepartamento . '>' . $reg->nombre . '</option>';
+					echo '<option value=' . $reg->idedificio . '>' . $reg->nombre . '</option>';
 				}
 	break;
 }
