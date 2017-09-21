@@ -8,33 +8,20 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema mydb
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema mydb
--- -----------------------------------------------------
-
-create database dbittsgen;
-use dbittsgen;
--- -----------------------------------------------------
--- Table `mydb`.`proveedor`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbittsgen`.`proveedor` (
-  `idproveedor` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE `proveedor` (
+  `idproveedor` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `nombre` VARCHAR(80) NOT NULL,
   `direccion` VARCHAR(70) NOT NULL,
   `telefono` VARCHAR(10) NOT NULL,
-  `email` VARCHAR(50) NOT NULL,
-  PRIMARY KEY (`idproveedor`))
+  `email` VARCHAR(50) NOT NULL)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
 -- Table `mydb`.`usuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbittsgen`.`usuario` (
-  `idusuario` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE `usuario` (
+  `idusuario` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `nombre` VARCHAR(100) NOT NULL,
   `direccion` VARCHAR(70) NOT NULL,
   `telefono` VARCHAR(10) NOT NULL,
@@ -43,8 +30,7 @@ CREATE TABLE IF NOT EXISTS `dbittsgen`.`usuario` (
   `login` VARCHAR(20) NOT NULL,
   `clave` VARCHAR(64) NOT NULL,
   `imagen` VARCHAR(80) NOT NULL,
-  `condicion` TINYINT(1) NOT NULL,
-  PRIMARY KEY (`idusuario`))
+  `condicion` TINYINT(1) NOT NULL)
 ENGINE = InnoDB;
 
 INSERT INTO `usuario` (`idusuario`, `nombre`, `direccion`, `telefono`, `email`, `cargo`, `login`, `clave`, `imagen`, `condicion`) VALUES
@@ -52,8 +38,8 @@ INSERT INTO `usuario` (`idusuario`, `nombre`, `direccion`, `telefono`, `email`, 
 -- -----------------------------------------------------
 -- Table `mydb`.`ingreso`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbittsgen`.`ingreso` (
-  `idingreso` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ingreso` (
+  `idingreso` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `idproveedor` int(11) NOT NULL,
   `idusuario` int(11) NOT NULL,
   `tipo_comprobante` varchar(20) NOT NULL,
@@ -63,17 +49,16 @@ CREATE TABLE IF NOT EXISTS `dbittsgen`.`ingreso` (
   `impuesto` decimal(4,2) NOT NULL,
   `total_compra` decimal(11,2) NOT NULL,
   `estado` varchar(20) NOT NULL,
-  PRIMARY KEY (`idingreso`),
   INDEX `fk_proveedor_idx` (`idproveedor` ASC),
   INDEX `fk_usuario_idx` (`idusuario` ASC),
   CONSTRAINT `fk_proveedor`
     FOREIGN KEY (`idproveedor`)
-    REFERENCES `dbittsgen`.`proveedor` (`idproveedor`)
+    REFERENCES `proveedor` (`idproveedor`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_usuario`
     FOREIGN KEY (`idusuario`)
-    REFERENCES `dbittsgen`.`usuario` (`idusuario`)
+    REFERENCES `usuario` (`idusuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -82,17 +67,16 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`detalle_ingreso`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbittsgen`.`detalle_ingreso` (
-  `iddetalle_ingreso` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `detalle_ingreso` (
+  `iddetalle_ingreso` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `idingreso` int(11) NOT NULL,
   `idarticulo` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `precio_compra` decimal(11,2) NOT NULL,
-  PRIMARY KEY (`iddetalle_ingreso`),
   INDEX `fk_detalle_ingreso_idx` (`idingreso` ASC),
   CONSTRAINT `fk_detalle_ingreso`
     FOREIGN KEY (`idingreso`)
-    REFERENCES `dbittsgen`.`ingreso` (`idingreso`)
+    REFERENCES `ingreso` (`idingreso`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -101,20 +85,19 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`categoria`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbittsgen`.`categoria` (
-  `idcategoria` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE `categoria` (
+  `idcategoria` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `nombre` VARCHAR(80) NOT NULL,
   `descripcion` VARCHAR(256) NOT NULL,
-  `condicion` TINYINT(1) NOT NULL,
-  PRIMARY KEY (`idcategoria`))
+  `condicion` TINYINT(1) NOT NULL)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
 -- Table `mydb`.`articulo`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbittsgen`.`articulo` (
-  `idarticulo` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE `articulo` (
+  `idarticulo` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `idcategoria` INT NOT NULL,
   `codigo` Varchar(50) NOT NULL,
   `nombre` VARCHAR(50) NOT NULL,
@@ -122,11 +105,10 @@ CREATE TABLE IF NOT EXISTS `dbittsgen`.`articulo` (
   `descripcion` VARCHAR(256) NOT NULL,
   `imagen` VARCHAR(80) NOT NULL,
   `condicion` TINYINT(1) NOT NULL,
-  PRIMARY KEY (`idarticulo`),
   INDEX `fk_articulo_categoria_idx` (`idcategoria` ASC),
   CONSTRAINT `fk_articulo_categoria`
     FOREIGN KEY (`idcategoria`)
-    REFERENCES `dbittsgen`.`categoria` (`idcategoria`)
+    REFERENCES `categoria` (`idcategoria`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -135,24 +117,22 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`permiso`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbittsgen`.`permiso` (
-  `idpermiso` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idpermiso`))
+CREATE TABLE `permiso` (
+  `idpermiso` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `nombre` VARCHAR(45) NOT NULL)
 ENGINE = InnoDB;
 
 INSERT INTO `permiso` (`idpermiso`, `nombre`) VALUES
 (1, 'Escritorio'),
 (2, 'Almacen'),
 (3, 'Compras'),
-(4, 'Diagnostico'),
-(5, 'Acceso'),
-(6, 'Areas'),
-(7, 'Graficas');
+(4, 'Acceso'),
+(5, 'Areas'),
+(6, 'Graficas');
 -- -----------------------------------------------------
 -- Table `mydb`.`usuario_permiso`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbittsgen`.`usuario_permiso` (
+CREATE TABLE `usuario_permiso` (
   `idusuario_permiso` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `idusuario` INT NOT NULL,
   `idpermiso` INT NOT NULL)
@@ -166,50 +146,53 @@ INSERT INTO `usuario_permiso` (`idusuario_permiso`, `idusuario`, `idpermiso`) VA
 (5 ,1, 5),
 (6 ,1, 6),
 (7 ,1, 7);
-
 -- -----------------------------------------------------
--- Table `mydb`.`diagnostico`
+-- Table.`edificio`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbittsgen`.`diagnostico` (
-  `iddiagnostico` INT NOT NULL AUTO_INCREMENT,
-  `idcliente` INT NOT NULL,
-  `idusuario` INT NOT NULL,
-  `fecha_hora` DATETIME NOT NULL,
-  `total_diagnostico` INT NOT NULL,
-  `estado` VARCHAR(20) NOT NULL,
-  PRIMARY KEY (`iddiagnostico`))
+CREATE TABLE `edificio` (
+  `idedificio` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `nombre` VARCHAR(80) NOT NULL,
+  `condicion` TINYINT(1) NOT NULL)
+ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `departamento`
+-- -----------------------------------------------------
+CREATE TABLE `departamento` (
+  `iddepartamento` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `nombre` VARCHAR(80) NOT NULL,
+  `elemento` VARCHAR(50) NOT NULL,
+  `cantidad` INT(5) NOT NULL,
+  `potencia` INT(7) NOT NULL,
+  `potencia_total` INT(7) NOT NULL,
+  `capacidad` DECIMAL(5,3) NOT NULL,
+  `funcionando` INT(5) NOT NULL,
+  `fundidas` INT(5) NOT NULL,
+  `descripcion` VARCHAR(256) NOT NULL,
+  `fecha_hora` datetime NOT NULL)
 ENGINE = InnoDB;
 
+CREATE TABLE `interior` (
+  `idinterior` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `idedificio` int(11) NOT NULL,
+  `idusuario` int(11) NOT NULL,
+  `fecha_hora` datetime NOT NULL,
+  `consumo_total` decimal(11,2) NOT NULL,
+  `estado` varchar(20) NOT NULL)
+  ENGINE = InnoDB;
 
--- -----------------------------------------------------
--- Table `mydb`.`detalle_diagnostico`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbittsgen`.`detalle_diagnostico` (
-  `iddetalle_diagnostico` INT NOT NULL AUTO_INCREMENT,
-  `iddiagnostico` INT NOT NULL,
-  `idarticulo` INT NOT NULL,
-  `cantidad` INT NOT NULL,
-  PRIMARY KEY (`iddetalle_diagnostico`),
-  INDEX `fk_detalle_diagnostico_idx` (`iddiagnostico` ASC),
-  INDEX `fk_detalle_diagnostico_articulo_idx` (`idarticulo` ASC),
-  CONSTRAINT `fk_detalle_diagnostico`
-    FOREIGN KEY (`iddiagnostico`)
-    REFERENCES `mydb`.`diagnostico` (`iddiagnostico`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_detalle_diagnostico_articulo`
-    FOREIGN KEY (`idarticulo`)
-    REFERENCES `dbittsgen`.`articulo` (`idarticulo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+CREATE TABLE `detalle_interiores` (
+  `iddetalle_interiores` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `idinterior` INT(11) NOT NULL,
+  `iddepartamento` INT(11) NOT NULL,
+  `operacion_semanal` int(11) NOT NULL,
+  `operacion_semanal` int(11) NOT NULL,
+  `operacion_semanal` int(11) NOT NULL)
 ENGINE = InnoDB;
-
-
 -- -----------------------------------------------------
 -- Table `mydb`.`exterior`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbittsgen`.`exterior` (
-  `idexterior` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE `exterior` (
+  `idexterior` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `nombre` VARCHAR(50) NOT NULL,
   `cantidad` INT(7) NOT NULL,
   `potencia` INT(5) NOT NULL,
@@ -219,57 +202,17 @@ CREATE TABLE IF NOT EXISTS `dbittsgen`.`exterior` (
   `consumo` DECIMAL(8,4) NOT NULL,
   `funcionando` INT(5) NOT NULL,
   `fundidas` INT(5) NOT NULL,
-  `descripcion` VARCHAR(256) NOT NULL,
-  PRIMARY KEY (`idexterior`))
+  `descripcion` VARCHAR(256) NOT NULL)
 ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`interiores`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbittsgen`.`interiores` (
-  `idinterior` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(80) NOT NULL,
-  `elemento` VARCHAR(50) NOT NULL,
-  `cantidad` INT(5) NOT NULL,
-  `potencia` INT(7) NOT NULL,
-  `potencia_total` INT(7) NOT NULL,
-  `capacidad` DECIMAL(5,3) NOT NULL,
-  `tiempo_operacion` INT(5) NOT NULL,
-  `consumo` DECIMAL(5,3) NOT NULL,
-  `funcionando` INT(5) NOT NULL,
-  `fundidas` INT(5) NOT NULL,
-  `descripcion` VARCHAR(256) NOT NULL,
-  PRIMARY KEY (`idinterior`))
-ENGINE = InnoDB;
-
-
 -- -----------------------------------------------------
 -- Table `mydb`.`detalle_interiores`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbittsgen`.`detalle_interiores` (
-  `iddetalle_interiores` INT NOT NULL AUTO_INCREMENT,
-  `idinterior` INT(5) NOT NULL,
-  `clasificacion` VARCHAR(60) NOT NULL,
-  `semanal` DECIMAL(7,4) NOT NULL,
-  `mensual` DECIMAL(8,4) NOT NULL,
-  `semestral` DECIMAL(9,4) NOT NULL,
-  PRIMARY KEY (`iddetalle_interiores`),
-  INDEX `fk_iddetalle_interior_idx` (`idinterior` ASC),
-  CONSTRAINT `fk_iddetalle_interior`
-    FOREIGN KEY (`idinterior`)
-    REFERENCES `dbittsgen`.`interiores` (`idinterior`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
 CREATE TABLE Resetpass (
   id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  ncuser nvarchar(10) NOT NULL,
+  ncuser varchar(10) NOT NULL,
   username varchar(100) NOT NULL,
   token varchar(64) NOT NULL,
   creado timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (id),
   UNIQUE KEY ncuser (ncuser)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 

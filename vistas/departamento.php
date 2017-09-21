@@ -31,7 +31,7 @@ if ($_SESSION['compras']==1)
                     <!-- /.box-header -->
                     <!-- centro -->
                     <div class="panel-body table-responsive" id="listadoregistros">
-                        <table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
+                        <table id="tbldepartamento" class="table table-striped table-bordered table-condensed table-hover">
                           <thead>
                             <th>Opciones</th>
                             <th>Nombre</th>
@@ -62,16 +62,16 @@ if ($_SESSION['compras']==1)
                             </select>
                           </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <label>Nombre(*):</label>
+                            <label>Departamento(*):</label>
                             <input type="text" class="form-control" name="nombre" id="nombre" required="">
                           </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <label>Elemento(*):</label>
-                              <input type="number" class="form-control" name="elemento" id="elemento" maxlength="7" placeholder="Serie">
+                            <label>Elemento del Departamento(*):</label>
+                              <input type="text" class="form-control" name="elemento" id="elemento" maxlength="7" placeholder="Elemento">
                           </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <label>Cantidad:</label>
-                            <input type="number" class="form-control" name="cantidad" id="cantidad" maxlength="7" placeholder="Serie">
+                            <label>Numero de Elementos:</label>
+                            <input type="number" class="form-control" name="cantidad" id="cantidad" maxlength="7" placeholder="Cantidad">
                           </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <label>Potencia:</label>
