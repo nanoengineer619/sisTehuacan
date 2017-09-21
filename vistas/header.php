@@ -1,5 +1,5 @@
 <?php
-if (strlen(session_id()) < 1) 
+if (strlen(session_id()) < 1)
   session_start();
 ?>
 <!DOCTYPE html>
@@ -24,7 +24,7 @@ if (strlen(session_id()) < 1)
     <link rel="shortcut icon" href="../public/img/favicon.ico">
 
     <!-- DATATABLES -->
-    <link rel="stylesheet" type="text/css" href="../public/datatables/jquery.dataTables.min.css">    
+    <link rel="stylesheet" type="text/css" href="../public/datatables/jquery.dataTables.min.css">
     <link href="../public/datatables/buttons.dataTables.min.css" rel="stylesheet"/>
     <link href="../public/datatables/responsive.dataTables.min.css" rel="stylesheet"/>
 
@@ -54,7 +54,7 @@ if (strlen(session_id()) < 1)
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
               <!-- Messages: style can be found in dropdown.less-->
-              
+
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -66,20 +66,20 @@ if (strlen(session_id()) < 1)
                   <li class="user-header">
                     <img src="../files/usuarios/<?php echo $_SESSION['imagen']; ?>" class="img-circle" alt="User Image">
                     <p>
-                      Instituto Tecnológico de Tehuacán Sistema de Gestión Energética                  
+                      Instituto Tecnológico de Tehuacán Sistema de Gestión Energética
                     </p>
                   </li>
-                  
+
                   <!-- Menu Footer-->
                   <li class="user-footer">
-                    
+
                     <div class="pull-right">
                       <a href="../ajax/usuario.php?op=salir" class="btn btn-default btn-flat">Cerrar</a>
                     </div>
                   </li>
                 </ul>
               </li>
-              
+
             </ul>
           </div>
 
@@ -88,11 +88,11 @@ if (strlen(session_id()) < 1)
       <!-- Left side column. contains the logo and sidebar -->
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">       
+        <section class="sidebar">
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header"></li>
-            <?php 
+            <?php
             if ($_SESSION['escritorio']==1)
             {
               echo '<li>
@@ -103,7 +103,7 @@ if (strlen(session_id()) < 1)
             }
             ?>
 
-            <?php 
+            <?php
             if ($_SESSION['almacen']==1)
             {
               echo '<li class="treeview">
@@ -120,7 +120,7 @@ if (strlen(session_id()) < 1)
             }
             ?>
 
-            <?php 
+            <?php
             if ($_SESSION['compras']==1)
             {
               echo '<li class="treeview">
@@ -135,8 +135,8 @@ if (strlen(session_id()) < 1)
               </ul>
             </li>';
             }
-            ?>                        
-            <?php 
+            ?>
+            <?php
             if ($_SESSION['acceso']==1)
             {
               echo '<li class="treeview">
@@ -147,12 +147,12 @@ if (strlen(session_id()) < 1)
               <ul class="treeview-menu">
                 <li><a href="usuario.php"><i class="fa fa-circle-o"></i> Usuarios</a></li>
                 <li><a href="permiso.php"><i class="fa fa-circle-o"></i> Permisos</a></li>
-                
+
               </ul>
             </li>';
             }
             ?>
-            <?php 
+            <?php
             if ($_SESSION['areas']==1)
             {
               echo '<li class="treeview">
@@ -167,7 +167,7 @@ if (strlen(session_id()) < 1)
             </li>';
             }
             ?>
-              <?php 
+              <?php
             if ($_SESSION['diagnostico']==1)
             {
               echo '<li class="treeview">
@@ -182,7 +182,7 @@ if (strlen(session_id()) < 1)
             </li>';
             }
             ?>
-            <?php 
+            <?php
             if($_SESSION['graficas']==1)
             {
               echo '<li class="treeview">
@@ -191,7 +191,7 @@ if (strlen(session_id()) < 1)
                 <!--<i class="fa fa-angle-left pull-right"></i> -->
               </a>
               <!--<ul class="treeview-menu">
-                <li><a href="consultacompras.php"><i class="fa fa-circle-o"></i>Graficas</a></li>                
+                <li><a href="consultacompras.php"><i class="fa fa-circle-o"></i>Graficas</a></li>
               </ul>-->
             </li>';
            }
@@ -208,7 +208,7 @@ if (strlen(session_id()) < 1)
                <!--<small class="label pull-right bg-yellow">IT</small>-->
               </a>
             </li>
-                        
+
           </ul>
         </section>
         <!-- /.sidebar -->
