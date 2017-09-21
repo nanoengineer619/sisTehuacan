@@ -31,30 +31,31 @@ if ($_SESSION['compras']==1)
                     <!-- /.box-header -->
                     <!-- centro -->
                     <div class="panel-body table-responsive" id="listadoregistros">
-                        <table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
+                        <table id="tbledificios" class="table table-striped table-bordered table-condensed table-hover">
                           <thead>
                             <th>Opciones</th>
                             <th>Nombre</th>
+                            <th>Estado</th>
                           </thead>
                           <tbody>
                           </tbody>
                           <tfoot>
                             <th>Opciones</th>
                             <th>Nombre</th>
+                            <th>Estado</th>
                           </tfoot>
                         </table>
                     </div>
                     <!--Formulario para insertar un edificio-->
                     <div class="panel-body" style="height: 400px;" id="formularioregistros">
                         <form name="formulario" id="formulario" method="POST">
-                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <button id="btnAgregarArt" type="button" class="btn btn-primary"> <span class="fa fa-plus"></span> Agregar</button>
-                        </div>
                         <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
                             <label>Edificio:</label>
-                            <input type="text" class="form-control" name="serie_comprobante" id="serie_comprobante" placeholder="Inserta Edificio">
+                            <input type="hidden" name="idedificio" id="idedificio">
+                            <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Inserta Edificio">
                         </div>
                             <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <button class="btn btn-primary" type="submit" id="btnGuardar"><i class="fa fa-save"></i> Guardar</button>
                             <button id="btnCancelar" class="btn btn-danger" onclick="cancelarform()" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
                           </div>
                         </form>
@@ -67,44 +68,6 @@ if ($_SESSION['compras']==1)
 
     </div><!-- /.content-wrapper -->
   <!--Fin-Contenido-->
-
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Seleccione un Artículo</h4>
-        </div>
-        <div class="modal-body">
-          <table id="tblarticulos" class="table table-striped table-bordered table-condensed table-hover">
-            <thead>
-                <th>Opciones</th>
-                <th>Nombre</th>
-                <th>Categoría</th>
-                <th>Código</th>
-                <th>Stock</th>
-                <th>Imagen</th>
-            </thead>
-            <tbody>
-
-            </tbody>
-            <tfoot>
-              <th>Opciones</th>
-                <th>Nombre</th>
-                <th>Categoría</th>
-                <th>Código</th>
-                <th>Stock</th>
-                <th>Imagen</th>
-            </tfoot>
-          </table>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
-    </div>
-  </div>
   <!-- Fin modal -->
 <?php
 }
@@ -115,7 +78,7 @@ else
 
 require 'footer.php';
 ?>
-<script type="text/javascript" src="scripts/ingreso.js"></script>
+<script type="text/javascript" src="scripts/edificio.js"></script>
 <?php
 }
 ob_end_flush();
