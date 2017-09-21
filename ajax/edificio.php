@@ -46,8 +46,8 @@ switch ($_GET["op"]){
  					'<button class="btn btn-warning" onclick="mostrar('.$reg->idedificio.')"><i class="fa fa-pencil"></i></button>'.
  					' <button class="btn btn-primary" onclick="activar('.$reg->idedificio.')"><i class="fa fa-check"></i></button>',
  				"1"=>$reg->nombre,
- 				"2"=>($reg->condicion)?'<span class="label bg-green">Activado</span>':
- 				'<span class="label bg-red">Desactivado</span>'
+ 				"2"=>($reg->condicion)?'<span class="label bg-green">En Servicio</span>':
+ 				'<span class="label bg-red">Fuera de Servicio</span>'
  				);
  		}
  		$results = array(
