@@ -83,7 +83,7 @@ if ($_SESSION['compras']==1)
                           </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <label>Numero de Elementos</label>
-                            <input type="text" class="form-control" name="cantidad" onkeyup="calcular();" id="cantidad" maxlength="7" placeholder="Cantidad" value="">
+                            <input type="text" class="form-control" name="cantidad" onkeyup="calcular();" id="cantidad" maxlength="7" placeholder="Cantidad" value="" required="">
                           </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <label>Potencia</label>
@@ -91,7 +91,7 @@ if ($_SESSION['compras']==1)
                           </div>
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
                             <label>Potencia Total</label>
-                            <input type="text" class="form-control" name="potencia_total" id="potencia_total" value="" placeholder="Total">
+                            <input type="text" class="form-control" name="potencia_total" id="potencia_total" readonly="" value="" placeholder="Total">
                           </div>
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
                             <label>Capacidad</label>

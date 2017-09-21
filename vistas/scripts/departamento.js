@@ -177,5 +177,7 @@ function calcular(){
 	pot = $("#potencia").val();
 	total = cant * pot;
 	$("#potencia_total").val(total);
+    cpt = total/1000; 
+	$("#capacidad").val(cpt);
 }
 init();
