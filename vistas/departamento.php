@@ -56,78 +56,51 @@ if ($_SESSION['compras']==1)
                         <form name="formulario" id="formulario" method="POST">
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <label>Edificio(*):</label>
-                            <input type="hidden" name="idingreso" id="idingreso">
-                            <select id="idproveedor" name="idproveedor" class="form-control selectpicker" data-live-search="true" required>
+                            <input type="hidden" name="iddepartamento" id="iddepartamento">
+                            <select id="idedificio" name="idedificio" class="form-control selectpicker" data-live-search="true" required>
 
                             </select>
                           </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <label>Nombre(*):</label>
-                            <input type="text" class="form-control" name="fecha_hora" id="fecha_hora" required="">
+                            <input type="text" class="form-control" name="nombre" id="nombre" required="">
                           </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <label>Elemento(*):</label>
-                              <input type="number" class="form-control" name="serie_comprobante" id="serie_comprobante" maxlength="7" placeholder="Serie">
+                              <input type="number" class="form-control" name="elemento" id="elemento" maxlength="7" placeholder="Serie">
                           </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <label>Cantidad:</label>
-                            <input type="number" class="form-control" name="serie_comprobante" id="serie_comprobante" maxlength="7" placeholder="Serie">
+                            <input type="number" class="form-control" name="cantidad" id="cantidad" maxlength="7" placeholder="Serie">
                           </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <label>Potencia:</label>
-                            <input type="number" class="form-control" name="num_comprobante" id="num_comprobante" maxlength="10" placeholder="Número" required="">
+                            <input type="number" class="form-control" name="potencia" id="potencia" maxlength="10" placeholder="Número" required="">
                           </div>
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
                             <label>Pot.Total:</label>
-                            <input type="number" class="form-control" name="impuesto" id="impuesto" required="">
+                            <input type="number" class="form-control" name="potencia_total" id="potencia_total" required="">
                           </div>
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
                             <label>Capacidad:</label>
-                            <input type="number" class="form-control" name="impuesto" id="impuesto" required="">
+                            <input type="number" class="form-control" name="capacidad" id="capacidad" required="">
                           </div>
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
                             <label>Funcionando:</label>
-                            <input type="number" class="form-control" name="impuesto" id="impuesto" required="">
+                            <input type="number" class="form-control" name="funcionando" id="funcionando" required="">
                           </div>
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
                             <label>Fundidas:</label>
-                            <input type="number" class="form-control" name="impuesto" id="impuesto" required="">
+                            <input type="number" class="form-control" name="fundidas" id="fundidas" required="">
                           </div>
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
                             <label>Fecha:</label>
-                            <input type="date" class="form-control" name="impuesto" id="impuesto" required="">
+                            <input type="date" class="form-control" name="fecha_hora" id="fecha_hora" required="">
                           </div>
                           <div class="form-group col-lg-8 col-md-8 col-sm-6 col-xs-12">
                             <label>Descripción:</label>
-                            <textarea class="form-control" name="impuesto" id="impuesto" required=""></textarea>
-                          </div>
-                          <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <a data-toggle="modal" href="#myModal">
-                              <button id="btnAgregarArt" type="button" class="btn btn-primary"> <span class="fa fa-plus"></span> Agregar Departamento</button>
-                            </a>
-                          </div>
-
-                          <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
-                            <table id="detalles" class="table table-striped table-bordered table-condensed table-hover" style="position: relative;">
-                              <thead style="background-color:#A9D0F5">
-                                    <th>Opciones</th>
-                                    <th>Artículo</th>
-                                    <th>Cantidad</th>
-                                    <th>Precio Compra</th>
-                                    <th>Subtotal</th>
-                                </thead>
-                                <tfoot style="background-color:#EEEEEE;">
-                                    <th>TOTAL</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th><h4 id="total">$ 0.00</h4><input type="hidden" name="total_compra" id="total_compra"></th>
-                                </tfoot>
-                                <tbody>
-
-                                </tbody>
-                            </table>
-                          </div>
+                            <textarea class="form-control" name="descripcion" id="descripcion" required=""></textarea>
+                          </div>         
 
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <button class="btn btn-primary" type="submit" id="btnGuardar"><i class="fa fa-save"></i> Guardar</button>
@@ -145,44 +118,6 @@ if ($_SESSION['compras']==1)
     </div><!-- /.content-wrapper -->
   <!--Fin-Contenido-->
 
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Seleccione un Artículo</h4>
-        </div>
-        <div class="modal-body">
-          <table id="tblarticulos" class="table table-striped table-bordered table-condensed table-hover">
-            <thead>
-                <th>Opciones</th>
-                <th>Nombre</th>
-                <th>Categoría</th>
-                <th>Código</th>
-                <th>Stock</th>
-                <th>Imagen</th>
-            </thead>
-            <tbody>
-
-            </tbody>
-            <tfoot>
-              <th>Opciones</th>
-                <th>Nombre</th>
-                <th>Categoría</th>
-                <th>Código</th>
-                <th>Stock</th>
-                <th>Imagen</th>
-            </tfoot>
-          </table>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Fin modal -->
 <?php
 }
 else
@@ -192,7 +127,7 @@ else
 
 require 'footer.php';
 ?>
-<script type="text/javascript" src="scripts/ingreso.js"></script>
+<script type="text/javascript" src="scripts/departamento.js"></script>
 <?php
 }
 ob_end_flush();

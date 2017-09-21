@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once "../modelos/Articulo.php";
 
 $articulo=new Articulo();
@@ -18,7 +18,7 @@ switch ($_GET["op"]){
 		{
 			$imagen=$_POST["imagenactual"];
 		}
-		else 
+		else
 		{
 			$ext = explode(".", $_FILES["imagen"]["name"]);
 			if ($_FILES['imagen']['type'] == "image/jpg" || $_FILES['imagen']['type'] == "image/jpeg" || $_FILES['imagen']['type'] == "image/png")
@@ -82,15 +82,15 @@ switch ($_GET["op"]){
 
 	break;
 
-	case "selectCategoria":
-		require_once "../modelos/Categoria.php";
-		$categoria = new Categoria();
+	case "selectEdificio":
+		require_once "../modelos/Departamento.php";
+		$departamento = new Departamento();
 
-		$rspta = $categoria->select();
+		$rspta = $departamento->select();
 
 		while ($reg = $rspta->fetch_object())
 				{
-					echo '<option value=' . $reg->idcategoria . '>' . $reg->nombre . '</option>';
+					echo '<option value=' . $reg->iddepartamento . '>' . $reg->nombre . '</option>';
 				}
 	break;
 }

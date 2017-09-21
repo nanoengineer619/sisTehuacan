@@ -7,13 +7,13 @@ function init(){
 
 	$("#formulario").on("submit",function(e)
 	{
-		guardaryeditar(e);	
+		guardaryeditar(e);
 	})
 
 	//Cargamos los items al select categoria
-	$.post("../ajax/articulo.php?op=selectCategoria", function(r){
-	            $("#idcategoria").html(r);
-	            $('#idcategoria').selectpicker('refresh');
+	$.post("../ajax/departamento.php?op=selectEdificio", function(r){
+	            $("#iddepartamento").html(r);
+	            $('#iddepartamento').selectpicker('refresh');
 
 	});
 	$("#imagenmuestra").hide();
@@ -22,14 +22,18 @@ function init(){
 //Función limpiar
 function limpiar()
 {
-	$("#codigo").val("");
+	$("#iddepartamento").val("");
 	$("#nombre").val("");
+	$("#elemento").val("");
+	$("#cantidad").val("");
+	$("#potencia").val("");
+	$("#potencia_total").val("");
+	$("#capacidad").val("");
+	$("#funcionando").val("");
+	$("#fundidas").val("");
+	$("#fecha_hora").val("");
 	$("#descripcion").val("");
-	$("#stock").val("");
-	$("#imagenmuestra").attr("src","");
-	$("#imagenactual").val("");
-	$("#print").hide();
-	$("#idarticulo").val("");
+	$("#idedificio").val("");
 }
 
 //Función mostrar formulario
@@ -66,7 +70,7 @@ function listar()
 		"aProcessing": true,//Activamos el procesamiento del datatables
 	    "aServerSide": true,//Paginación y filtrado realizados por el servidor
 	    dom: 'Bfrtip',//Definimos los elementos del control de tabla
-	    buttons: [		          
+	    buttons: [
 		            'copyHtml5',
 		            'excelHtml5',
 		            'csvHtml5',
@@ -76,9 +80,9 @@ function listar()
 				{
 					url: '../ajax/articulo.php?op=listar',
 					type : "get",
-					dataType : "json",						
+					dataType : "json",
 					error: function(e){
-						console.log(e.responseText);	
+						console.log(e.responseText);
 					}
 				},
 		"bDestroy": true,
@@ -102,8 +106,8 @@ function guardaryeditar(e)
 	    processData: false,
 
 	    success: function(datos)
-	    {                    
-	          bootbox.alert(datos);	          
+	    {
+	          bootbox.alert(datos);
 	          mostrarform(false);
 	          tabla.ajax.reload();
 	    }
@@ -116,7 +120,7 @@ function mostrar(idarticulo)
 {
 	$.post("../ajax/articulo.php?op=mostrar",{idarticulo : idarticulo}, function(data, status)
 	{
-		data = JSON.parse(data);		
+		data = JSON.parse(data);
 		mostrarform(true);
 
 		$("#idcategoria").val(data.idcategoria);
@@ -143,7 +147,7 @@ function desactivar(idarticulo)
         	$.post("../ajax/articulo.php?op=desactivar", {idarticulo : idarticulo}, function(e){
         		bootbox.alert(e);
 	            tabla.ajax.reload();
-        	});	
+        	});
         }
 	})
 }
@@ -157,7 +161,7 @@ function activar(idarticulo)
         	$.post("../ajax/articulo.php?op=activar", {idarticulo : idarticulo}, function(e){
         		bootbox.alert(e);
 	            tabla.ajax.reload();
-        	});	
+        	});
         }
 	})
 }
