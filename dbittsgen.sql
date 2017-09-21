@@ -45,7 +45,7 @@ CREATE TABLE `ingreso` (
   `tipo_comprobante` varchar(20) NOT NULL,
   `serie_comprobante` varchar(7) DEFAULT NULL,
   `num_comprobante` varchar(10) NOT NULL,
-  `fecha_hora` datetime NOT NULL,
+  `fecha_hora` date NOT NULL,
   `impuesto` decimal(4,2) NOT NULL,
   `total_compra` decimal(11,2) NOT NULL,
   `estado` varchar(20) NOT NULL,
@@ -159,6 +159,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE `departamento` (
   `iddepartamento` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `idedificio` INT NOT NULL,
   `nombre` VARCHAR(80) NOT NULL,
   `elemento` VARCHAR(50) NOT NULL,
   `cantidad` INT(5) NOT NULL,
@@ -168,14 +169,20 @@ CREATE TABLE `departamento` (
   `funcionando` INT(5) NOT NULL,
   `fundidas` INT(5) NOT NULL,
   `descripcion` VARCHAR(256) NOT NULL,
-  `fecha_hora` datetime NOT NULL)
+  `fecha_hora` date NOT NULL,
+  INDEX `fk_departamento_edificio_idx` (`idedificio` ASC),
+  CONSTRAINT `fk_departamento_edificio`
+    FOREIGN KEY (`idedificio`)
+    REFERENCES `edificio` (`idedificio`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 CREATE TABLE `interior` (
   `idinterior` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `idedificio` int(11) NOT NULL,
   `idusuario` int(11) NOT NULL,
-  `fecha_hora` datetime NOT NULL,
+  `fecha_hora` date NOT NULL,
   `consumo_total` decimal(11,2) NOT NULL,
   `estado` varchar(20) NOT NULL)
   ENGINE = InnoDB;

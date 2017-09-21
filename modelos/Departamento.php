@@ -19,29 +19,29 @@ Class Departamento
 	}
 
 	//Implementamos un método para editar registros
-	public function editar($iddepertamento,$idedificio,$nombre,$elemento,$cantidad,$potencia,$potencia_total,$capacidad,$funcionando,$fundidas,$descripcion,$fecha_hora)
+	public function editar($iddepartamento,$idedificio,$nombre,$elemento,$cantidad,$potencia,$potencia_total,$capacidad,$funcionando,$fundidas,$descripcion,$fecha_hora)
 	{
-		$sql="UPDATE departamento SET idedificio='$idedificio',nombre='$nombre',elemento='$elemento',cantidad='$cantidad',potencia='$potencia',potencia_total='$potencia_total',capacidad='$capacidad',funcionando='$funcionando',fundidas='$fundidas',descripcion='$descripcion',fecha_hora='$fecha_hora' WHERE iddepertamento='$iddepertamento'";
+		$sql="UPDATE departamento SET idedificio='$idedificio',nombre='$nombre',elemento='$elemento',cantidad='$cantidad',potencia='$potencia',potencia_total='$potencia_total',capacidad='$capacidad',funcionando='$funcionando',fundidas='$fundidas',descripcion='$descripcion',fecha_hora='$fecha_hora' WHERE iddepartamento='$iddepartamento'";
 		return ejecutarConsulta($sql);
 	}
 	//Implementar un método para mostrar los datos de un registro a modificar
-	public function mostrar($iddepertamento)
+	public function mostrar($iddepartamento)
 	{
-		$sql="SELECT * FROM departamento WHERE iddepertamento='$iddepertamento'";
+		$sql="SELECT * FROM departamento WHERE iddepartamento='$iddepartamento'";
 		return ejecutarConsultaSimpleFila($sql);
 	}
 
 	//Implementar un método para listar los registros
 	public function listar()
 	{
-		$sql="SELECT d.iddepertamento,d.idedificio,e.nombre as edificio,d.codigo,d.nombre,d.stock,d.descripcion,d.imagen,d.condicion FROM departamento p INNER JOIN edificio e ON d.idedificio=e.idedificio";
+		$sql="SELECT d.iddepartamento,d.idedificio,e.nombre as edificio,d.nombre,d.elemento,d.cantidad,d.potencia,d.potencia_total,d.capacidad,d.funcionando,d.fundidas,d.descripcion,d.fecha_hora FROM departamento d INNER JOIN edificio e ON d.idedificio=e.idedificio";
 		return ejecutarConsulta($sql);		
 	}
 
 	//Implementar un método para listar los registros activos
 	public function listarActivos()
 	{
-		$sql="SELECT d.iddepertamento,d.idedificio,e.nombre as edificio_nom,d.nombre,d.elemento,d.cantidad,d.potencia,d.potencia_total,d.capacidad,d.funcionando,d.fundidas,d.descripcion,d.fecha_hora FROM departamento a INNER JOIN edificio e ON d.idedificio=e.idedificio";
+		$sql="SELECT d.iddepartamento,d.idedificio,e.nombre as edificio,d.nombre,d.elemento,d.cantidad,d.potencia,d.potencia_total,d.capacidad,d.funcionando,d.fundidas,d.descripcion,d.fecha_hora FROM departamento d INNER JOIN edificio e ON d.idedificio=e.idedificio";
 		return ejecutarConsulta($sql);		
 	}
 }
