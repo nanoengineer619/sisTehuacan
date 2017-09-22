@@ -19,36 +19,35 @@ Class Exterior
 	}
 
 	//Implementamos un método para editar registros
-	public function editar($idexterior,$nombre,$elemento,$cantidad,$potencia,$potencia_total,$capacidad,$funcionando,$fundidas,$descripcion,$fecha_hora)
+	public function editar($idexterior,$nombre,$cantidad,$potencia,$potencia_total,$capacidad,$tiempo_operacion,$consumo,$funcionando,$fundidas,$fecha,$descripcion)
 	{
-		$sql="UPDATE departamento SET idedificio='$idedificio',nombre='$nombre',elemento='$elemento',cantidad='$cantidad',potencia='$potencia',potencia_total='$potencia_total',capacidad='$capacidad',funcionando='$funcionando',fundidas='$fundidas',descripcion='$descripcion',fecha_hora='$fecha_hora' WHERE iddepartamento='$iddepartamento'";
+		$sql="UPDATE exterior SET idexterior='$idexterior',nombre='$nombre',cantidad='$cantidad',potencia='$potencia',potencia_total='$potencia_total,capacidad='$capacidad',tiempo_operacion='$tiempo_operacion',consumo='$consumo'funcionando='$funcionando',fundidas='$fundidas',fecha='$fecha',descripcion='$descripcion' WHERE idexterior='$idexterior'";
 		return ejecutarConsulta($sql);
 	}
-	public function desactivar($iddepartamento)
+	public function desactivar($idexterior)
 	{
-		$sql="DELETE FROM departamento  WHERE iddepartamento='$iddepartamento'";
+		$sql="DELETE FROM exterior WHERE idexterior='$idexterior'";
 		return ejecutarConsulta($sql);
 	}
 	//Implementar un método para mostrar los datos de un registro a modificar
-	public function mostrar($iddepartamento)
+	public function mostrar($idexterior)
 	{
-		$sql="SELECT * FROM departamento WHERE iddepartamento='$iddepartamento'";
+		$sql="SELECT * FROM exterior WHERE idexterior='$idexterior'";
 		return ejecutarConsultaSimpleFila($sql);
 	}
 
-	//Implementar un método para listar los registros
+  //Implementar un método para listar los registros
 	public function listar()
 	{
-		$sql="SELECT d.iddepartamento,d.idedificio,e.nombre as edificio,d.nombre,d.elemento,d.cantidad,d.potencia,d.potencia_total,d.capacidad,d.funcionando,d.fundidas,d.descripcion,d.fecha_hora FROM departamento d INNER JOIN edificio e ON d.idedificio=e.idedificio";
+		$sql="SELECT * FROM exterior";
 		return ejecutarConsulta($sql);
 	}
-
-	//Implementar un método para listar los registros activos
-	public function listarActivos()
+	//Implementar un método para listar los registros y mostrar en el select
+  /*
+	public function select()
 	{
-		$sql="SELECT d.iddepartamento,d.idedificio,e.nombre as edificio,d.nombre,d.elemento,d.cantidad,d.potencia,d.potencia_total,d.capacidad,d.funcionando,d.fundidas,d.descripcion,d.fecha_hora FROM departamento d INNER JOIN edificio e ON d.idedificio=e.idedificio";
+		$sql="SELECT * FROM exterior where condicion=1";
 		return ejecutarConsulta($sql);
-	}
-
-
+	}*/
+}
 ?>

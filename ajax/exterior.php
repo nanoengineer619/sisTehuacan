@@ -29,7 +29,7 @@ switch ($_GET["op"]){
 		}
 	break;
 	case 'mostrar':
-		$rspta=$exterior->mostrar($iddepartamento);
+		$rspta=$exterior->mostrar($idexterior);
  		//Codificar el resultado utilizando json
  		echo json_encode($rspta);
 	break;
@@ -40,24 +40,21 @@ switch ($_GET["op"]){
  		$data= Array();
 
  		while ($reg=$rspta->fetch_object()){
- 			$data[]=array(
- 				"0"=>($reg->condicion)?'<button class="btn btn-warning" onclick="mostrar('.$reg->iddepartamento.')"><i class="fa fa-pencil"></i></button>'.
- 					' <button class="btn btn-danger" onclick="desactivar('.$reg->iddepartamento.')"><i class="fa fa-close"></i></button>':
- 					'<button class="btn btn-warning" onclick="mostrar('.$reg->iddepartamento.')"><i class="fa fa-pencil"></i></button>'.
- 					' <button class="btn btn-primary" onclick="activar('.$reg->iddepartamento.')"><i class="fa fa-check"></i></button>',
- 				"1"=>$reg->edificio_nom,
- 				"2"=>$reg->nombre,
- 				"3"=>$reg->elemento,
- 				"4"=>$reg->cantidad,
- 				"5"=>$reg->potencia,
- 				"6"=>$reg->potencia_total,
-                "7"=>$reg->capacidad,
-                "8"=>$reg->funcionando,
-                "9"=>$reg->fundidas,
-                "10"=>$reg->descripcion,
-                "11"=>$reg->fecha,
- 				);
- 		}
+			$data[]=array(
+ 			"0"=>'<button class="btn btn-warning" onclick="mostrar('.$reg->idexterior.')"><i class="fa fa-eye"></i></button>',
+			"1"=>$reg->nombre,
+			"2"=>$reg->cantidad,
+			"3"=>$reg->potencia,
+			"4"=>$reg->potencia_total,
+			"5"=>$reg->capacidad,
+			"6"=>$reg->tiempo_operacion,
+			"7"=>$reg->consumo,
+			"8"=>$reg->funcionando,
+			"9"=>$reg->fundidas,
+			"10"=>$reg->fecha,
+			"11"=>$reg->descripcion
+			);
+	}
  		$results = array(
  			"sEcho"=>1, //Información para el datatables
  			"iTotalRecords"=>count($data), //enviamos el total registros al datatable

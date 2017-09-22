@@ -8,19 +8,12 @@ function init(){
 	$("#formulario").on("submit",function(e)
 	{
 		guardaryeditar(e);
-	});
-	//Cargamos los items al select proveedor
-	$.post("../ajax/exterior.php?op=selectExterior", function(r){
-	            $("#idproveedor").html(r);
-	            $('#idproveedor').selectpicker('refresh');
-	});
-
+	})
 }
 
 //Función limpiar
 function limpiar()
 {
-  $("#idexterior").val("");
 	$("#nombre").val("");
 	$("#cantidad").val("");
 	$("#potencia").val("");
@@ -32,6 +25,13 @@ function limpiar()
 	$("#fundidas").val("");
 	$("#fecha").val("");
 	$("#descripcion").val("");
+	$("#idexterior").val("");
+
+	var now = new Date();
+	var day = ("0" + now.getDate()).slice(-2);
+	var month = ("0" + (now.getMonth() + 1)).slice(-2);
+	var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+		$('#fecha').val(today);
 }
 
 //Función mostrar formulario
@@ -64,7 +64,7 @@ function cancelarform()
 //Función Listar
 function listar()
 {
-	tabla=$('#tbllistado').dataTable(
+	tabla=$('#exterior').dataTable(
 	{
 		"aProcessing": true,//Activamos el procesamiento del datatables
 	    "aServerSide": true,//Paginación y filtrado realizados por el servidor
@@ -116,14 +116,13 @@ function guardaryeditar(e)
 	limpiar();
 }
 
-function mostrar(iddepartamento)
+function mostrar(idexterior)
 {
 	$.post("../ajax/exterior.php?op=mostrar",{idexterior : idexterior}, function(data, status)
 	{
 		data = JSON.parse(data);
 		mostrarform(true);
 
-		$("#idexterior").val(data.idedificio);
 		$("#nombre").val(data.nombre);
 		$("#cantidad").val(data.cantidada);
 		$("#potencia").val(data.potencia);
@@ -135,13 +134,15 @@ function mostrar(iddepartamento)
 		$("#fundidas").val(data.fundidas);
 		$("#fecha").val(data.fecha);
  		$("#descripcion").val(data.descripcion);
+		$("#idexterior").val(data.idedificio);
+
  	})
 }
 
 //Función para desactivar registros
 function desactivar(idexterior)
 {
-	bootbox.confirm("¿Está Seguro de desactivar el registro?", function(result){
+	bootbox.confirm("¿Está Seguro de desactivar el exterior?", function(result){
 		if(result)
         {
         	$.post("../ajax/exterior.php?op=desactivar", {idexterior : idexterior}, function(e){
@@ -155,7 +156,7 @@ function desactivar(idexterior)
 //Función para activar registros
 function activar(idexterior)
 {
-	bootbox.confirm("¿Está Seguro de activar el Registro?", function(result){
+	bootbox.confirm("¿Está Seguro de activar el Exterior?", function(result){
 		if(result)
         {
         	$.post("../ajax/exterior.php?op=activar", {idexterior : idexterior}, function(e){
@@ -166,4 +167,14 @@ function activar(idexterior)
 	})
 }
 
+function calcular(){
+	var cant=0;
+	var  pot =0;
+	cant = $("#funcionando").val();
+	pot = $("#potencia").val();
+	total = pot * cant;
+	$("#potencia_total").val(total);
+    cpt = total/1000;
+	$("#capacidad").val(cpt);
+}
 init();
