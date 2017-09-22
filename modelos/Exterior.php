@@ -26,7 +26,7 @@ Class Exterior
 	}
 	public function desactivar($idexterior)
 	{
-		$sql="DELETE FROM exterior  WHERE idexterior='$idexterior'";
+		$sql="DELETE FROM exterior WHERE idexterior='$idexterior'";
 		return ejecutarConsulta($sql);
 	}
 	//Implementar un método para mostrar los datos de un registro a modificar

@@ -66,27 +66,31 @@ if ($_SESSION['compras']==1)
                     </div>
                     <div class="panel-body" style="height: 400px;" id="formularioregistros">
                         <form name="formulario" id="formulario" method="POST">
-                          <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                          <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12">
                             <label>Nombre Elemento:</label>
                             <input type="text" class="form-control" name="nombre" id="nombre" required="">
                           </div>
-                          <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <label>Cantidad:</label>
-                              <input type="number" class="form-control" name="cantidad" id="cantidad" maxlength="7" >
+                          <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                            <label>Num Elemento:</label>
+                              <input type="text" class="form-control" name="cantidad" id="cantidad" maxlength="7" >
                           </div>
-                          <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <label>Potencia:</label>
-                            <input type="number" class="form-control" name="potencia" id="potencia" maxlength="7" >
+                          <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                            <label>P.Instalada(Watts):</label>
+                            <input type="text" class="form-control" name="capacidad" onchange="calcular();" on id="capacidad" maxlength="10"  required="">
                           </div>
-                          <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <label>Potencia total:</label>
-                            <input type="number" class="form-control" name="potencia_total" id="potencia_total" maxlength="7" >
+                          <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                            <label>Potencia U/(Watts):</label>
+                            <input type="text" class="form-control" name="potencia" onchange="calcular();" on id="potencia" maxlength="7" >
+                          </div>
+                          <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                            <label>Potencia instalada(Kw):</label>
+                            <input type="text" class="form-control" name="potencia_total" id="potencia_total" maxlength="7" >
                           </div>
                             <!--Inicio de otra nueva fila-->
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
-                            <label>Capacidad:</label>
-                            <input type="number" class="form-control" name="capacidad" id="capacidad" maxlength="10"  required="">
-                          </div>
+                              <label>En Funcionando:</label>
+                              <input type="text" class="form-control" name="funcionando" id="funcionando" required="">
+                            </div>
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
                             <label>Tiempo de Operación:</label>
                             <input type="number" class="form-control" name="tiempo_operacion" id="tiempo_operacion" required="">
@@ -95,10 +99,7 @@ if ($_SESSION['compras']==1)
                             <label>Consumo:</label>
                             <input type="number" class="form-control" name="consumo" id="consumo" required="">
                           </div>
-                          <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
-                            <label>Funcionando:</label>
-                            <input type="number" class="form-control" name="funcionando" id="funcionando" required="">
-                          </div>
+
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
                             <label>Fundidas:</label>
                             <input type="number" class="form-control" name="fundidas" id="fundidas" required="">

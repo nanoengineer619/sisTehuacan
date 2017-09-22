@@ -26,6 +26,12 @@ function limpiar()
 	$("#fecha").val("");
 	$("#descripcion").val("");
 	$("#idexterior").val("");
+
+	var now = new Date();
+	var day = ("0" + now.getDate()).slice(-2);
+	var month = ("0" + (now.getMonth() + 1)).slice(-2);
+	var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+		$('#fecha').val(today);
 }
 
 //Función mostrar formulario
@@ -129,6 +135,7 @@ function mostrar(idexterior)
 		$("#fecha").val(data.fecha);
  		$("#descripcion").val(data.descripcion);
 		$("#idexterior").val(data.idedificio);
+
  	})
 }
 
@@ -160,4 +167,14 @@ function activar(idexterior)
 	})
 }
 
+function calcular(){
+	var cant=0;
+	var  pot =0;
+	cant = $("#funcionando").val();
+	pot = $("#potencia").val();
+	total = pot * cant;
+	$("#potencia_total").val(total);
+    cpt = total/1000;
+	$("#capacidad").val(cpt);
+}
 init();
