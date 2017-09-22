@@ -31,7 +31,7 @@ if ($_SESSION['compras']==1)
                     <!-- /.box-header -->
                     <!-- centro -->
                     <div class="panel-body table-responsive" id="listadoregistros">
-                        <table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
+                        <table id="exterior" class="table table-striped table-bordered table-condensed table-hover">
                           <thead>
                             <th>Opciones</th>
                             <th>Nom.Elemento</th>
@@ -114,7 +114,7 @@ if ($_SESSION['compras']==1)
                           </div>
                           <!--Inicio de otra nueva fila-->
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
-                            <button id="btnGuarda" class="btn btn-primary" type="submit" ><i class="fa fa-save"></i> Guardar</button>
+                            <button id="btnGuardar" class="btn btn-primary" type="submit" ><i class="fa fa-save"></i> Guardar</button>
                           </div>
                           <!--Inicio de otra nueva fila-->
                           <div class="form-group col-lg-1 col-md-1 col-sm-6 col-xs-12">
