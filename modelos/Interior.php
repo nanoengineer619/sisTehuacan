@@ -41,15 +41,15 @@ Class Interior
 
 
 	//Implementar un método para mostrar los datos de un registro a modificar
-	public function mostrar($idingreso)
+	public function mostrar($idedificio)
 	{
-		$sql="SELECT i.idingreso,DATE(i.fecha_hora) as fecha,i.idproveedor,p.nombre as proveedor,u.idusuario,u.nombre as usuario,i.tipo_comprobante,i.serie_comprobante,i.num_comprobante,i.total_compra,i.impuesto,i.estado FROM ingreso i INNER JOIN proveedor p ON i.idproveedor=p.idproveedor INNER JOIN usuario u ON i.idusuario=u.idusuario WHERE i.idingreso='$idingreso'";
+		$sql="SELECT * FROM  edificio WHERE idedificio ='$idedificio'";
 		return ejecutarConsultaSimpleFila($sql);
 	}
 
-	public function listarDetalle($idingreso)
+	public function listarDetalle($idedificio)
 	{
-		$sql="SELECT di.idingreso,di.idarticulo,a.nombre,di.cantidad,di.precio_compra FROM detalle_ingreso di inner join articulo a on di.idarticulo=a.idarticulo where di.idingreso='$idingreso'";
+		$sql="SELECT iddepartamento,idedificio,nombre FROM departamento WHERE idedificio='$idedificio'";
 		return ejecutarConsulta($sql);
 	}
 
@@ -59,7 +59,10 @@ Class Interior
 		$sql="SELECT i.idingreso,DATE(i.fecha_hora) as fecha,i.idproveedor,p.nombre as proveedor,u.idusuario,u.nombre as usuario,i.tipo_comprobante,i.serie_comprobante,i.num_comprobante,i.total_compra,i.impuesto,i.estado FROM ingreso i INNER JOIN proveedor p ON i.idproveedor=p.idproveedor INNER JOIN usuario u ON i.idusuario=u.idusuario ORDER BY i.idingreso desc";
 		return ejecutarConsulta($sql);		
 	}
-	
+	public function listarEdificio(){
+		$sql="SELECT * FROM  edificio";
+		return ejecutarConsulta($sql);
+	}
 }
 
 ?>

@@ -31,84 +31,59 @@ if ($_SESSION['compras']==1)
                     <!-- /.box-header -->
                     <!-- centro -->
                     <div class="panel-body table-responsive" id="listadoregistros">
-                        <table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
+                        <table id="tbllistadoedificio" class="table table-striped table-bordered table-condensed table-hover">
                           <thead>
                             <th>Opciones</th>
-                            <th>Fecha</th>
-                            <th>Proveedor</th>
-                            <th>Usuario</th>
-                            <th>Total Compra</th>
-                            <th>Estado</th>
+                            <th>Edificio</th>
+                            <th>Consumo Semanal</th>
+                            <th>Consumo Mensual</th>
+                            <th>Consumo Semestral</th>
                           </thead>
                           <tbody>
                           </tbody>
                           <tfoot>
                             <th>Opciones</th>
-                            <th>Fecha</th>
-                            <th>Proveedor</th>
-                            <th>Usuario</th>
-                            <th>Total Compra</th>
-                            <th>Estado</th>
+                            <th>Edificio</th>
+                            <th>Consumo Semanal</th>
+                            <th>Consumo Mensual</th>
+                            <th>Consumo Semestral</th>
                           </tfoot>
                         </table>
                     </div>
                     <div class="panel-body" style="height: 400px;" id="formularioregistros">
                         <form name="formulario" id="formulario" method="POST">
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <label>Edificio(*):</label>
-                            <input type="hidden" name="iddepartamento" id="iddepartamento">
-                            <select id="idedificio" name="idedificio" class="form-control selectpicker" data-live-search="true" required>
-
-                            </select>
+                            <label>Edificio</label>
+                            <input type="hidden" name="idedificio" id="idedificio">
+                            <input type="text" class="form-control" readonly="" name="edificioname" id="edificioname" value="">
                           </div>
                           <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <label>Fecha(*):</label>
-                            <input type="date" class="form-control" name="fecha_hora" id="fecha_hora" required="">
+                            <label>Fecha</label>
+                            <input type="text" class="form-control" name="fecha_hora" id="fecha_hora" readonly="" required="">
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label>Tipo Comprobante(*):</label>
-                            <select name="tipo_comprobante" id="tipo_comprobante" class="form-control selectpicker" required="">
-                               <option value="Boleta">Boleta</option>
-                               <option value="Factura">Factura</option>
-                               <option value="Ticket">Ticket</option>
-                            </select>
-                          </div>
-                          <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
-                            <label>Serie:</label>
-                            <input type="text" class="form-control" name="serie_comprobante" id="serie_comprobante" maxlength="7" placeholder="Serie">
-                          </div>
-                          <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
-                            <label>Número:</label>
-                            <input type="text" class="form-control" name="num_comprobante" id="num_comprobante" maxlength="10" placeholder="Número" required="">
-                          </div>
-                          <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
-                            <label>Impuesto:</label>
-                            <input type="text" class="form-control" name="impuesto" id="impuesto" required="">
-                          </div>
+                          
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <br>
                             <a data-toggle="modal" href="#myModal">           
-                              <button id="btnAgregarArt" type="button" class="btn btn-primary"> <span class="fa fa-plus"></span> Agregar Artículos</button>
+                              <button id="btnAgregarDep" type="button" class="btn btn-primary form-control"> <span class="fa fa-plus"></span> Agregar Departamentos</button>
                             </a>
                           </div>
-                          <div class="form-group col-lg-9 col-md-9 col-sm-6 col-xs-12">
-                            <label>Descripción:</label>
-                            <textarea class="form-control" name="descripcion" id="descripcion" required=""></textarea>
-                          </div>
+                          
                            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
-                            <table id="detalles" class="table table-striped table-bordered table-condensed table-hover" style="position: relative;">
+                            <table id="detallesdep" class="table table-striped table-bordered table-condensed table-hover" style="position: relative;">
                               <thead style="background-color:#A9D0F5">
                                     <th>Opciones</th>
-                                    <th>Artículo</th>
-                                    <th>Cantidad</th>
-                                    <th>Precio Compra</th>
-                                    <th>Subtotal</th>
+                                    <th>Departamento</th>
+                                    <th>Tiempo de Operacion Total</th>
+                                    <th>Consumo total Por Departamento</th>
+                                    <th>Total de consumo</th>
                                 </thead>
                                 <tfoot style="background-color:#EEEEEE;">
                                     <th>TOTAL</th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
-                                    <th><h4 id="total">$ 0.00</h4><input type="hidden" name="total_compra" id="total_compra"></th> 
+                                    <th><h4 id="total">0.00 kWh</h4><input type="hidden" name="total_compra" id="total_compra"></th> 
                                 </tfoot>
                                 <tbody>
                                   
@@ -133,6 +108,82 @@ if ($_SESSION['compras']==1)
 
     </div><!-- /.content-wrapper -->
   <!--Fin-Contenido-->
+  <!-- Modal para Detalles de Departamento-->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 80% !important;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Diagnosticar Elemento</h4>
+        </div>
+        <div class="modal-body" style="width: 800px;">
+          <table id="tbldepartamentos" class="table table-striped table-bordered table-condensed table-hover">
+            <thead>
+                <th>Elemento</th>
+                <th>Cantidad</th>
+                <th>Potencia</th>
+                <th>P. Total</th>
+                <th>T. Operacion</th>
+                <th>Capacida KW</th>
+                <th>Consumo Semanal</th>
+                <th>Capacidad</th>
+                <th>Funcionando</th>
+                <th>Fundidos</th>
+                <th>Actualizar</th>
+            </thead>
+            <tbody>
+              
+            </tbody>
+            <tfoot>
+              
+            </tfoot>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Guardar</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>        
+      </div>
+    </div>
+  </div>  
+  <!-- Modal para agregar Departamento-->
+  <div class="modal fade" id="myDep" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 80% !important;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Diagnosticar Elemento</h4>
+        </div>
+        <div class="modal-body" style="width: 800px;">
+          <table id="tbldepartamentos" class="table table-striped table-bordered table-condensed table-hover">
+            <thead>
+                <th>Elemento</th>
+                <th>Cantidad</th>
+                <th>Potencia</th>
+                <th>P. Total</th>
+                <th>T. Operacion</th>
+                <th>Capacida KW</th>
+                <th>Consumo Semanal</th>
+                <th>Capacidad</th>
+                <th>Funcionando</th>
+                <th>Fundidos</th>
+                <th>Actualizar</th>
+            </thead>
+            <tbody>
+              
+            </tbody>
+            <tfoot>
+              
+            </tfoot>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Guardar</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>        
+      </div>
+    </div>
+  </div>  
 <?php
 }
 else

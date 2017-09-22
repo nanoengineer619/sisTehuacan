@@ -78,7 +78,7 @@ function cancelarform()
 //Función Listar
 function listar()
 {
-	tabla=$('#tbllistado').dataTable(
+	tabla=$('#tbllistadoedificio').dataTable(
 	{
 		"aProcessing": true,//Activamos el procesamiento del datatables
 	    "aServerSide": true,//Paginación y filtrado realizados por el servidor
@@ -91,7 +91,7 @@ function listar()
 		        ],
 		"ajax":
 				{
-					url: '../ajax/ingreso.php?op=listar',
+					url: '../ajax/interior.php?op=listar',
 					type : "get",
 					dataType : "json",						
 					error: function(e){
@@ -108,7 +108,7 @@ function listar()
 //Función ListarArticulos
 function listarArticulos()
 {
-	tabla=$('#tblarticulos').dataTable(
+	tabla=$('#tbldepartamentos').dataTable(
 	{
 		"aProcessing": true,//Activamos el procesamiento del datatables
 	    "aServerSide": true,//Paginación y filtrado realizados por el servidor
@@ -118,7 +118,7 @@ function listarArticulos()
 		        ],
 		"ajax":
 				{
-					url: '../ajax/ingreso.php?op=listarArticulos',
+					url: '../ajax/interior.php?op=listarDepartamento',
 					type : "get",
 					dataType : "json",						
 					error: function(e){
@@ -156,32 +156,27 @@ function guardaryeditar(e)
 	limpiar();
 }
 
-function mostrar(idingreso)
+function mostrar(idedificio)
 {
-	$.post("../ajax/ingreso.php?op=mostrar",{idingreso : idingreso}, function(data, status)
+
+	$.post("../ajax/interior.php?op=mostrar",{idedificio : idedificio}, function(data, status)
 	{
 		data = JSON.parse(data);		
 		mostrarform(true);
 
-		$("#idproveedor").val(data.idproveedor);
-		$("#idproveedor").selectpicker('refresh');
-		$("#tipo_comprobante").val(data.tipo_comprobante);
-		$("#tipo_comprobante").selectpicker('refresh');
-		$("#serie_comprobante").val(data.serie_comprobante);
-		$("#num_comprobante").val(data.num_comprobante);
-		$("#fecha_hora").val(data.fecha);
-		$("#impuesto").val(data.impuesto);
-		$("#idingreso").val(data.idingreso);
+        $("#idedificio").val(data.idedificio);
+		$("#edificioname").val(data.nombre);
+		$("#fecha_hora").val(data.condicion);
+		
 
 		//Ocultar y mostrar los botones
 		$("#btnGuardar").hide();
 		$("#btnCancelar").show();
 		$("#btnAgregarArt").hide();
- 	});
-
- 	$.post("../ajax/ingreso.php?op=listarDetalle&id="+idingreso,function(r){
-	        $("#detalles").html(r);
+		$.post("../ajax/interior.php?op=listarDetalle&id="+idedificio,function(r){
+	        $("#detallesdep").html(r);
 	});
+ 	});
 }
 
 //Función para anular registros
@@ -220,20 +215,20 @@ function marcarImpuesto()
     }
   }
 
-function agregarDetalle(idarticulo,articulo)
+function agregarDetalle(iddepartamento,nombre,capacidad)
   {
-  	var cantidad=1;
-    var precio_compra=1;
+  	var capacidad=1;
+    var tiempo_operacion=0;
 
-    if (idarticulo!="")
+    if (iddepartamento!="")
     {
-    	var subtotal=cantidad*precio_compra;
+    	var subtotal=capacidad*tiempo_operacion;
     	var fila='<tr class="filas" id="fila'+cont+'">'+
-    	'<td><button type="button" class="btn btn-danger" onclick="eliminarDetalle('+cont+')">X</button></td>'+
-    	'<td><input type="hidden" name="idarticulo[]" value="'+idarticulo+'">'+articulo+'</td>'+
-    	'<td><input type="number" onkeyup="modificarSubototales()" name="cantidad[]" id="cantidad[]" value="'+cantidad+'"></td>'+
-    	'<td><input type="number" onkeyup="modificarSubototales()" name="precio_compra[]" id="precio_compra[]" value="'+precio_compra+'"></td>'+
-    	'<td>$ <span name="subtotal" id="subtotal'+cont+'">'+subtotal+'</span></td>';
+    	'<td><a data-toggle="modal" href="#myDep"><button id="btnAgregarDep" type="button" class="btn btn-warning"><span class="fa fa-eye"></span></button></a>&nbsp;<button type="button" class="btn btn-danger" onclick="eliminarDetalle('+cont+')">X</button></td>'+
+    	'<td><input type="hidden" name="iddepartamento[]" value="'+iddepartamento+'">'+nombre+'</td>'+
+    	'<td><input type="number" step="any" onkeyup="modificarSubototales()" name="capacidad[]" id="capacidad[]" value="'+capacidad+'"></td>'+
+    	'<td><input type="number" step="any" onkeyup="modificarSubototales()" name="tiempo_operacion[]" id="tiempo_operacion[]" value="'+tiempo_operacion+'"></td>'+
+    	'<td><span name="subtotal" id="subtotal'+cont+'">'+subtotal+'</span> <b>kWh</b></td>';
     	cont++;
     	detalles=detalles+1;
     	$('#detalles').append(fila);
@@ -247,8 +242,8 @@ function agregarDetalle(idarticulo,articulo)
 
   function modificarSubototales()
   {
-  	var cant = document.getElementsByName("cantidad[]");
-    var prec = document.getElementsByName("precio_compra[]");
+  	var cant = document.getElementsByName("capacidad[]");
+    var prec = document.getElementsByName("tiempo_operacion[]");
     var sub = document.getElementsByName("subtotal");
 
     for (var i = 0; i <cant.length; i++) {
@@ -269,7 +264,7 @@ function agregarDetalle(idarticulo,articulo)
   	for (var i = 0; i <sub.length; i++) {
 		total += document.getElementsByName("subtotal")[i].value;
 	}
-	$("#total").html("$ " + total);
+	$("#total").html(total + " <b>kWh</b>");
     $("#total_compra").val(total);
     evaluar();
   }

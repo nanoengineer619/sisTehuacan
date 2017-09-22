@@ -6,7 +6,7 @@ require_once "../modelos/Interior.php";
 
 $interior=new Interior();
 
-$idingreso=isset($_POST["idingreso"])? limpiarCadena($_POST["idingreso"]):"";
+$idedificio=isset($_POST["idedificio"])? limpiarCadena($_POST["idedificio"]):"";
 $idproveedor=isset($_POST["idproveedor"])? limpiarCadena($_POST["idproveedor"]):"";
 $idusuario=$_SESSION["idusuario"];
 $tipo_comprobante=isset($_POST["tipo_comprobante"])? limpiarCadena($_POST["tipo_comprobante"]):"";
@@ -32,7 +32,7 @@ switch ($_GET["op"]){
 	break;
 
 	case 'mostrar':
-		$rspta=$interior->mostrar($idingreso);
+		$rspta=$interior->mostrar($idedificio);
  		//Codificar el resultado utilizando json
  		echo json_encode($rspta);
 	break;
@@ -40,49 +40,40 @@ switch ($_GET["op"]){
 	case 'listarDetalle':
 		//Recibimos el idingreso
 		$id=$_GET['id'];
-
 		$rspta = $interior->listarDetalle($id);
-		$total=0;
 		echo '<thead style="background-color:#A9D0F5">
                                     <th>Opciones</th>
-                                    <th>Artículo</th>
-                                    <th>Cantidad</th>
-                                    <th>Precio Compra</th>
-                                    <th>Subtotal</th>
+                                    <th>Departamento</th>
+                                    <th>Tiempo de Operacion Total</th>
+                                    <th>Consumo Por Departamento</th>
+                                    <th>Total de Consumo</th>
                                 </thead>';
 
 		while ($reg = $rspta->fetch_object())
 				{
-					echo '<tr class="filas"><td></td><td>'.$reg->nombre.'</td><td>'.$reg->cantidad.'</td><td>'.$reg->precio_compra.'</td><td>'.$reg->precio_compra*$reg->cantidad.'</td></tr>';
-					$total=$total+($reg->precio_compra*$reg->cantidad);
+					echo '<tr class="filas"><td><a data-toggle="modal" href="#myModal"><button id="btnAgregarDep" type="button" class="btn btn-warning"><span class="fa fa-eye"></span></button></a></td><td><b>'.$reg->nombre.'</b></td><td><span>0.00 Kw</span></td><td><span>0.00 Kw</span></td><td><span>0.00 Kw</span></td></tr>';
 				}
 		echo '<tfoot>
                                     <th>TOTAL</th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
-                                    <th><h4 id="total">$ '.$total.'</h4><input type="hidden" name="total_compra" id="total_compra"></th> 
+                                    <th><h4 id="total"></h4><input type="hidden" name="total_compra" id="total_compra"></th> 
                                 </tfoot>';
 	break;
 
 	case 'listar':
-		$rspta=$interior->listar();
+		$rspta=$interior->listarEdificio();
  		//Vamos a declarar un array
  		$data= Array();
 
  		while ($reg=$rspta->fetch_object()){
  			$data[]=array(
- 				"0"=>($reg->estado=='Aceptado')?'<button class="btn btn-warning" onclick="mostrar('.$reg->idingreso.')"><i class="fa fa-eye"></i></button>'.
- 					' <button class="btn btn-danger" onclick="anular('.$reg->idingreso.')"><i class="fa fa-close"></i></button>':
- 					'<button class="btn btn-warning" onclick="mostrar('.$reg->idingreso.')"><i class="fa fa-eye"></i></button>',
- 				"1"=>$reg->fecha,
- 				"2"=>$reg->proveedor,
- 				"3"=>$reg->usuario,
- 				"4"=>$reg->tipo_comprobante,
- 				"5"=>$reg->serie_comprobante.'-'.$reg->num_comprobante,
- 				"6"=>$reg->total_compra,
- 				"7"=>($reg->estado=='Aceptado')?'<span class="label bg-green">Aceptado</span>':
- 				'<span class="label bg-red">Anulado</span>'
+ 				"0"=>($reg->condicion==1)?'<button class="btn btn-warning" onclick="mostrar('.$reg->idedificio.')"><i class="fa fa-eye"></i></button>':'<span>Edificio No Disponible</span>',
+ 				"1"=>$reg->nombre,
+ 				"2"=>'<span>KW</span>',
+ 				"3"=>'<span>KW</span>',
+ 				"4"=>'<span>KW</span>'
  				);
  		}
  		$results = array(
@@ -108,20 +99,25 @@ switch ($_GET["op"]){
 
 	case 'listarDepartamento':
 		require_once "../modelos/Departamento.php";
-		$articulo=new Articulo();
+		$departamento=new Departamento();
 
-		$rspta=$articulo->listarActivos();
+		$rspta=$departamento->listar();
  		//Vamos a declarar un array
  		$data= Array();
 
  		while ($reg=$rspta->fetch_object()){
  			$data[]=array(
- 				"0"=>'<button class="btn btn-warning" onclick="agregarDetalle('.$reg->idarticulo.',\''.$reg->nombre.'\')"><span class="fa fa-plus"></span></button>',
- 				"1"=>$reg->nombre,
- 				"2"=>$reg->categoria,
- 				"3"=>$reg->codigo,
- 				"4"=>$reg->stock,
- 				"5"=>"<img src='../files/articulos/".$reg->imagen."' height='50px' width='50px' >"
+ 				"0"=>$reg->elemento,
+ 				"1"=>$reg->cantidad,
+ 				"2"=>$reg->potencia,
+ 				"3"=>$reg->potencia_total,
+ 				"4"=>$reg->capacidad,
+ 				"5"=>'<input type="number" class="form-control" step="any" name="consumo" id="consumo">',
+ 				"6"=>'<span>kW</span>',
+                "7"=>$reg->capacidad,
+                "8"=>$reg->funcionando,
+                "9"=>$reg->fundidas,
+                "10"=>'<button class="btn btn-info" onclick="agregarDetalle('.$reg->iddepartamento.',\''.$reg->nombre.'\','.$reg->capacidad.')"><i class="fa fa-refresh"></i></span></button>'
  				);
  		}
  		$results = array(
