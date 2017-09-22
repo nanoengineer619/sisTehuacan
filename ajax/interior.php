@@ -2,7 +2,7 @@
 if (strlen(session_id()) < 1) 
   session_start();
 
-require_once "../modelos/Ingreso.php";
+require_once "../modelos/Interior.php";
 
 $interior=new Interior();
 
@@ -94,15 +94,15 @@ switch ($_GET["op"]){
 
 	break;
 
-	case 'selectEdificio':
+	case "selectEdificio":
 		require_once "../modelos/Edificio.php";
-		$edific = new Edificio();
+		$edificio = new Edificio();
 
-		$rspta = $edific->select();
+		$rspta = $edificio->select();
 
 		while ($reg = $rspta->fetch_object())
 				{
-				echo '<option value=' . $reg->idedificio . '>' . $reg->nombre . '</option>';
+					echo '<option value=' . $reg->idedificio . '>' . $reg->nombre . '</option>';
 				}
 	break;
 

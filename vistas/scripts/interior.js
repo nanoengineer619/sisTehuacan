@@ -10,8 +10,8 @@ function init(){
 		guardaryeditar(e);	
 	});
 	//Cargamos los items al select proveedor
-	$.post("../ajax/interior.php?op=selectEdificio", function(e){
-	            $("#idedificio").html(e);
+	$.post("../ajax/interior.php?op=selectEdificio", function(r){
+	            $("#idedificio").html(r);
 	            $('#idedificio').selectpicker('refresh');
 	});
 	

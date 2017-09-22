@@ -2,7 +2,7 @@
 //Incluímos inicialmente la conexión a la base de datos
 require "../config/Conexion.php";
 
-Class Ingreso
+Class Interior
 {
 	//Implementamos nuestro constructor
 	public function __construct()

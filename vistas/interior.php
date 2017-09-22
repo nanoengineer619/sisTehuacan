@@ -54,11 +54,11 @@ if ($_SESSION['compras']==1)
                     </div>
                     <div class="panel-body" style="height: 400px;" id="formularioregistros">
                         <form name="formulario" id="formulario" method="POST">
-                          <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <label>Proveedor(*):</label>
-                            <input type="hidden" name="idinterior" id="idinterior">
+                          <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <label>Edificio(*):</label>
+                            <input type="hidden" name="iddepartamento" id="iddepartamento">
                             <select id="idedificio" name="idedificio" class="form-control selectpicker" data-live-search="true" required>
-                              
+
                             </select>
                           </div>
                           <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
