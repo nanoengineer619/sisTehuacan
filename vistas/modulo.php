@@ -23,7 +23,7 @@ if ($_SESSION['compras']==1)
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header with-border">
-                      <h2 style="font-family:bold; text-align: center;">Gestión de edificios</h2></br>
+                      <h2 style="font-family:bold; text-align: center;">Gestión de Departamentos</h2></br>
                           <button class="btn btn-success" id="btnagregar" onclick="mostrarform(true)"><i class="fa fa-plus-circle"></i> Agregar</button>
                         <div class="box-tools pull-right">
                         </div>

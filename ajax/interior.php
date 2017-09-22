@@ -4,7 +4,7 @@ if (strlen(session_id()) < 1)
 
 require_once "../modelos/Ingreso.php";
 
-$ingreso=new Ingreso();
+$interior=new Interior();
 
 $idingreso=isset($_POST["idingreso"])? limpiarCadena($_POST["idingreso"]):"";
 $idproveedor=isset($_POST["idproveedor"])? limpiarCadena($_POST["idproveedor"]):"";
@@ -19,7 +19,7 @@ $total_compra=isset($_POST["total_compra"])? limpiarCadena($_POST["total_compra"
 switch ($_GET["op"]){
 	case 'guardaryeditar':
 		if (empty($idingreso)){
-			$rspta=$ingreso->insertar($idproveedor,$idusuario,$tipo_comprobante,$serie_comprobante,$num_comprobante,$fecha_hora,$impuesto,$total_compra,$_POST["idarticulo"],$_POST["cantidad"],$_POST["precio_compra"]);
+			$rspta=$interior->insertar($idproveedor,$idusuario,$tipo_comprobante,$serie_comprobante,$num_comprobante,$fecha_hora,$impuesto,$total_compra,$_POST["idarticulo"],$_POST["cantidad"],$_POST["precio_compra"]);
 			echo $rspta ? "Ingreso registrado" : "No se pudieron registrar todos los datos del ingreso";
 		}
 		else {
@@ -27,12 +27,12 @@ switch ($_GET["op"]){
 	break;
 
 	case 'anular':
-		$rspta=$ingreso->anular($idingreso);
+		$rspta=$interior->anular($idingreso);
  		echo $rspta ? "Ingreso anulado" : "Ingreso no se puede anular";
 	break;
 
 	case 'mostrar':
-		$rspta=$ingreso->mostrar($idingreso);
+		$rspta=$interior->mostrar($idingreso);
  		//Codificar el resultado utilizando json
  		echo json_encode($rspta);
 	break;
@@ -41,7 +41,7 @@ switch ($_GET["op"]){
 		//Recibimos el idingreso
 		$id=$_GET['id'];
 
-		$rspta = $ingreso->listarDetalle($id);
+		$rspta = $interior->listarDetalle($id);
 		$total=0;
 		echo '<thead style="background-color:#A9D0F5">
                                     <th>Opciones</th>
@@ -66,7 +66,7 @@ switch ($_GET["op"]){
 	break;
 
 	case 'listar':
-		$rspta=$ingreso->listar();
+		$rspta=$interior->listar();
  		//Vamos a declarar un array
  		$data= Array();
 
@@ -94,20 +94,20 @@ switch ($_GET["op"]){
 
 	break;
 
-	case 'selectProveedor':
-		require_once "../modelos/Persona.php";
-		$proveedor = new Proveedor();
+	case 'selectEdificio':
+		require_once "../modelos/Edificio.php";
+		$edific = new Edificio();
 
-		$rspta = $proveedor->listarP();
+		$rspta = $edific->select();
 
 		while ($reg = $rspta->fetch_object())
 				{
-				echo '<option value=' . $reg->idproveedor . '>' . $reg->nombre . '</option>';
+				echo '<option value=' . $reg->idedificio . '>' . $reg->nombre . '</option>';
 				}
 	break;
 
-	case 'listarArticulos':
-		require_once "../modelos/Articulo.php";
+	case 'listarDepartamento':
+		require_once "../modelos/Departamento.php";
 		$articulo=new Articulo();
 
 		$rspta=$articulo->listarActivos();

@@ -54,56 +54,66 @@ if ($_SESSION['compras']==1)
                     </div>
                     <div class="panel-body" style="height: 400px;" id="formularioregistros">
                         <form name="formulario" id="formulario" method="POST">
+                          <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label>Proveedor(*):</label>
+                            <input type="hidden" name="idinterior" id="idinterior">
+                            <select id="idedificio" name="idedificio" class="form-control selectpicker" data-live-search="true" required>
+                              
+                            </select>
+                          </div>
+                          <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label>Fecha(*):</label>
+                            <input type="date" class="form-control" name="fecha_hora" id="fecha_hora" required="">
+                          </div>
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label>Tipo Comprobante(*):</label>
+                            <select name="tipo_comprobante" id="tipo_comprobante" class="form-control selectpicker" required="">
+                               <option value="Boleta">Boleta</option>
+                               <option value="Factura">Factura</option>
+                               <option value="Ticket">Ticket</option>
+                            </select>
+                          </div>
+                          <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                            <label>Serie:</label>
+                            <input type="text" class="form-control" name="serie_comprobante" id="serie_comprobante" maxlength="7" placeholder="Serie">
+                          </div>
+                          <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                            <label>Número:</label>
+                            <input type="text" class="form-control" name="num_comprobante" id="num_comprobante" maxlength="10" placeholder="Número" required="">
+                          </div>
+                          <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                            <label>Impuesto:</label>
+                            <input type="text" class="form-control" name="impuesto" id="impuesto" required="">
+                          </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <label>Nombre(*):</label>
-                            <input type="text" class="form-control" name="nombre" id="nombre" required="">
+                            <a data-toggle="modal" href="#myModal">           
+                              <button id="btnAgregarArt" type="button" class="btn btn-primary"> <span class="fa fa-plus"></span> Agregar Artículos</button>
+                            </a>
                           </div>
-                          <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <label>Cantidad:</label>
-                              <input type="number" class="form-control" name="cantidad" id="cantidad" maxlength="7" >
-                          </div>
-                          <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <label>Elemento:</label>
-                            <input type="number" class="form-control" name="elemento" id="elemento" maxlength="7" >
-                          </div>
-                          <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <label>Potencia:</label>
-                            <input type="number" class="form-control" name="potencia" id="potencia" maxlength="7" >
-                          </div>
-                          <!--Inicio de otra nueva fila-->
-                          <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
-                            <label>Potencia total:</label>
-                            <input type="number" class="form-control" name="potencia_total" id="potencia_total" maxlength="7" >
-                          </div>
-                          <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
-                            <label>Capacidad:</label>
-                            <input type="number" class="form-control" name="capacidad" id="capacidad" maxlength="10"  required="">
-                          </div>
-                          <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
-                            <label>Tiempo de Operación:</label>
-                            <input type="number" class="form-control" name="tiempo_operacion" id="tiempo_operacion" required="">
-                          </div>
-                          <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
-                            <label>Consumo:</label>
-                            <input type="number" class="form-control" name="consumo" id="consumo" required="">
-                          </div>
-                          <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
-                            <label>Funcionando:</label>
-                            <input type="number" class="form-control" name="funcionando" id="funcionando" required="">
-                          </div>
-                          <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
-                            <label>Fundidas:</label>
-                            <input type="number" class="form-control" name="fundidas" id="fundidas" required="">
-                          </div>
-                          <!--Inicio de otra nueva fila-->
-                          <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <label>Fecha:</label>
-                            <input type="date" class="form-control" name="fecha" id="fecha" required="">
-                          </div>
-
                           <div class="form-group col-lg-9 col-md-9 col-sm-6 col-xs-12">
                             <label>Descripción:</label>
                             <textarea class="form-control" name="descripcion" id="descripcion" required=""></textarea>
+                          </div>
+                           <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                            <table id="detalles" class="table table-striped table-bordered table-condensed table-hover" style="position: relative;">
+                              <thead style="background-color:#A9D0F5">
+                                    <th>Opciones</th>
+                                    <th>Artículo</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio Compra</th>
+                                    <th>Subtotal</th>
+                                </thead>
+                                <tfoot style="background-color:#EEEEEE;">
+                                    <th>TOTAL</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th><h4 id="total">$ 0.00</h4><input type="hidden" name="total_compra" id="total_compra"></th> 
+                                </tfoot>
+                                <tbody>
+                                  
+                                </tbody>
+                            </table>
                           </div>
                           <!--Inicio de otra nueva fila-->
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
@@ -132,7 +142,7 @@ else
 
 require 'footer.php';
 ?>
-<script type="text/javascript" src="scripts/ingreso.js"></script>
+<script type="text/javascript" src="scripts/interior.js"></script>
 <?php
 }
 ob_end_flush();

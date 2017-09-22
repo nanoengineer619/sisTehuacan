@@ -163,7 +163,7 @@ if (strlen(session_id()) < 1)
               <ul class="treeview-menu">
                 <li><a href="edificio.php"><i class="fa fa-circle-o"></i>Edificios</a></li>
                 <li><a href="modulo.php"><i class="fa fa-circle-o"></i> Departamentos</a></li>
-                <li><a href="departamento.php"><i class="fa fa-circle-o"></i> Detalle de Edificio</a></li>
+                <li><a href="departamento.php"><i class="fa fa-circle-o"></i> Detalles de Departamentos</a></li>
               </ul>
             </li>';
             }
