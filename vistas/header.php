@@ -96,8 +96,8 @@ if (strlen(session_id()) < 1)
             if ($_SESSION['escritorio']==1)
             {
               echo '<li>
-              <a href="#">
-                <i class="fa fa-tasks"></i> <span>Escritorio</span>
+              <a href="inicio.php">
+                <i class="fa fa-tasks"></i> <span>Inicio</span>
               </a>
             </li>';
             }

@@ -11,17 +11,18 @@ Class Exterior
 	}
 
 	//Implementamos un método para insertar registros
-	public function insertar($nombre,$cantidad,$potencia,$potencia_total,$capacidad,$tiempo_operacion,$consumo,$funcionando,$fundidas,$fecha,$descripcion)
+	public function insertar($nombre,$cantidad,$funcionando,$potencia_unidad,$instalada_watts,$instalada_kw,$t_operacion_sem,$cons_semana,$t_op_mensual,$cons_mes,$cons_semestre,$fundidas,$fecha)
 	{
-		$sql="INSERT INTO exterior (nombre,cantidad,potencia,potencia_total,capacidad,tiempo_operacion, consumo,funcionando,fundidas,fecha,descripcion)
-		VALUES ('$nombre','$cantidad','$potencia','$potencia_total','$capacidad','$tiempo_operacion','$consumo','$funcionando','$fundidas','$fecha','$descripcion')";
+		$sql="INSERT INTO exterior (nombre,cantidad,funcionando,potencia_unidad,instalada_watts,instalada_kw, t_operacion_sem,cons_semana,t_op_mensual,cons_mes,cons_semestre,fundidas,fecha)
+		VALUES ('$nombre','$cantidad','$funcionando','$potencia_unidad','$instalada_watts','$instalada_kw','$t_operacion_sem','$cons_semana','$t_op_mensual','$cons_mes','$cons_semestre','$fundidas','$fecha')";
 		return ejecutarConsulta($sql);
 	}
 
 	//Implementamos un método para editar registros
-	public function editar($idexterior,$nombre,$cantidad,$potencia,$potencia_total,$capacidad,$tiempo_operacion,$consumo,$funcionando,$fundidas,$fecha,$descripcion)
+	public function editar($nombre,$cantidad,$funcionando,$potencia_unidad,$instalada_watts,$instalada_kw,$t_operacion_sem,$cons_semana,$t_op_mensual,$cons_mes,$cons_semestre,$fundidas,$fecha)
 	{
-		$sql="UPDATE exterior SET idexterior='$idexterior',nombre='$nombre',cantidad='$cantidad',potencia='$potencia',potencia_total='$potencia_total,capacidad='$capacidad',tiempo_operacion='$tiempo_operacion',consumo='$consumo'funcionando='$funcionando',fundidas='$fundidas',fecha='$fecha',descripcion='$descripcion' WHERE idexterior='$idexterior'";
+		$sql="UPDATE exterior SET idexterior='$idexterior',nombre='$nombre',cantidad='$cantidad',funcionando='$funcionando',potencia_unidad='$potencia_unidad,instalada_watts='$instalada_watts',instalada_kw='$instalada_kw',
+		t_operacion_sem='$t_operacion_sem'cons_semana='$cons_semana',t_op_mensual='$t_op_mensual',cons_mes='$cons_mes',cons_semestre='$cons_semestre',fundidas='$fundidas',fecha='$fecha' WHERE idexterior='$idexterior'";
 		return ejecutarConsulta($sql);
 	}
 	public function desactivar($idexterior)

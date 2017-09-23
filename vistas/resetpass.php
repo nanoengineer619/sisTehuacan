@@ -30,26 +30,25 @@
         <!--<a href="../../index2.html"><b>ITTSGEN</b></a>-->
       </div><!-- /.login-logo -->
       <div class="login-box-body" style="border: 1px solid #DDDCDC; border-radius: 5px;">
-        <p class="login-box-msg">Ingrese sus datos de Acceso</p>
+        <p class="login-box-msg">Restablecer contraseña</p>
         <form method="post" id="frmAcceso">
           <div class="form-group has-feedback">
-            <input type="text" id="logina" name="logina" class="form-control" placeholder="Usuario">
-            <span class="fa fa-user form-control-feedback"></span>
+            <input type="text" id="logina" name="logina" class="form-control" placeholder="Inserte su correo electronico">
+            <span class="fa fa-envelope form-control-feedback"></span>
           </div>
+          <!--
           <div class="form-group has-feedback">
             <input type="password" id="clavea" name="clavea" class="form-control" placeholder="Password">
             <span class="fa fa-key form-control-feedback"></span>
-          </div>
+          </div>-->
           <div class="row">
             <div class="col-xs-8">
-
             </div><!-- /.col -->
             <div class="col-xs-4">
-              <button type="submit" class="btn btn-primary btn-block btn-flat">Ingresar</button>
+              <button type="submit" class="btn btn-primary btn-block btn-flat">Restablecer</button>
             </div><!-- /.col -->
           </div>
         </form>
-        <a href="resetpass.php">Olvidé mi password</a><br>
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
 

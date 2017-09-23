@@ -16,16 +16,17 @@ function limpiar()
 {
 	$("#nombre").val("");
 	$("#cantidad").val("");
-	$("#potencia").val("");
-	$("#potencia_total").val("");
-	$("#capacidad").val("");
-	$("#tiempo_operacion").val("");
-	$("#consumo").val("");
 	$("#funcionando").val("");
+	$("#potencia_unidad").val("");
+	$("#instalada_watts").val("");
+	$("#instalada_kw").val("");
+	$("#t_operacion_sem").val("");
+	$("#cons_semana").val("");
+	$("#t_op_mensual").val("");
+	$("#cons_mes").val("");
+	$("#cons_semestre").val("");
 	$("#fundidas").val("");
 	$("#fecha").val("");
-	$("#descripcion").val("");
-	$("#idexterior").val("");
 
 	var now = new Date();
 	var day = ("0" + now.getDate()).slice(-2);
@@ -122,20 +123,20 @@ function mostrar(idexterior)
 	{
 		data = JSON.parse(data);
 		mostrarform(true);
-
+		$("#idexterior").val(data.idexterior);
 		$("#nombre").val(data.nombre);
-		$("#cantidad").val(data.cantidada);
-		$("#potencia").val(data.potencia);
-		$("#potencia_total").val(data.potencia_total);
-		$("#capacidad").val(data.capacidad);
-    $("#tiempo_operacion").val(data.tiempo_operacion);
-		$("#consumo").val(data.consumo);
-		$("#funcionando").val(data.funcionando);
+		$("#cantidad").val(data.cantidad);
+		$("#funcionando").val(date.funcionando);
+		$("#potencia_unidad").val(data.potencia_unidad);
+		$("#instalada_watts").val(data.instalada_watts);
+		$("#instalada_kw").val(data.instalada_kw);
+		$("#t_operacion_sem").val(data.t_operacion_sem);
+		$("#cons_semana").val(data.cons_semana);
+		$("#t_op_mensual").val(data.t_op_mensual);
+		$("#cons_mes").val(data.cons_mes);
+		$("#cons_semestre").val(data.cons_semestre);
 		$("#fundidas").val(data.fundidas);
 		$("#fecha").val(data.fecha);
- 		$("#descripcion").val(data.descripcion);
-		$("#idexterior").val(data.idedificio);
-
  	})
 }
 
@@ -170,11 +171,26 @@ function activar(idexterior)
 function calcular(){
 	var cant=0;
 	var  pot =0;
+	var t_ope_semanal = 0;
 	cant = $("#funcionando").val();
-	pot = $("#potencia").val();
+	pot = $("#potencia_unidad").val();
+
 	total = pot * cant;
-	$("#potencia_total").val(total);
+	$("#instalada_watts").val(total);
     cpt = total/1000;
-	$("#capacidad").val(cpt);
+	$("#instalada_kw").val(cpt);
+		//Sacar el consumo semanal
+	t_ope_semanal = $("#t_operacion_sem").val();
+	consumoSemanal = cpt * t_ope_semanal;
+	$("#cons_semana").val(consumoSemanal);
+		//Sacar tipo de operacion mensual
+	t_op_semanal = t_ope_semanal * 4;
+	$("#t_op_mensual").val(t_op_semanal);
+	//Sacar el consumo mensual
+consumoMensual = consumoSemanal * 4;
+$("#cons_mes").val(consumoMensual);
+//Sacar el consumo semestral
+consumoSemestral = consumoMensual * 6;
+$("#cons_semestre").val(consumoSemestral);
 }
 init();
