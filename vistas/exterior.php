@@ -36,16 +36,12 @@ if ($_SESSION['compras']==1)
                             <th>Opciones</th>
                             <th>Nom.Elemento</th>
                             <th>Cantidad</th>
-                            <th>En funcionamiento</th>
-                            <th>P.Unidad(Watts)</th>
+                            <th>Funcionando</th>
                             <th>P.Instalada(Watts)</th>
-                            <th>P.Instalada(Kw)</th>
-                            <th>T/Op.Semana(Hrs)</th>
                             <th>Con.Semanal(KWh)</th>
-                            <th>T/Op.Mes(Hrs)</th>
                             <th>C.Mensual(Kwh)</th>
                             <th>C.Semestral(kwh)</th>
-                            <th>Fundidas</th>
+                            <th>Fecha</th>
                           </thead>
                           <tbody>
                           </tbody>
@@ -53,16 +49,12 @@ if ($_SESSION['compras']==1)
                             <th>Opciones</th>
                             <th>Nom.Elemento</th>
                             <th>Cantidad</th>
-                            <th>En funcionamiento</th>
-                            <th>P.Unidad(Watts)</th>
+                            <th>Funcionando</th>
                             <th>P.Instalada(Watts)</th>
-                            <th>P.Instalada(Kw)</th>
-                            <th>T/Op.Semana(Hrs)</th>
                             <th>Con.Semanal(KWh)</th>
-                            <th>T/Op.Mes(Hrs)</th>
                             <th>C.Mensual(Kwh)</th>
                             <th>C.Semestral(kwh)</th>
-                            <th>Fundidas</th>
+                            <th>Fecha</th>
                           </tfoot>
                         </table>
                     </div>
@@ -86,12 +78,12 @@ if ($_SESSION['compras']==1)
                           </div>
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
                             <label>P.Instalada(Watts):</label>
-                            <input type="text" class="form-control" name="instalada_watts"  id="instalada_watts" maxlength="10"  >
+                            <input type="text" class="form-control" name="instalada_watts"  id="instalada_watts" maxlength="10"  disabled>
                           </div>
                           <!--Inicio de otra nueva fila-->
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <label>Potencia instalada(Kw):</label>
-                            <input type="text" class="form-control" name="instalada_kw" onchange="calcular();" id="instalada_kw" maxlength="7" >
+                            <input type="text" class="form-control" name="instalada_kw" onchange="calcular();" id="instalada_kw" maxlength="7" disabled>
                           </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <label>T/Operación Semanal(Hrs):</label>
@@ -99,20 +91,20 @@ if ($_SESSION['compras']==1)
                           </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <label>Consumo Semana(Kwh):</label>
-                            <input type="text" class="form-control" name="cons_semana" id="cons_semana" >
+                            <input type="text" class="form-control" name="cons_semana" id="cons_semana" disabled>
                           </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <label>T/Operación Mensual(Hrs):</label>
-                            <input type="text" class="form-control" name="t_op_mensual" id="t_op_mensual" >
+                            <input type="text" class="form-control" name="t_op_mensual" id="t_op_mensual" disabled>
                           </div>
                           <!--Inicio de otra nueva fila-->
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <label>Consumo Mensual(Kwh):</label>
-                            <input type="text" class="form-control" name="cons_mes" id="cons_mes" >
+                            <input type="text" class="form-control" name="cons_mes" id="cons_mes" disabled>
                           </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <label>Consumo Semestral(Kwh):</label>
-                            <input type="text" class="form-control" name="cons_semestre" id="cons_semestre" maxlength="5" >
+                            <input type="text" class="form-control" name="cons_semestre" id="cons_semestre" maxlength="5" disabled>
                           </div>
 
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -121,7 +113,7 @@ if ($_SESSION['compras']==1)
                           </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <label>Fecha:</label>
-                            <input type="date" class="form-control" name="fecha" id="fecha" >
+                            <input type="date" class="form-control" name="fecha" id="fecha" disabled>
                           </div>
                           <!--Inicio de otra nueva fila
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">

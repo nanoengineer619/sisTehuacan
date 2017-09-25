@@ -43,20 +43,16 @@ switch ($_GET["op"]){
 
  		while ($reg=$rspta->fetch_object()){
 			$data[]=array(
- 			"0"=>'<button class="btn btn-warning" onclick="mostrar('.$reg->idexterior.')"><i class="fa fa-eye"></i></button>',
+ 			"0"=>'<button class="btn btn-warning" onclick="mostrar('.$reg->idexterior.')"><i class="fa fa-eye"></i></button>
+						<button class="btn btn-success" onclick="mostrar('.$reg->idexterior.')"><i class="fa fa-pencil"></i></button>',
 			"1"=>$reg->nombre,
 			"2"=>$reg->cantidad,
 			"3"=>$reg->funcionando,
-			"4"=>$reg->potencia_unidad,
-			"5"=>$reg->instalada_watts,
-			"6"=>$reg->instalada_kw,
-			"7"=>$reg->t_operacion_sem,
-			"8"=>$reg->cons_semana,
-			"9"=>$reg->t_op_mensual,
-			"10"=>$reg->cons_mes,
-			"11"=>$reg->cons_semestre,
-			"12"=>$reg->fundidas,
-			"13"=>$reg->fecha
+			"4"=>$reg->instalada_watts,
+			"5"=>$reg->cons_semana,
+			"6"=>$reg->cons_mes,
+			"7"=>$reg->cons_semestre,
+			"8"=>$reg->fecha
 			);
 	}
  		$results = array(

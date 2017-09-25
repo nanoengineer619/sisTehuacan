@@ -21,7 +21,7 @@ if (strlen(session_id()) < 1)
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="../public/css/_all-skins.min.css">
     <link rel="apple-touch-icon" href="../public/img/apple-touch-icon.png">
-    <link rel="shortcut icon" href="../public/img/favicon.ico">
+    <link rel="shortcut icon" href="../public/img/energia.png">
 
     <!-- DATATABLES -->
     <link rel="stylesheet" type="text/css" href="../public/datatables/jquery.dataTables.min.css">
