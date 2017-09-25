@@ -182,14 +182,14 @@ var detalles=0;
 $("#btnGuardar").hide();
 function agregarDetalle(idelemento,nombre)
   {
-  	var cantidad=1;
-    var potencia_unidad=1;
+  	var cantidad=0;
+    var potencia_unidad=0;
 
 
     if (idelemento!="")
     {
     	var potencia_total=cantidad*potencia_unidad;
-    	var consumo=1;
+    	var consumo=0;
     	var fila='<tr class="filas" id="fila'+cont+'">'+
     	'<td><button type="button" class="btn btn-danger" onclick="eliminarDetalle('+cont+')">X</button></td>'+
     	'<td><input type="hidden" name="idelemento" value="'+idelemento+'">'+nombre+'</td>'+
@@ -200,7 +200,7 @@ function agregarDetalle(idelemento,nombre)
     	'<td><input type="number" readonly="" class="form-control" name="potencia_total" id="potencia_total" value=""></td>'+
     	'<td><input type="number" readonly="" class="form-control" name="capacidad" id="capacidad" value=""></td>'+
     	'<td><input type="number" class="form-control" onkeyup="modificarSubototales()" name="tiempo_operacion[]" id="tiempo_operacion[]" value=""></td>'+
-    	'<td><span name="consumo" id="consumo'+cont+'">'+consumo+'</span></td>'+
+    	'<td style="background:#398699; color:#fff;"><span name="consumo" id="consumo'+cont+'">'+consumo+'</span></td>'+
     	'</tr>';
     	cont++;
     	detalles=detalles+1;
@@ -279,17 +279,18 @@ function activar(iddepartamento)
         }
 	})
 }
-function calcular(){
-	var cant=0;
-	var  pot =0;
-	cant = $("#cantidad[]").val();
-	pot = $("#potencia_unidad[]").val();
-	total = cant * pot;
-	alert(total);
-	$("#potencia_total[]").val(total);
-    cpt = total/1000; 
-	$("#capacidad[]").val(cpt);
-}
+function evaluar(){
+  	if (detalles>0)
+    {
+      $("#btnGuardar").show();
+    }
+    else
+    {
+      $("#btnGuardar").hide(); 
+      cont=0;
+    }
+  }
+  
 function eliminarDetalle(indice){
   	$("#fila" + indice).remove();
   	calcularTotales();
