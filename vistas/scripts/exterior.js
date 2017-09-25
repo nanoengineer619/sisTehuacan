@@ -14,6 +14,7 @@ function init(){
 //Función limpiar
 function limpiar()
 {
+	$("#idexterior").val("");
 	$("#nombre").val("");
 	$("#cantidad").val("");
 	$("#funcionando").val("");
@@ -86,7 +87,7 @@ function listar()
 					}
 				},
 		"bDestroy": true,
-		"iDisplayLength": 5,//Paginación
+		"iDisplayLength": 7,//Paginación
 	    "order": [[ 0, "desc" ]]//Ordenar (columna,orden)
 	}).DataTable();
 }
@@ -127,15 +128,10 @@ function mostrar(idexterior)
 		$("#nombre").val(data.nombre);
 		$("#cantidad").val(data.cantidad);
 		$("#funcionando").val(date.funcionando);
-		$("#potencia_unidad").val(data.potencia_unidad);
 		$("#instalada_watts").val(data.instalada_watts);
-		$("#instalada_kw").val(data.instalada_kw);
-		$("#t_operacion_sem").val(data.t_operacion_sem);
 		$("#cons_semana").val(data.cons_semana);
-		$("#t_op_mensual").val(data.t_op_mensual);
 		$("#cons_mes").val(data.cons_mes);
 		$("#cons_semestre").val(data.cons_semestre);
-		$("#fundidas").val(data.fundidas);
 		$("#fecha").val(data.fecha);
  	})
 }

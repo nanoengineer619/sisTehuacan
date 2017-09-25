@@ -88,18 +88,6 @@ if ($_SESSION['compras']==1)
                                     <th>Consumo</th>
                                 </thead>
                                 
-                                <tfoot style="background-color:#EEEEEE;">
-                                    <th>TOTAL</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th><h4 id="total">$ 0.00</h4><input type="hidden" name="total_compra" id="total_compra"></th> 
-                                </tfoot>
                                 <tbody>
                                   
                                 </tbody>
@@ -142,7 +130,6 @@ if ($_SESSION['compras']==1)
           </table>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Guardar</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
         </div>        
       </div>

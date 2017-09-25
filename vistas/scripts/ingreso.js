@@ -160,6 +160,11 @@ function mostrar(idingreso)
 {
 	$.post("../ajax/ingreso.php?op=mostrar",{idingreso : idingreso}, function(data, status)
 	{
+		$.post("../ajax/ingreso.php?op=listarDetalle&id="+idingreso,function(r){
+	        $("#detalles").html(r);
+	});
+
+
 		data = JSON.parse(data);		
 		mostrarform(true);
 
@@ -179,9 +184,7 @@ function mostrar(idingreso)
 		$("#btnAgregarArt").hide();
  	});
 
- 	$.post("../ajax/ingreso.php?op=listarDetalle&id="+idingreso,function(r){
-	        $("#detalles").html(r);
-	});
+ 	
 }
 
 //Función para anular registros
