@@ -50,6 +50,7 @@ if ($_SESSION['compras']==1)
                           </tbody>
                           <tfoot>
                             
+                          </tfoot>
                         </table>
                     </div>
                     <div class="panel-body" style="height: 400px;" id="formularioregistros">
@@ -63,49 +64,46 @@ if ($_SESSION['compras']==1)
                           </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <label>Departamento(*):</label>
-                            <select id="departamen" name="departamen" class="form-control selectpicker" data-live-search="true" required>
-
-                            </select>
+                            <input type="hidden" id="fecha_hora">
+                            <input type="text" class="form-control" id="departamento" name="departamento" placeholder="Ingrese el Departamento">
                           </div>
-                          <!--<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <label>Departamento(*)</label>
-                            <input type="text" class="form-control" name="nombre" id="nombre" required="" placeholder="Departamento">
-                          </div>-->
-                          <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <label>Elemento del Departamento(*)</label>
-                              <input type="text" class="form-control"  name="elemento" id="elemento" placeholder="Elemento">
+                           <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                            <a data-toggle="modal" href="#myModal"> 
+                              <label style="color: #fff;">.</label>         
+                              <button id="btnAgregarArt" type="button" class="btn btn-primary form-control"> <span class="fa fa-plus"></span> Agregar Elemento</button>
+                            </a>
                           </div>
-                          <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <label>Numero de Elementos</label>
-                            <input type="text" class="form-control" name="cantidad" onchange="calcular();" on id="cantidad" maxlength="7" placeholder="Cantidad" value="" required="">
-                          </div>
-                          <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <label>Potencia</label>
-                            <input type="text" class="form-control" name="potencia" onchange="calcular();" id="potencia" maxlength="10" placeholder="Número" value="" required="">
-                          </div>
-                          <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
-                            <label>Potencia Total</label>
-                            <input type="text" class="form-control" name="potencia_total" id="potencia_total" readonly="" value="" placeholder="Total">
-                          </div>
-                          <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
-                            <label>Capacidad</label>
-                            <input type="text" class="form-control" name="capacidad" maxlength="7" id="capacidad" required="">
-                          </div>
-                          <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
-                            <label>Funcionando</label>
-                            <input type="number" class="form-control" name="funcionando" id="funcionando" required="">
-                          </div>
-                          <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
-                            <label>Fundidas</label>
-                            <input type="number" class="form-control" name="fundidas" id="fundidas" required="">
-                          </div>
-                          <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
-                            <label>Fecha</label>
-                            <input type="text" class="form-control" name="fecha_hora" id="fecha_hora" required="" readonly="">
-                          </div>
-                          <div class="form-group col-lg-8 col-md-8 col-sm-6 col-xs-12">
-                            <label>Descripción</label>
-                            <textarea class="form-control" name="descripcion" id="descripcion" required=""></textarea>
+                           <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                            <table id="detalles" class="table table-striped table-bordered table-condensed table-hover" style="position: relative;">
+                              <thead style="background-color:#A9D0F5">
+                                    <th>Opciones</th>
+                                    <th>Elemento</th>
+                                    <th>Cantidad</th>
+                                    <th>Funcionando</th>
+                                    <th>Fundidos</th>
+                                    <th>Potencia Watts</th>
+                                    <th>P. Total</th>
+                                    <th>KW</th>
+                                    <th>T. Operacion</th>
+                                    <th>Consumo</th>
+                                </thead>
+                                
+                                <tfoot style="background-color:#EEEEEE;">
+                                    <th>TOTAL</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th><h4 id="total">$ 0.00</h4><input type="hidden" name="total_compra" id="total_compra"></th> 
+                                </tfoot>
+                                <tbody>
+                                  
+                                </tbody>
+                            </table>
                           </div>
 
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -123,6 +121,33 @@ if ($_SESSION['compras']==1)
 
     </div><!-- /.content-wrapper -->
   <!--Fin-Contenido-->
+  <!-- Modal para agregar Departamento-->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Diagnosticar Elemento</h4>
+        </div>
+        <div class="modal-body" style="width: 100% !important;">
+          <table id="tblelementos" class="table table-striped table-bordered table-condensed table-hover" style="width: 100% !important;">
+            <thead>
+                <th>Opción</th>
+                <th>Elementos</th>
+            </thead>
+            <tbody>
+            </tbody>
+            <tfoot>
+            </tfoot>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Guardar</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>        
+      </div>
+    </div>
+  </div>  
 
 <?php
 }

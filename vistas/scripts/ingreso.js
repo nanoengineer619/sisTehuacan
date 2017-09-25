@@ -233,7 +233,7 @@ function agregarDetalle(idarticulo,articulo)
     	'<td><input type="hidden" name="idarticulo[]" value="'+idarticulo+'">'+articulo+'</td>'+
     	'<td><input type="number" onkeyup="modificarSubototales()" name="cantidad[]" id="cantidad[]" value="'+cantidad+'"></td>'+
     	'<td><input type="number" onkeyup="modificarSubototales()" name="precio_compra[]" id="precio_compra[]" value="'+precio_compra+'"></td>'+
-    	'<td>$ <span name="subtotal" id="subtotal'+cont+'">'+subtotal+'</span></td>';
+    	'<td>$ <span name="subtotal" id="subtotal'+cont+'">'+subtotal+'</span></td></tr>';
     	cont++;
     	detalles=detalles+1;
     	$('#detalles').append(fila);

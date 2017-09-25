@@ -39,7 +39,7 @@ Class Departamento
 	//Implementar un método para listar los registros
 	public function listar()
 	{
-		$sql="SELECT d.iddepartamento,d.idedificio,e.nombre as edificio,d.nombre,d.elemento,d.cantidad,d.potencia,d.potencia_total,d.capacidad,d.funcionando,d.fundidas,d.descripcion,d.fecha_hora FROM departamento d INNER JOIN edificio e ON d.idedificio=e.idedificio";
+		$sql="SELECT * FROM elemento";
 		return ejecutarConsulta($sql);		
 	}
 

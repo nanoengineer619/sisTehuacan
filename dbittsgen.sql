@@ -158,8 +158,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table.`departamento`
 -- -----------------------------------------------------
-CREATE TABLE `modulo` (
-  `idmodulo` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE `elemento` (
+  `idelemento` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `nombre` VARCHAR(80) NOT NULL,
   `condicion` TINYINT(1) NOT NULL)
 ENGINE = InnoDB;
@@ -170,19 +170,27 @@ CREATE TABLE `departamento` (
   `iddepartamento` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `idedificio` INT NOT NULL,
   `nombre` VARCHAR(80) NOT NULL,
-  `elemento` VARCHAR(50) NOT NULL,
+  `estado` TINYINT(1) NOT NULL)
+ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `departamento`
+-- -----------------------------------------------------
+CREATE TABLE `detalle_departamento` (
+  `iddetalle` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `iddepartamento` INT NOT NULL,
+  `idelemento` INT NOT NULL,
   `cantidad` INT(5) NOT NULL,
-  `potencia` INT(7) NOT NULL,
-  `potencia_total` INT(7) NOT NULL,
-  `capacidad` DECIMAL(5,3) NOT NULL,
   `funcionando` INT(5) NOT NULL,
-  `fundidas` INT(5) NOT NULL,
-  `descripcion` VARCHAR(256) NOT NULL,
-  `fecha_hora` date NOT NULL,
-  INDEX `fk_departamento_edificio_idx` (`idedificio` ASC),
-  CONSTRAINT `fk_departamento_edificio`
-    FOREIGN KEY (`idedificio`)
-    REFERENCES `edificio` (`idedificio`)
+  `fundidas` INT(7) NOT NULL,
+  `potencia_unidad` INT(7) NOT NULL,
+  `potencia_total` INT(7) NOT NULL,
+  `capacidad` DECIMAL(7,2) NOT NULL,
+  `tiempo_operacion` INT(7) NULL,
+  `consumo` DECIMAL(7,2) NULL,
+  INDEX `fk_detalle_departamento_idx` (`iddepartamento` ASC),
+  CONSTRAINT `fk_departamento_elementos`
+    FOREIGN KEY (`iddepartamento`)
+    REFERENCES `departamento` (`iddepartamento`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -207,19 +215,23 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`exterior`
 -- -----------------------------------------------------
-CREATE TABLE `exterior` (
-  `idexterior` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `nombre` VARCHAR(50) NOT NULL,
-  `cantidad` INT(7) NOT NULL,
-  `potencia` INT(5) NOT NULL,
-  `potencia_total` INT(7) NOT NULL,
-  `capacidad` DECIMAL(8,4) NOT NULL,
-  `tiempo_operacion` INT(5) NOT NULL,
-  `consumo` DECIMAL(8,4) NOT NULL,
-  `funcionando` INT(5) NOT NULL,
-  `fundidas` INT(5) NOT NULL,
-  `descripcion` VARCHAR(256) NOT NULL)
-ENGINE = InnoDB;
+CREATE TABLE IF NOT EXISTS `exterior` (
+ `idexterior` int(11) NOT NULL AUTO_INCREMENT,
+ `nombre` varchar(50) NOT NULL,
+ `cantidad` int(7) NOT NULL,
+ `funcionando` int(5) NOT NULL,
+ `potencia_unidad` decimal(8,4) NOT NULL,
+ `instalada_watts` decimal(8,4) NOT NULL,
+ `instalada_kw` decimal(8,4) NOT NULL,
+ `t_operacion_sem` decimal(8,4) NOT NULL,
+ `cons_semana` decimal(8,4) NOT NULL,
+ `t_op_mensual` int(5) NOT NULL,
+ `cons_mes` decimal(8,4) NOT NULL,
+ `cons_semestre` decimal(8,4) NOT NULL,
+ `fundidas` int(11) NOT NULL,
+ `fecha` date NOT NULL,
+ PRIMARY KEY (`idexterior`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 -- -----------------------------------------------------
 -- Table `mydb`.`detalle_interiores`
 -- -----------------------------------------------------

@@ -41,18 +41,8 @@ switch ($_GET["op"]){
 
  		while ($reg=$rspta->fetch_object()){
  			$data[]=array(
- 				"0"=>'<button class="btn btn-warning" onclick="mostrar('.$reg->iddepartamento.')"><i class="fa fa-pencil"></i></button>',
- 				"1"=>$reg->edificio,
- 				"2"=>$reg->nombre,
- 				"3"=>$reg->elemento,
- 				"4"=>$reg->cantidad,
- 				"5"=>$reg->potencia,
- 				"6"=>$reg->potencia_total,
-                "7"=>$reg->capacidad,
-                "8"=>$reg->funcionando,
-                "9"=>$reg->fundidas,
-                "10"=>$reg->descripcion,
-                "11"=>$reg->fecha_hora
+ 				"0"=>'<button class="btn btn-warning" onclick="mostrar('.$reg->idelemento.')"><i class="fa fa-pencil"></i></button>',
+ 				"1"=>$reg->nombre,
  				);
  		}
  		$results = array(
@@ -85,6 +75,27 @@ switch ($_GET["op"]){
 				{
 					echo '<option value=' . $reg->nombre . '>' . $reg->nombre . '</option>';
 				}
+	break;
+	case 'listarElementos':
+		require_once "../modelos/Elemento.php";
+		$elemento=new Elemento();
+
+		$rspta=$elemento->listarActivos();
+ 		//Vamos a declarar un array
+ 		$data= Array();
+
+ 		while ($reg=$rspta->fetch_object()){
+ 			$data[]=array(
+ 				"0"=>'<button class="btn btn-warning" onclick="agregarDetalle('.$reg->idelemento.',\''.$reg->nombre.'\')"><span class="fa fa-plus"></span></button>',
+ 				"1"=>$reg->nombre
+ 				);
+ 		}
+ 		$results = array(
+ 			"sEcho"=>1, //Información para el datatables
+ 			"iTotalRecords"=>count($data), //enviamos el total registros al datatable
+ 			"iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+ 			"aaData"=>$data);
+ 		echo json_encode($results);
 	break;
 }
 ?>
