@@ -36,15 +36,9 @@ if ($_SESSION['compras']==1)
                             <th>Opciones</th>
                             <th>Edificio</th>
                             <th>Departamento</th>
-                            <th>Elemento</th>
-                            <th>Cantidad</th>
-                            <th>Potencia</th>
-                            <th>P. Total</th>
-                            <th>Capacidad</th>
-                            <th>Funcionando</th>
-                            <th>Fundidos</th>
-                            <th>Descripcion</th>
                             <th>Fecha</th>
+                            <th>Consumo</th>
+                            <th>Estadp</th>
                           </thead>
                           <tbody>
                           </tbody>
@@ -57,15 +51,18 @@ if ($_SESSION['compras']==1)
                         <form name="formulario" id="formulario" method="POST">
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <label>Edificio(*):</label>
-                            <input type="hidden" name="iddepartamento" id="iddepartamento">
-                            <select id="idedificio" name="idedificio" class="form-control selectpicker" data-live-search="true" required>
+                            <select id="idedificio" name="idedificio" class="form-control selectpicker" data-live-search="true" required="">
 
                             </select>
                           </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <label>Departamento(*):</label>
-                            <input type="hidden" id="fecha_hora">
-                            <input type="text" class="form-control" id="departamento" name="departamento" placeholder="Ingrese el Departamento">
+                            <input type="hidden" name="iddepartamento" id="iddepartamento">
+                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el Departamento" required="">
+                          </div>
+                          <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <label>Fecha</label>
+                            <input type="text" class="form-control" id="fecha" name="fecha" readonly="">
                           </div>
                            <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-6">
                             <a data-toggle="modal" href="#myModal"> 
@@ -80,7 +77,7 @@ if ($_SESSION['compras']==1)
                                     <th>Elemento</th>
                                     <th>Cantidad</th>
                                     <th>Funcionando</th>
-                                    <th>Fundidos</th>
+                                    <th>Fallando</th>
                                     <th>Potencia Watts</th>
                                     <th>P. Total</th>
                                     <th>KW</th>
@@ -91,6 +88,18 @@ if ($_SESSION['compras']==1)
                                 <tbody>
                                   
                                 </tbody>
+                                <tfoot>
+                                    <th>TOTAL</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th><h4 id="total">KW 0.00</h4><input type="hidden" name="total_consumo" id="total_consumo"></th> 
+                                </tfoot>
                             </table>
                           </div>
 

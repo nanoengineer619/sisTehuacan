@@ -170,6 +170,8 @@ CREATE TABLE `departamento` (
   `iddepartamento` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `idedificio` INT NOT NULL,
   `nombre` VARCHAR(80) NOT NULL,
+  `total_consumo` Decimal(7,3)Not Null,
+  `fecha` Date Not Null,
   `estado` TINYINT(1) NOT NULL)
 ENGINE = InnoDB;
 -- -----------------------------------------------------
@@ -184,9 +186,9 @@ CREATE TABLE `detalle_departamento` (
   `fundidas` INT(7) NOT NULL,
   `potencia_unidad` INT(7) NOT NULL,
   `potencia_total` INT(7) NOT NULL,
-  `capacidad` DECIMAL(7,2) NOT NULL,
-  `tiempo_operacion` INT(7) NULL,
-  `consumo` DECIMAL(7,2) NULL,
+  `capacidad` DECIMAL(7,3) NOT NULL,
+  `tiempo_operacion` INT(7)NOT NULL,
+  `consumo` DECIMAL(7,3)NOT NULL,
   INDEX `fk_detalle_departamento_idx` (`iddepartamento` ASC),
   CONSTRAINT `fk_departamento_elementos`
     FOREIGN KEY (`iddepartamento`)

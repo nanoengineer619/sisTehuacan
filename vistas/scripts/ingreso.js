@@ -137,7 +137,6 @@ function guardaryeditar(e)
 	e.preventDefault(); //No se activará la acción predeterminada del evento
 	//$("#btnGuardar").prop("disabled",true);
 	var formData = new FormData($("#formulario")[0]);
-
 	$.ajax({
 		url: "../ajax/ingreso.php?op=guardaryeditar",
 	    type: "POST",
@@ -163,8 +162,7 @@ function mostrar(idingreso)
 		$.post("../ajax/ingreso.php?op=listarDetalle&id="+idingreso,function(r){
 	        $("#detalles").html(r);
 	});
-
-
+		
 		data = JSON.parse(data);		
 		mostrarform(true);
 
@@ -182,9 +180,7 @@ function mostrar(idingreso)
 		$("#btnGuardar").hide();
 		$("#btnCancelar").show();
 		$("#btnAgregarArt").hide();
- 	});
-
- 	
+ 	}); 	
 }
 
 //Función para anular registros

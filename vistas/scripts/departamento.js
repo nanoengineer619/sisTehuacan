@@ -3,7 +3,7 @@ var tabla;
 //Función que se ejecuta al inicio
 function init(){
 	mostrarform(false);
-	listarElementos();
+	listar();
 	$("#formulario").on("submit",function(e)
 	{
 		guardaryeditar(e);
@@ -15,36 +15,24 @@ function init(){
 	            $('#idedificio').selectpicker('refresh');
 
 	});
-
-	$.post("../ajax/departamento.php?op=selectDepartamento", function(d){
-	            $("#departamen").html(d);
-	            $('#departamen').selectpicker('refresh');
-
-	});
 	$("#imagenmuestra").hide();
 }
 
 //Función limpiar
 function limpiar()
 {
-	$("#iddepartamento").val("");
-	$("#departamen").val("");
-	$("#elemento").val("");
-	$("#cantidad").val("");
-	$("#potencia").val("");
-	$("#potencia_total").val("");
-	$("#capacidad").val("");
-	$("#funcionando").val("");
-	$("#fundidas").val("");
-	$("#fecha_hora").val("");
-	$("#descripcion").val("");
 	$("#idedificio").val("");
+	$("#nombre").val("");
+
+	$("#total_consumo").val("");
+	$(".filas").remove();
+	$("#total").html("0");
 
 	var now = new Date();
 	var day = ("0" + now.getDate()).slice(-2);
 	var month = ("0" + (now.getMonth() + 1)).slice(-2);
 	var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
-    $('#fecha_hora').val(today);
+    $('#fecha').val(today);
 }
 //Función mostrar formulario
 function mostrarform(flag)
@@ -57,6 +45,7 @@ function mostrarform(flag)
 		$("#btnagregar").hide();
 		$("#btnGuardar").hide();
 		$("#btnCancelar").show();
+		listarElementos();
 		detalles=0;
 		$("#btnAgregarArt").show();
 	}
@@ -77,7 +66,7 @@ function cancelarform()
 
 function listar()
 {
-	tabla=$('#tbllistado').dataTable(
+	tabla=$('#tbldepartamento').dataTable(
 	{
 		"aProcessing": true,//Activamos el procesamiento del datatables
 	    "aServerSide": true,//Paginación y filtrado realizados por el servidor
@@ -90,7 +79,7 @@ function listar()
 		        ],
 		"ajax":
 				{
-					url: '../ajax/ingreso.php?op=listar',
+					url: '../ajax/departamento.php?op=listar',
 					type : "get",
 					dataType : "json",						
 					error: function(e){
@@ -146,7 +135,7 @@ function guardaryeditar(e)
 	    {
 	          bootbox.alert(datos);
 	          mostrarform(false);
-	          tabla.ajax.reload();
+	          listar();
 	    }
 
 	});
@@ -157,24 +146,28 @@ function mostrar(iddepartamento)
 {
 	$.post("../ajax/departamento.php?op=mostrar",{iddepartamento : iddepartamento}, function(data, status)
 	{
+		$.post("../ajax/departamento.php?op=listarDetalle&id="+iddepartamento,function(r){
+	        $("#detalles").html(r);
+	});
+		
 		data = JSON.parse(data);
 		mostrarform(true);
 
+		
 		$("#idedificio").val(data.idedificio);
-		$('#idedificio').selectpicker('refresh');
-		$("#departamen").val(data.nombre);
-		$('#departamen').selectpicker('refresh');
-		$("#elemento").val(data.elemento);
-		$("#cantidad").val(data.cantidad);
-		$("#potencia").val(data.potencia);
-		$("#potencia_total").val(data.potencia_total);
-		$("#capacidad").val(data.capacidad);
-		$("#funcionando").val(data.funcionando);
-		$("#fundidas").val(data.fundidas);
-		$("#fecha_hora").val(data.fecha_hora);
-		$("#descripcion").val(data.descripcion);
- 		$("#iddepartamento").val(data.iddepartamento);
- 	})
+		$("#idedificio").selectpicker('refresh');
+		$("#nombre").val(data.nombre);
+		$("#fecha").val(data.fecha);
+		$("#total_consumo").val(data.total_consumo);
+		$("#total").val(data.total_consumo);
+		$("#iddepartamento").val(data.iddepartamento);
+
+		//Ocultar y mostrar los botones
+		$("#btnGuardar").hide();
+		$("#btnCancelar").show();
+		$("#btnAgregarArt").hide();
+ 	});
+ 	
 }
 var cont=0;
 var detalles=0;
@@ -184,23 +177,25 @@ function agregarDetalle(idelemento,nombre)
   {
   	var cantidad=0;
     var potencia_unidad=0;
+    var capacidad =0;
+    var tiempo_operacion=0;
 
 
     if (idelemento!="")
     {
     	var potencia_total=cantidad*potencia_unidad;
-    	var consumo=0;
+    	var subtotal=capacidad * tiempo_operacion;
     	var fila='<tr class="filas" id="fila'+cont+'">'+
     	'<td><button type="button" class="btn btn-danger" onclick="eliminarDetalle('+cont+')">X</button></td>'+
-    	'<td><input type="hidden" name="idelemento" value="'+idelemento+'">'+nombre+'</td>'+
-    	'<td><input type="number" class="form-control" onkeyup="modificarSubototales()" name="cantidad[]" id="cantidad[]" value="'+cantidad+'"></td>'+
-    	'<td><input type="number" class="form-control" name="funcionando[]" id="funcionando[]" value=""></td>'+
-    	'<td><input type="number" class="form-control" name="fundidas[]" id="fundidas[]" value=""></td>'+
-    	'<td><input type="number" class="form-control" onkeyup="modificarSubototales()" name="potencia_unidad[]" id="potencia_unidad[]" value="'+potencia_unidad+'"></td>'+
-    	'<td><input type="number" readonly="" class="form-control" name="potencia_total" id="potencia_total" value=""></td>'+
-    	'<td><input type="number" readonly="" class="form-control" name="capacidad" id="capacidad" value=""></td>'+
-    	'<td><input type="number" class="form-control" onkeyup="modificarSubototales()" name="tiempo_operacion[]" id="tiempo_operacion[]" value=""></td>'+
-    	'<td style="background:#398699; color:#fff;"><span name="consumo" id="consumo'+cont+'">'+consumo+'</span></td>'+
+    	'<td><input type="hidden" name="idelemento[]" value="'+idelemento+'">'+nombre+'</td>'+
+    	'<td><input type="number" step="any" class="form-control" onkeyup="modificarSubototales()" name="cantidad[]" id="cantidad[]" value="'+cantidad+'"></td>'+
+    	'<td><input type="number" step="any" class="form-control" name="funcionando[]" id="funcionando" value=""></td>'+
+    	'<td><input type="number" step="any" class="form-control" name="fundidas[]" id="fundidas" value=""></td>'+
+    	'<td><input type="number" step="any" class="form-control" onkeyup="modificarSubototales()" name="potencia_unidad[]" id="potencia_unidad" value="'+potencia_unidad+'"></td>'+
+    	'<td><input type="number" step="any" readonly="" class="form-control" name="potencia_total[]" id="potencia_total" value=""></td>'+
+    	'<td><input type="number" step="any" readonly="" class="form-control" name="capacidad[]" id="capacidad" value=""></td>'+
+    	'<td><input type="number" step="any" class="form-control" onkeyup="modificarSubototales()" name="tiempo_operacion[]" id="tiempo_operacion" value=""></td>'+
+    	'<td><span name="subtotal" id="subtotal'+cont+'">'+subtotal+'</span><input type="hidden" name="consumo[]" id="consumo"></td>'+
     	'</tr>';
     	cont++;
     	detalles=detalles+1;
@@ -217,9 +212,10 @@ function modificarSubototales()
   	var cant = document.getElementsByName("cantidad[]");
     var prec = document.getElementsByName("potencia_unidad[]");
     var tmp = document.getElementsByName("tiempo_operacion[]");
-    var pott= document.getElementsByName("potencia_total");
-    var capp = document.getElementsByName("capacidad");
-    var cons = document.getElementsByName("consumo");
+    var pott= document.getElementsByName("potencia_total[]");
+    var capp = document.getElementsByName("capacidad[]");
+    var cons = document.getElementsByName("consumo[]");
+    var subs = document.getElementsByName("subtotal");
 
     for (var i = 0; i <cant.length; i++) {
     	var inpC=cant[i];
@@ -228,13 +224,13 @@ function modificarSubototales()
     	var inpS=pott[i];
     	var cap=capp[i];
     	var con=cons[i];
+    	var sub=subs[i];
 
     	inpS.value=inpC.value * inpP.value;
     	cap.value=inpS.value/1000;
     	con.value=cap.value * tm.value;
-    	document.getElementsByName("potencia_total")[i].innerHTML = inpS.value;
-    	document.getElementsByName("capacidad")[i].innerHTML = cap.value;
-    	document.getElementsByName("consumo")[i].innerHTML = con.value;
+    	sub.value=cap.value * tm.value;
+    	document.getElementsByName("subtotal")[i].innerHTML = con.value;
 
     }
     calcularTotales();
@@ -248,7 +244,7 @@ function modificarSubototales()
 		total += document.getElementsByName("subtotal")[i].value;
 	}
 	$("#total").html("$ " + total);
-    $("#total_compra").val(total);
+    $("#total_consumo").val(total);
     evaluar();
   }
 

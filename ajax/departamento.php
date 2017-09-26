@@ -5,23 +5,16 @@ $departamento=new Departamento();
 
 $iddepartamento=isset($_POST["iddepartamento"])? limpiarCadena($_POST["iddepartamento"]):"";
 $idedificio=isset($_POST["idedificio"])? limpiarCadena($_POST["idedificio"]):"";
-$nombre=isset($_POST["departamen"])? limpiarCadena($_POST["departamen"]):"";
-$elemento=isset($_POST["elemento"])? limpiarCadena($_POST["elemento"]):"";
-$cantidad=isset($_POST["cantidad"])? limpiarCadena($_POST["cantidad"]):"";
-$potencia=isset($_POST["potencia"])? limpiarCadena($_POST["potencia"]):"";
-$potencia_total=isset($_POST["potencia_total"])? limpiarCadena($_POST["potencia_total"]):"";
-$capacidad=isset($_POST["capacidad"])? limpiarCadena($_POST["capacidad"]):"";
-$funcionando=isset($_POST["funcionando"])? limpiarCadena($_POST["funcionando"]):"";
-$fundidas=isset($_POST["fundidas"])? limpiarCadena($_POST["fundidas"]):"";
-$descripcion=isset($_POST["descripcion"])? limpiarCadena($_POST["descripcion"]):"";
-$fecha_hora=isset($_POST["fecha_hora"])? limpiarCadena($_POST["fecha_hora"]):"";
+$nombre=isset($_POST["nombre"])? limpiarCadena($_POST["nombre"]):"";
+$total_consumo=isset($_POST["total_consumo"])? limpiarCadena($_POST["total_consumo"]):"";
+$fecha=isset($_POST["fecha"])? limpiarCadena($_POST["fecha"]):"";
 
 switch ($_GET["op"]){
 	case 'guardaryeditar':
 
 		if (empty($iddepartamento)){
-			$rspta=$departamento->insertar($idedificio,$nombre,$elemento,$cantidad,$potencia,$potencia_total,$capacidad,$funcionando,$fundidas,$descripcion,$fecha_hora);
-			echo $rspta ? "Artículo registrado" : "Artículo no se pudo registrar";
+			$rspta=$departamento->insertar($idedificio,$nombre,$total_consumo,$fecha,$_POST["idelemento"],$_POST["cantidad"],$_POST["funcionando"],$_POST["fundidas"],$_POST["potencia_unidad"],$_POST["potencia_total"],$_POST["capacidad"],$_POST["tiempo_operacion"],$_POST["consumo"]);
+			echo $rspta ? "Departamento registrado" : "Departamento no se pudo registrar";
 		}
 		else {
 			$rspta=$departamento->editar($iddepartamento,$idedificio,$nombre,$elemento,$cantidad,$potencia,$potencia_total,$capacidad,$funcionando,$fundidas,$descripcion,$fecha_hora);
@@ -33,6 +26,45 @@ switch ($_GET["op"]){
  		//Codificar el resultado utilizando json
  		echo json_encode($rspta);
 	break;
+    
+    case 'listarDetalle':
+		//Recibimos el idingreso
+		$id=$_GET['id'];
+
+		$rspta = $departamento->listarDetalle($id);
+		$total=0;
+		echo '<thead style="background-color:#A9D0F5">
+                                    <th>Opciones</th>
+                                    <th>Elemento</th>
+                                    <th>Cantidad</th>
+                                    <th>Funcionando</th>
+                                    <th>Fallando</th>
+                                    <th>Potencia Watts</th>
+                                    <th>P. Total</th>
+                                    <th>KW</th>
+                                    <th>T. Operacion</th>
+                                    <th>Consumo</th>
+                                </thead>';
+
+		while ($reg = $rspta->fetch_object())
+				{
+					echo '<tr class="filas"><td></td><td>'.$reg->nombre.'</td><td>'.$reg->cantidad.'</td><td>'.$reg->funcionando.'</td><td>'.$reg->fundidas.'</td><td>'.$reg->potencia_unidad.'</td><td>'.$reg->potencia_total.'</td><td>'.$reg->capacidad.'</td><td>'.$reg->tiempo_operacion.'</td><td>'.$reg->consumo.'</td></tr>';
+				}
+		echo '<tfoot>
+                                    <tfoot>
+                                    <th>TOTAL</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th><h4 id="total">KW 0.00</h4><input type="text" name="total_consumo" id="total_consumo"></th> 
+                                </tfoot> 
+                                </tfoot>';
+	break;
 
 	case 'listar':
 		$rspta=$departamento->listar();
@@ -41,8 +73,13 @@ switch ($_GET["op"]){
 
  		while ($reg=$rspta->fetch_object()){
  			$data[]=array(
- 				"0"=>'<button class="btn btn-warning" onclick="mostrar('.$reg->idelemento.')"><i class="fa fa-pencil"></i></button>',
- 				"1"=>$reg->nombre,
+ 				"0"=>'<button class="btn btn-warning" onclick="mostrar('.$reg->iddepartamento.')"><i class="fa fa-pencil"></i></button>',
+ 				"1"=>$reg->edificio,
+ 				"2"=>$reg->nombre,
+ 				"3"=>$reg->fecha,
+ 				"4"=>$reg->total_consumo,
+ 				"5"=>($reg->estado)?'<span class="label bg-green">Activado</span>':
+ 				'<span class="label bg-red">Desactivado</span>'
  				);
  		}
  		$results = array(
