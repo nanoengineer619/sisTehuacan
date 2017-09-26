@@ -37,8 +37,8 @@ if ($_SESSION['compras']==1)
                             <th>Edificio</th>
                             <th>Departamento</th>
                             <th>Fecha</th>
-                            <th>Consumo</th>
-                            <th>Estadp</th>
+                            <th>Consumo semanal</th>
+                            <th>Estado</th>
                           </thead>
                           <tbody>
                           </tbody>
@@ -63,6 +63,8 @@ if ($_SESSION['compras']==1)
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <label>Fecha</label>
                             <input type="text" class="form-control" id="fecha" name="fecha" readonly="">
+                            <input type="hidden" name="total_c" id="total_c">
+                            <input type="hidden" name="total_consumo" id="total_consumo">
                           </div>
                            <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-6">
                             <a data-toggle="modal" href="#myModal"> 
@@ -81,8 +83,8 @@ if ($_SESSION['compras']==1)
                                     <th>Potencia Watts</th>
                                     <th>P. Total</th>
                                     <th>KW</th>
-                                    <th>T. Operacion</th>
-                                    <th>Consumo</th>
+                                    <th>T. Operacion Semanal</th>
+                                    <th>Consumo Semanal Kw</th>
                                 </thead>
                                 
                                 <tbody>
@@ -98,7 +100,7 @@ if ($_SESSION['compras']==1)
                                     <th></th>
                                     <th></th>
                                     <th></th>
-                                    <th><h4 id="total">KW 0.00</h4><input type="hidden" name="total_consumo" id="total_consumo"></th> 
+                                    <th><h4 id="total">KW 0.00</h4></th> 
                                 </tfoot>
                             </table>
                           </div>

@@ -107,7 +107,7 @@ function guardaryeditar(e)
 
 	    success: function(datos)
 	    {
-	          bootbox.alert(datos);
+	          swal(datos);
 	          mostrarform(false);
 	          tabla.ajax.reload();
 	    }
@@ -130,11 +130,20 @@ function mostrar(idelemento)
 //Función para desactivar registros
 function desactivar(idelemento)
 {
-	bootbox.confirm("¿Está Seguro de desactivar eliminar este departamento?", function(result){
-		if(result)
-        {
+	swal({   title: "¿Estas Seguro?",   
+                    text:"¿Desea Eliminar el elemento?",   
+                    type: "warning",   
+                    showCancelButton: true,   
+                    confirmButtonColor: "#61ABCE",   
+                    confirmButtonText: "Aceptar!",   
+                    closeOnConfirm: true},
+
+                    function(isConfirm)
+                    {   
+                          if (isConfirm) 
+                          { 
         	$.post("../ajax/elemento.php?op=desactivar", {idelemento : idelemento}, function(e){
-        		bootbox.alert(e);
+        		swal(e);
 	            tabla.ajax.reload();
         	});
         }
@@ -144,11 +153,20 @@ function desactivar(idelemento)
 //Función para activar registros
 function activar(iddepartamento)
 {
-	bootbox.confirm("¿Está Seguro de activar el Artículo?", function(result){
-		if(result)
-        {
+	swal({   title: "¿Estas Seguro?",   
+                    text:"¿Desea Activar el Edificio?",   
+                    type: "warning",   
+                    showCancelButton: true,   
+                    confirmButtonColor: "#61ABCE",   
+                    confirmButtonText: "Aceptar!",   
+                    closeOnConfirm: true},
+
+                    function(isConfirm)
+                    {   
+                          if (isConfirm) 
+                          { 
         	$.post("../ajax/elemento.php?op=activar", {iddepartamento : iddepartamento}, function(e){
-        		bootbox.alert(e);
+        		swal(e);
 	            tabla.ajax.reload();
         	});
         }

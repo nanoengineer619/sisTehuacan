@@ -104,7 +104,7 @@ function guardaryeditar(e)
 
 	    success: function(datos)
 	    {                    
-	          bootbox.alert(datos);	          
+	          swal(datos);	          
 	          mostrarform(false);
 	          tabla.ajax.reload();
 	    }
@@ -144,11 +144,20 @@ function mostrar(idusuario)
 //Función para desactivar registros
 function desactivar(idusuario)
 {
-	bootbox.confirm("¿Está Seguro de desactivar el usuario?", function(result){
-		if(result)
-        {
+	swal({   title: "¿Estas Seguro?",   
+                    text:"¿Desea desactivar el Usuario?",   
+                    type: "warning",   
+                    showCancelButton: true,   
+                    confirmButtonColor: "#61ABCE",   
+                    confirmButtonText: "Aceptar!",   
+                    closeOnConfirm: true},
+
+                    function(isConfirm)
+                    {   
+                          if (isConfirm) 
+                          { 
         	$.post("../ajax/usuario.php?op=desactivar", {idusuario : idusuario}, function(e){
-        		bootbox.alert(e);
+        		swal(e);
 	            tabla.ajax.reload();
         	});	
         }
@@ -158,11 +167,20 @@ function desactivar(idusuario)
 //Función para activar registros
 function activar(idusuario)
 {
-	bootbox.confirm("¿Está Seguro de activar el Usuario?", function(result){
-		if(result)
-        {
+	swal({   title: "¿Estas Seguro?",   
+                    text:"¿Desea activar el Usuario?",   
+                    type: "warning",   
+                    showCancelButton: true,   
+                    confirmButtonColor: "#61ABCE",   
+                    confirmButtonText: "Aceptar!",   
+                    closeOnConfirm: true},
+
+                    function(isConfirm)
+                    {   
+                          if (isConfirm) 
+                          { 
         	$.post("../ajax/usuario.php?op=activar", {idusuario : idusuario}, function(e){
-        		bootbox.alert(e);
+        		swal(e);
 	            tabla.ajax.reload();
         	});	
         }

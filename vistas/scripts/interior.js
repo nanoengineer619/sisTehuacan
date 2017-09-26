@@ -52,7 +52,7 @@ function mostrarform(flag)
 		$("#formularioregistros").show();
 		//$("#btnGuardar").prop("disabled",false);
 		$("#btnagregar").hide();
-		listarArticulos();
+		listarDepartamento();
 
 		$("#btnGuardar").hide();
 		$("#btnCancelar").show();
@@ -106,7 +106,7 @@ function listar()
 
 
 //Función ListarArticulos
-function listarArticulos()
+function listarDepartamento()
 {
 	tabla=$('#tbldepartamentos').dataTable(
 	{
@@ -147,7 +147,7 @@ function guardaryeditar(e)
 
 	    success: function(datos)
 	    {                    
-	          bootbox.alert(datos);	          
+	          swal(datos);	          
 	          mostrarform(false);
 	          listar();
 	    }
@@ -182,11 +182,20 @@ function mostrar(idedificio)
 //Función para anular registros
 function anular(idingreso)
 {
-	bootbox.confirm("¿Está Seguro de anular el ingreso?", function(result){
-		if(result)
-        {
+	swal({   title: "¿Estas Seguro?",   
+                    text:"¿Desea anular el Edificio?",   
+                    type: "warning",   
+                    showCancelButton: true,   
+                    confirmButtonColor: "#61ABCE",   
+                    confirmButtonText: "Aceptar!",   
+                    closeOnConfirm: true},
+
+                    function(isConfirm)
+                    {   
+                          if (isConfirm) 
+                          { 
         	$.post("../ajax/ingreso.php?op=anular", {idingreso : idingreso}, function(e){
-        		bootbox.alert(e);
+        		swal(e);
 	            tabla.ajax.reload();
         	});	
         }

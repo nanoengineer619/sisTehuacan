@@ -60,7 +60,7 @@ Class Interior
 		return ejecutarConsulta($sql);		
 	}
 	public function listarEdificio(){
-		$sql="SELECT * FROM  edificio";
+		$sql="SELECT d.iddepartamento,d.idedificio,e.nombre as edificio,d.nombre,d.tota_consumo,d.fecha,d.estado FROM departamento d inner join edificio e on d.idedificio=e.idedificio";
 		return ejecutarConsulta($sql);
 	}
 }

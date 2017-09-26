@@ -133,7 +133,7 @@ function guardaryeditar(e)
 
 	    success: function(datos)
 	    {
-	          bootbox.alert(datos);
+	          swal(datos);
 	          mostrarform(false);
 	          listar();
 	    }
@@ -149,7 +149,7 @@ function mostrar(iddepartamento)
 		$.post("../ajax/departamento.php?op=listarDetalle&id="+iddepartamento,function(r){
 	        $("#detalles").html(r);
 	});
-		
+
 		data = JSON.parse(data);
 		mostrarform(true);
 
@@ -158,14 +158,13 @@ function mostrar(iddepartamento)
 		$("#idedificio").selectpicker('refresh');
 		$("#nombre").val(data.nombre);
 		$("#fecha").val(data.fecha);
-		$("#total_consumo").val(data.total_consumo);
-		$("#total").val(data.total_consumo);
+		$("#total_c").val(data.total_consumo);
 		$("#iddepartamento").val(data.iddepartamento);
 
 		//Ocultar y mostrar los botones
 		$("#btnGuardar").hide();
 		$("#btnCancelar").show();
-		$("#btnAgregarArt").hide();
+		$("#btnAgregarArt").show();
  	});
  	
 }
@@ -238,24 +237,46 @@ function modificarSubototales()
   }
  function calcularTotales(){
   	var sub = document.getElementsByName("subtotal");
+  	var com = $("#iddepartamento").val();
   	var total = 0.0;
-
+    var ntc=0.0;
   	for (var i = 0; i <sub.length; i++) {
 		total += document.getElementsByName("subtotal")[i].value;
 	}
-	$("#total").html("$ " + total);
-    $("#total_consumo").val(total);
-    evaluar();
+	if(com!='')
+	{
+		var nt = document.getElementById("total_c").value;
+		ntc=(parseFloat(total) + parseFloat(nt));
+
+	  	$("#totalc").html("$ " + ntc);
+	    $("#total_consumo").val(ntc);
+	    evaluar();
+	}
+	else
+	{
+        $("#total").html("$ " + total);
+	    $("#total_consumo").val(total);
+	    evaluar();
+	}
   }
 
 //Función para desactivar registros
 function desactivar(iddepartamento)
 {
-	bootbox.confirm("¿Está Seguro de desactivar eliminar este departamento?", function(result){
-		if(result)
-        {
+	swal({   title: "¿Estas Seguro?",   
+                    text:"¿Desea desactivar el Edificio?",   
+                    type: "warning",   
+                    showCancelButton: true,   
+                    confirmButtonColor: "#61ABCE",   
+                    confirmButtonText: "Aceptar!",   
+                    closeOnConfirm: true},
+
+                    function(isConfirm)
+                    {   
+                          if (isConfirm) 
+                          { 
         	$.post("../ajax/departamento.php?op=desactivar", {iddepartamento : iddepartamento}, function(e){
-        		bootbox.alert(e);
+        		swal(e);
 	            tabla.ajax.reload();
         	});
         }
@@ -265,11 +286,20 @@ function desactivar(iddepartamento)
 //Función para activar registros
 function activar(iddepartamento)
 {
-	bootbox.confirm("¿Está Seguro de activar el Artículo?", function(result){
-		if(result)
-        {
+	swal({   title: "¿Estas Seguro?",   
+                    text:"¿Desea desactivar el Departamento?",   
+                    type: "warning",   
+                    showCancelButton: true,   
+                    confirmButtonColor: "#61ABCE",   
+                    confirmButtonText: "Aceptar!",   
+                    closeOnConfirm: true},
+
+                    function(isConfirm)
+                    {   
+                          if (isConfirm) 
+                          { 
         	$.post("../ajax/departamento.php?op=activar", {iddepartamento : iddepartamento}, function(e){
-        		bootbox.alert(e);
+        		swal(e);
 	            tabla.ajax.reload();
         	});
         }

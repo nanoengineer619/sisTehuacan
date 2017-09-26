@@ -74,9 +74,9 @@ if ($_SESSION['compras']==1)
                               <thead style="background-color:#A9D0F5">
                                     <th>Opciones</th>
                                     <th>Departamento</th>
-                                    <th>Tiempo de Operacion Total</th>
-                                    <th>Consumo total Por Departamento</th>
-                                    <th>Total de consumo</th>
+                                    <th>Consumo Semanal</th>
+                                    <th>Consumo Mensual</th>
+                                    <th>Consumo Semestral</th>
                                 </thead>
                                 <tfoot style="background-color:#EEEEEE;">
                                     <th>TOTAL</th>
@@ -119,17 +119,11 @@ if ($_SESSION['compras']==1)
         <div class="modal-body" style="width: 800px;">
           <table id="tbldepartamentos" class="table table-striped table-bordered table-condensed table-hover">
             <thead>
-                <th>Elemento</th>
-                <th>Cantidad</th>
-                <th>Potencia</th>
-                <th>P. Total</th>
-                <th>T. Operacion</th>
-                <th>Capacida KW</th>
-                <th>Consumo Semanal</th>
-                <th>Capacidad</th>
-                <th>Funcionando</th>
-                <th>Fundidos</th>
-                <th>Actualizar</th>
+                <th>Acción</th>
+                <th>Departamento</th>
+                <th>Consumo</th>
+                <th>Fecha</th>
+                <th>Estado</th>
             </thead>
             <tbody>
               
@@ -155,7 +149,7 @@ if ($_SESSION['compras']==1)
           <h4 class="modal-title">Diagnosticar Elemento</h4>
         </div>
         <div class="modal-body" style="width: 800px;">
-          <table id="tbldepartamentos" class="table table-striped table-bordered table-condensed table-hover">
+          <table id="tblelementos" class="table table-striped table-bordered table-condensed table-hover">
             <thead>
                 <th>Elemento</th>
                 <th>Cantidad</th>

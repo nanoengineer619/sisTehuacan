@@ -13,17 +13,17 @@ switch ($_GET["op"]){
 	case 'guardaryeditar':
 		if (empty($idproveedor)){
 			$rspta=$proveedor->insertar($nombre,$direccion,$telefono,$email);
-			echo $rspta ? "Persona registrada" : "Persona no se pudo registrar";
+			echo $rspta ? "Proveedor registrada" : "Proveedor no se pudo registrar";
 		}
 		else {
 			$rspta=$proveedor->editar($idproveedor,$nombre,$direccion,$telefono,$email);
-			echo $rspta ? "Persona actualizada" : "Persona no se pudo actualizar";
+			echo $rspta ? "Proveedor actualizada" : "Proveedor no se pudo actualizar";
 		}
 	break;
 
 	case 'eliminar':
 		$rspta=$proveedor->eliminar($idproveedor);
- 		echo $rspta ? "Persona eliminada" : "Persona no se puede eliminar";
+ 		echo $rspta ? "Proveedor eliminada" : "Proveedor no se puede eliminar";
 	break;
 
 	case 'mostrar':

@@ -68,12 +68,13 @@ switch ($_GET["op"]){
  		$data= Array();
 
  		while ($reg=$rspta->fetch_object()){
+
  			$data[]=array(
  				"0"=>($reg->condicion==1)?'<button class="btn btn-warning" onclick="mostrar('.$reg->idedificio.')"><i class="fa fa-eye"></i></button>':'<span>Edificio No Disponible</span>',
- 				"1"=>$reg->nombre,
- 				"2"=>'<span>KW</span>',
- 				"3"=>'<span>KW</span>',
- 				"4"=>'<span>KW</span>'
+ 				"1"=>$reg->edificio,
+ 				"2"=>$reg->nombre,
+ 				"3"=>$reg->total_consumo,
+ 				"4"=>$reg->fecha_hora
  				);
  		}
  		$results = array(

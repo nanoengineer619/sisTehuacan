@@ -103,7 +103,7 @@ function guardaryeditar(e)
 
 	    success: function(datos)
 	    {                    
-	          bootbox.alert(datos);	          
+	          swal(datos);	          
 	          mostrarform(false);
 	          tabla.ajax.reload();
 	    }
@@ -137,9 +137,18 @@ function mostrar(idarticulo)
 //Función para desactivar registros
 function desactivar(idarticulo)
 {
-	bootbox.confirm("¿Está Seguro de desactivar el artículo?", function(result){
-		if(result)
-        {
+	swal({   title: "¿Estas Seguro?",   
+                    text:"¿Desea desactivar el articulo?",   
+                    type: "warning",   
+                    showCancelButton: true,   
+                    confirmButtonColor: "#61ABCE",   
+                    confirmButtonText: "Aceptar!",   
+                    closeOnConfirm: true},
+
+                    function(isConfirm)
+                    {   
+                          if (isConfirm) 
+                          { 
         	$.post("../ajax/articulo.php?op=desactivar", {idarticulo : idarticulo}, function(e){
         		bootbox.alert(e);
 	            tabla.ajax.reload();
@@ -151,9 +160,18 @@ function desactivar(idarticulo)
 //Función para activar registros
 function activar(idarticulo)
 {
-	bootbox.confirm("¿Está Seguro de activar el Artículo?", function(result){
-		if(result)
-        {
+	swal({   title: "¿Estas Seguro?",   
+                    text:"¿Desea desactivar el articulo?",   
+                    type: "warning",   
+                    showCancelButton: true,   
+                    confirmButtonColor: "#61ABCE",   
+                    confirmButtonText: "Aceptar!",   
+                    closeOnConfirm: true},
+
+                    function(isConfirm)
+                    {   
+                          if (isConfirm) 
+                          { 
         	$.post("../ajax/articulo.php?op=activar", {idarticulo : idarticulo}, function(e){
         		bootbox.alert(e);
 	            tabla.ajax.reload();

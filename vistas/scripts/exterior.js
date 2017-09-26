@@ -109,7 +109,7 @@ function guardaryeditar(e)
 
 	    success: function(datos)
 	    {
-	          bootbox.alert(datos);
+	          swal(datos);
 	          mostrarform(false);
 	          tabla.ajax.reload();
 	    }
@@ -139,11 +139,20 @@ function mostrar(idexterior)
 //Función para desactivar registros
 function desactivar(idexterior)
 {
-	bootbox.confirm("¿Está Seguro de desactivar el exterior?", function(result){
-		if(result)
-        {
+	swal({   title: "¿Estas Seguro?",   
+                    text:"¿Desea desactivar el Elemento?",   
+                    type: "warning",   
+                    showCancelButton: true,   
+                    confirmButtonColor: "#61ABCE",   
+                    confirmButtonText: "Aceptar!",   
+                    closeOnConfirm: true},
+
+                    function(isConfirm)
+                    {   
+                          if (isConfirm) 
+                          { 
         	$.post("../ajax/exterior.php?op=desactivar", {idexterior : idexterior}, function(e){
-        		bootbox.alert(e);
+        		swal(e);
 	            tabla.ajax.reload();
         	});
         }
@@ -153,11 +162,20 @@ function desactivar(idexterior)
 //Función para activar registros
 function activar(idexterior)
 {
-	bootbox.confirm("¿Está Seguro de activar el Exterior?", function(result){
-		if(result)
-        {
+	swal({   title: "¿Estas Seguro?",   
+                    text:"¿Desea desactivar el Elemento?",   
+                    type: "warning",   
+                    showCancelButton: true,   
+                    confirmButtonColor: "#61ABCE",   
+                    confirmButtonText: "Aceptar!",   
+                    closeOnConfirm: true},
+
+                    function(isConfirm)
+                    {   
+                          if (isConfirm) 
+                          { 
         	$.post("../ajax/exterior.php?op=activar", {idexterior : idexterior}, function(e){
-        		bootbox.alert(e);
+        		swal(e);
 	            tabla.ajax.reload();
         	});
         }

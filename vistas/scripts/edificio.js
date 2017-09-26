@@ -89,7 +89,7 @@ function guardaryeditar(e)
 
 	    success: function(datos)
 	    {
-	          bootbox.alert(datos);
+	          swal(datos);
 	          mostrarform(false);
 	          tabla.ajax.reload();
 	    }
@@ -114,26 +114,44 @@ function mostrar(idedificio)
 //Función para desactivar registros
 function desactivar(idedificio)
 {
-	bootbox.confirm("¿Está Seguro de desactivar el edificio?", function(result){
-		if(result)
-        {
-        	$.post("../ajax/edificio.php?op=desactivar", {idedificio : idedificio}, function(e){
-        		bootbox.alert(e);
-	            tabla.ajax.reload();
-        	});
-        }
-	})
+	swal({   title: "¿Estas Seguro?",   
+                    text:"¿Desea desactivar el Edificio?",   
+                    type: "warning",   
+                    showCancelButton: true,   
+                    confirmButtonColor: "#61ABCE",   
+                    confirmButtonText: "Aceptar!",   
+                    closeOnConfirm: true},
+
+                    function(isConfirm)
+                    {   
+                          if (isConfirm) 
+                          { 
+				        	$.post("../ajax/edificio.php?op=desactivar", {idedificio : idedificio}, function(e){
+				        		swal(e);
+					            tabla.ajax.reload();
+        	                 });
+                          }
+	               })
 }
 
 //Función para activar registros
 function activar(idedificio)
 {
-	bootbox.confirm("¿Está Seguro de activar la Categoría?", function(result){
-		if(result)
-        {
-        	$.post("../ajax/edificio.php?op=activar", {idedificio : idedificio}, function(e){
-        		bootbox.alert(e);
-	            tabla.ajax.reload();
+	swal({   title: "¿Estas Seguro?",   
+                    text:"¿Desea Activar el Edificio?",   
+                    type: "warning",   
+                    showCancelButton: true,   
+                    confirmButtonColor: "#61ABCE",   
+                    confirmButtonText: "Aceptar!",   
+                    closeOnConfirm: true},
+
+                    function(isConfirm)
+                    {   
+                          if (isConfirm) 
+                          {   
+				        	$.post("../ajax/edificio.php?op=activar", {idedificio : idedificio}, function(e){
+				        		swal(e);
+					            tabla.ajax.reload();
         	});
         }
 	})

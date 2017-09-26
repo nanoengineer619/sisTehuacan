@@ -1,19 +1,19 @@
 <?php 
 //Ip de la pc servidor de base de datos
-define("DB_HOST","mysql.hostinger.mx");
+define("DB_HOST","localhost");
 
 //Nombre de la base de datos
-define("DB_NAME", "u758602712_ittsg");
+define("DB_NAME", "id2956830_bdittsgen");
 
 //Usuario de la base de datos
-define("DB_USERNAME", "u758602712_pro");
+define("DB_USERNAME", "id2956830_ittsgen");
 
 //Contraseña del usuario de la base de datos
-define("DB_PASSWORD", "animales");
+define("DB_PASSWORD", "!BkLaQfJvMZOEhsNCI&3");
 
 //definimos la codificación de los caracteres
 define("DB_ENCODE","utf8");
 
 //Definimos una constante como nombre del proyecto
-define("PRO_NOMBRE","ITVentas");
+define("PRO_NOMBRE","ITTSGEN");
 ?>

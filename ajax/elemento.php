@@ -10,11 +10,11 @@ switch ($_GET["op"]){
 
 		if (empty($idelemento)){
 			$rspta=$elemento->insertar($nombre);
-			echo $rspta ? "Artículo registrado" : "Artículo no se pudo registrar";
+			echo $rspta ? "Elemento registrado" : "Elemento no se pudo registrar";
 		}
 		else {
 			$rspta=$elemento->editar($idelemento,$nombre);
-			echo $rspta ? "Artículo actualizado" : "Artículo no se pudo actualizar";
+			echo $rspta ? "Elemento actualizado" : "Elemento no se pudo actualizar";
 		}
 	break;
 

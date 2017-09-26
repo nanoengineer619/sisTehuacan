@@ -22,6 +22,8 @@ if (strlen(session_id()) < 1)
     <link rel="stylesheet" href="../public/css/_all-skins.min.css">
     <link rel="apple-touch-icon" href="../public/img/apple-touch-icon.png">
     <link rel="shortcut icon" href="../public/img/energia.png">
+    <script src="../public/js/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../public/css/sweetalert.css">
 
     <!-- DATATABLES -->
     <link rel="stylesheet" type="text/css" href="../public/datatables/jquery.dataTables.min.css">

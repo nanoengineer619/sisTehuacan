@@ -11,14 +11,13 @@ $fecha=isset($_POST["fecha"])? limpiarCadena($_POST["fecha"]):"";
 
 switch ($_GET["op"]){
 	case 'guardaryeditar':
-
 		if (empty($iddepartamento)){
 			$rspta=$departamento->insertar($idedificio,$nombre,$total_consumo,$fecha,$_POST["idelemento"],$_POST["cantidad"],$_POST["funcionando"],$_POST["fundidas"],$_POST["potencia_unidad"],$_POST["potencia_total"],$_POST["capacidad"],$_POST["tiempo_operacion"],$_POST["consumo"]);
 			echo $rspta ? "Departamento registrado" : "Departamento no se pudo registrar";
 		}
 		else {
-			$rspta=$departamento->editar($iddepartamento,$idedificio,$nombre,$elemento,$cantidad,$potencia,$potencia_total,$capacidad,$funcionando,$fundidas,$descripcion,$fecha_hora);
-			echo $rspta ? "Artículo actualizado" : "Artículo no se pudo actualizar";
+			$rspta=$departamento->editar($iddepartamento,$idedificio,$nombre,$total_consumo,$fecha,$_POST["idelemento"],$_POST["cantidad"],$_POST["funcionando"],$_POST["fundidas"],$_POST["potencia_unidad"],$_POST["potencia_total"],$_POST["capacidad"],$_POST["tiempo_operacion"],$_POST["consumo"]);
+			echo $rspta ? "Departamento registrado" : "Departamento no se pudo registrar";
 		}
 	break;
 	case 'mostrar':
@@ -42,13 +41,14 @@ switch ($_GET["op"]){
                                     <th>Potencia Watts</th>
                                     <th>P. Total</th>
                                     <th>KW</th>
-                                    <th>T. Operacion</th>
-                                    <th>Consumo</th>
+                                    <th>T. Operacion Semanal</th>
+                                    <th>Consumo Semanal KW</th>
                                 </thead>';
 
 		while ($reg = $rspta->fetch_object())
 				{
-					echo '<tr class="filas"><td></td><td>'.$reg->nombre.'</td><td>'.$reg->cantidad.'</td><td>'.$reg->funcionando.'</td><td>'.$reg->fundidas.'</td><td>'.$reg->potencia_unidad.'</td><td>'.$reg->potencia_total.'</td><td>'.$reg->capacidad.'</td><td>'.$reg->tiempo_operacion.'</td><td>'.$reg->consumo.'</td></tr>';
+					echo '<tr class="filas"><td></td><td>'.$reg->nombre.'</td><td>'.$reg->cantidad.'</td><td>'.$reg->funcionando.'</td><td>'.$reg->fundidas.'</td><td>'.$reg->potencia_unidad.'</td><td>'.$reg->potencia_total.'</td><td>'.$reg->capacidad.'</td><td>'.$reg->tiempo_operacion.'</td><td style="background:#3B8F7B; color:#fff;">KW '.$reg->consumo.'</td></tr>';
+					$total=$total+ ($reg->consumo);
 				}
 		echo '<tfoot>
                                     <tfoot>
@@ -61,7 +61,7 @@ switch ($_GET["op"]){
                                     <th></th>
                                     <th></th>
                                     <th></th>
-                                    <th><h4 id="total">KW 0.00</h4><input type="text" name="total_consumo" id="total_consumo"></th> 
+                                    <th><h4 id="totalc" name="totalc">kw '.$total.'</h4><input type="hidden" name="total_cons" id="total_cons" value="'.$total.'"></th> 
                                 </tfoot> 
                                 </tfoot>';
 	break;

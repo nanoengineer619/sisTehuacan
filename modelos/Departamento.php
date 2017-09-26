@@ -32,10 +32,22 @@ Class Departamento
 	}
 
 	//Implementamos un método para editar registros
-	public function editar($iddepartamento,$idedificio,$nombre,$elemento,$cantidad,$potencia,$potencia_total,$capacidad,$funcionando,$fundidas,$descripcion,$fecha_hora)
+	public function editar($iddepartamento,$idedificio,$nombre,$total_consumo,$fecha,$idelemento,$cantidad,$funcionando,$fundidas,$potencia_unidad,$potencia_total,$capacidad,$tiempo_operacion,$consumo)
 	{
-		$sql="UPDATE departamento SET idedificio='$idedificio',nombre='$nombre',elemento='$elemento',cantidad='$cantidad',potencia='$potencia',potencia_total='$potencia_total',capacidad='$capacidad',funcionando='$funcionando',fundidas='$fundidas',descripcion='$descripcion',fecha_hora='$fecha_hora' WHERE iddepartamento='$iddepartamento'";
-		return ejecutarConsulta($sql);
+		$sql="UPDATE departamento SET  idedificio='$idedificio',nombre='$nombre',total_consumo='$total_consumo',fecha='$fecha' WHERE iddepartamento = '$iddepartamento'";
+		   ejecutarConsulta($sql);
+
+		$num_elementos=0;	
+		$sw=true;
+
+		while ($num_elementos < count($idelemento))
+		{
+			$sql_detalle = "INSERT INTO detalle_departamento (iddepartamento,idelemento,cantidad,funcionando,fundidas,potencia_unidad,potencia_total,capacidad,tiempo_operacion,consumo) VALUES ('$iddepartamento','$idelemento[$num_elementos]','$cantidad[$num_elementos]','$funcionando[$num_elementos]','$fundidas[$num_elementos]','$potencia_unidad[$num_elementos]','$potencia_total[$num_elementos]','$capacidad[$num_elementos]','$tiempo_operacion[$num_elementos]','$consumo[$num_elementos]')";
+			ejecutarConsulta($sql_detalle) or $sw = false;
+			$num_elementos=$num_elementos + 1;
+		}
+
+		return $sw;
 	}
 	public function desactivar($iddepartamento)
 	{

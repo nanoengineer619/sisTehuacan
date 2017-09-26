@@ -92,7 +92,7 @@ function guardaryeditar(e)
 
 	    success: function(datos)
 	    {                    
-	          bootbox.alert(datos);	          
+	          swal(datos);	          
 	          mostrarform(false);
 	          tabla.ajax.reload();
 	    }
@@ -121,11 +121,20 @@ function mostrar(idproveedor)
 //Función para eliminar registros
 function eliminar(idproveedor)
 {
-	bootbox.confirm("¿Está Seguro de eliminar el proveedor?", function(result){
-		if(result)
-        {
+	swal({   title: "¿Estas Seguro?",   
+                    text:"¿Desea Eliminar el Proveedor?",   
+                    type: "warning",   
+                    showCancelButton: true,   
+                    confirmButtonColor: "#61ABCE",   
+                    confirmButtonText: "Aceptar!",   
+                    closeOnConfirm: true},
+
+                    function(isConfirm)
+                    {   
+                          if (isConfirm) 
+                          { 
         	$.post("../ajax/persona.php?op=eliminar", {idproveedor : idproveedor}, function(e){
-        		bootbox.alert(e);
+        		swal(e);
 	            tabla.ajax.reload();
         	});	
         }

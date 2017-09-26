@@ -90,7 +90,7 @@ function guardaryeditar(e)
 
 	    success: function(datos)
 	    {                    
-	          bootbox.alert(datos);	          
+	          swal(datos);	          
 	          mostrarform(false);
 	          tabla.ajax.reload();
 	    }
@@ -116,11 +116,20 @@ function mostrar(idcategoria)
 //Función para desactivar registros
 function desactivar(idcategoria)
 {
-	bootbox.confirm("¿Está Seguro de desactivar la Categoría?", function(result){
-		if(result)
-        {
+	swal({   title: "¿Estas Seguro?",   
+                    text:"¿Desea desactivar la categoria?",   
+                    type: "warning",   
+                    showCancelButton: true,   
+                    confirmButtonColor: "#61ABCE",   
+                    confirmButtonText: "Aceptar!",   
+                    closeOnConfirm: true},
+
+                    function(isConfirm)
+                    {   
+                          if (isConfirm) 
+                          { 
         	$.post("../ajax/categoria.php?op=desactivar", {idcategoria : idcategoria}, function(e){
-        		bootbox.alert(e);
+        		swal(e);
 	            tabla.ajax.reload();
         	});	
         }
@@ -130,11 +139,20 @@ function desactivar(idcategoria)
 //Función para activar registros
 function activar(idcategoria)
 {
-	bootbox.confirm("¿Está Seguro de activar la Categoría?", function(result){
-		if(result)
-        {
+	swal({   title: "¿Estas Seguro?",   
+                    text:"¿Desea desactivar la categoria?",   
+                    type: "warning",   
+                    showCancelButton: true,   
+                    confirmButtonColor: "#61ABCE",   
+                    confirmButtonText: "Aceptar!",   
+                    closeOnConfirm: true},
+
+                    function(isConfirm)
+                    {   
+                          if (isConfirm) 
+                          { 
         	$.post("../ajax/categoria.php?op=activar", {idcategoria : idcategoria}, function(e){
-        		bootbox.alert(e);
+        		swal(e);
 	            tabla.ajax.reload();
         	});	
         }
