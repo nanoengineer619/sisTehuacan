@@ -26,7 +26,7 @@ switch ($_GET["op"]){
 			echo $rspta ? "Exterior registrado" : "Exterior no se pudo registrar";
 		}
 		else {
-			$rspta=$exterior->editar($nombre,$cantidad,$funcionando,$potencia_unidad,$instalada_watts,$instalada_kw,$t_operacion_sem,$cons_semana,$t_op_mensual,$cons_mes,$cons_semestre,$fundidas,$fecha);
+			$rspta=$exterior->editar($idexterior,$nombre,$cantidad,$funcionando,$potencia_unidad,$instalada_watts,$instalada_kw,$t_operacion_sem,$cons_semana,$t_op_mensual,$cons_mes,$cons_semestre,$fundidas,$fecha);
 			echo $rspta ? "Exterior actualizado" : "Exterior no se pudo actualizar";
 		}
 	break;
@@ -43,8 +43,10 @@ switch ($_GET["op"]){
 
  		while ($reg=$rspta->fetch_object()){
 			$data[]=array(
- 			"0"=>'<button class="btn btn-warning" onclick="mostrar('.$reg->idexterior.')"><i class="fa fa-eye"></i></button>
-						<button class="btn btn-success" onclick="mostrar('.$reg->idexterior.')"><i class="fa fa-pencil"></i></button>',
+ 			"0"=>'
+						<button class="btn btn-success" onclick="mostrar('.$reg->idexterior.')"><i class="fa fa-pencil"></i></button>
+						<button class="btn btn-warning" onclick="mostrar('.$reg->idexterior.')"><i class="fa fa-eye"></i></button>
+						<button class="btn btn-danger" onclick="eliminar('.$reg->idexterior.')"><i class="fa fa-trash"></i></button>',
 			"1"=>$reg->nombre,
 			"2"=>$reg->cantidad,
 			"3"=>$reg->funcionando,
@@ -61,6 +63,11 @@ switch ($_GET["op"]){
  			"iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
  			"aaData"=>$data);
  		echo json_encode($results);
+	break;
+
+	case 'eliminar':
+		$rspta=$exterior->eliminar($idexterior);
+		echo $rspta ? "Registro eliminado" : "Registro no se puedo eliminar";
 	break;
 /*
 	case "selectEdificio":
