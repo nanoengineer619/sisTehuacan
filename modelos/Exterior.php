@@ -25,7 +25,8 @@ Class Exterior
 		t_operacion_sem='$t_operacion_sem'cons_semana='$cons_semana',t_op_mensual='$t_op_mensual',cons_mes='$cons_mes',cons_semestre='$cons_semestre',fundidas='$fundidas',fecha='$fecha' WHERE idexterior='$idexterior'";
 		return ejecutarConsulta($sql);
 	}
-	public function desactivar($idexterior)
+	//Implementamos un método para eliminar un registro
+	public function eliminar($idexterior)
 	{
 		$sql="DELETE FROM exterior WHERE idexterior='$idexterior'";
 		return ejecutarConsulta($sql);

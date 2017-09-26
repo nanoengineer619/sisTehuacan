@@ -14,7 +14,7 @@ function init(){
 //Función limpiar
 function limpiar()
 {
-	$("#idexterior").val("");
+
 	$("#nombre").val("");
 	$("#cantidad").val("");
 	$("#funcionando").val("");
@@ -28,6 +28,7 @@ function limpiar()
 	$("#cons_semestre").val("");
 	$("#fundidas").val("");
 	$("#fecha").val("");
+	$("#idexterior").val("");
 
 	var now = new Date();
 	var day = ("0" + now.getDate()).slice(-2);
@@ -124,25 +125,31 @@ function mostrar(idexterior)
 	{
 		data = JSON.parse(data);
 		mostrarform(true);
-		$("#idexterior").val(data.idexterior);
+
 		$("#nombre").val(data.nombre);
 		$("#cantidad").val(data.cantidad);
 		$("#funcionando").val(date.funcionando);
+		$("#potencia_unidad").val(data.potencia_unidad);
 		$("#instalada_watts").val(data.instalada_watts);
+		$("#instalada_kw").val(data.instalada_kw);
+		$("#t_operacion_sem").val(data.t_operacion_sem);
 		$("#cons_semana").val(data.cons_semana);
+		$("#t_op_mensual").val(data.t_op_mensual);
 		$("#cons_mes").val(data.cons_mes);
 		$("#cons_semestre").val(data.cons_semestre);
+		$("#fundidas").val(data.fundidas);
 		$("#fecha").val(data.fecha);
+		$("#idexterior").val(data.fecha);
  	})
 }
 
-//Función para desactivar registros
-function desactivar(idexterior)
+//Función para eliminar registros
+function eliminar(idexterior)
 {
-	bootbox.confirm("¿Está Seguro de desactivar el exterior?", function(result){
+	bootbox.confirm("¿Está Seguro de eliminar el registro?", function(result){
 		if(result)
         {
-        	$.post("../ajax/exterior.php?op=desactivar", {idexterior : idexterior}, function(e){
+        	$.post("../ajax/exterior.php?op=eliminar", {idexterior : idexterior}, function(e){
         		bootbox.alert(e);
 	            tabla.ajax.reload();
         	});
@@ -150,7 +157,7 @@ function desactivar(idexterior)
 	})
 }
 
-//Función para activar registros
+/*
 function activar(idexterior)
 {
 	bootbox.confirm("¿Está Seguro de activar el Exterior?", function(result){
@@ -163,7 +170,7 @@ function activar(idexterior)
         }
 	})
 }
-
+*/
 function calcular(){
 	var cant=0;
 	var  pot =0;
