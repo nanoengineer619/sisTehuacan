@@ -136,45 +136,23 @@ function mostrar(idexterior)
  	})
 }
 
-//Función para desactivar registros
-function desactivar(idexterior)
+
+//Función para eliminar registros
+function eliminar(idexterior)
 {
-	swal({   title: "¿Estas Seguro?",   
-                    text:"¿Desea desactivar el Elemento?",   
-                    type: "warning",   
-                    showCancelButton: true,   
-                    confirmButtonColor: "#61ABCE",   
-                    confirmButtonText: "Aceptar!",   
+	swal({   title: "¿Estas Seguro?",
+                    text:"¿Desea Eliminar el Exterior?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#61ABCE",
+                    confirmButtonText: "Aceptar!",
                     closeOnConfirm: true},
 
                     function(isConfirm)
-                    {   
-                          if (isConfirm) 
-                          { 
-        	$.post("../ajax/exterior.php?op=desactivar", {idexterior : idexterior}, function(e){
-        		swal(e);
-	            tabla.ajax.reload();
-        	});
-        }
-	})
-}
-
-//Función para activar registros
-function activar(idexterior)
-{
-	swal({   title: "¿Estas Seguro?",   
-                    text:"¿Desea desactivar el Elemento?",   
-                    type: "warning",   
-                    showCancelButton: true,   
-                    confirmButtonColor: "#61ABCE",   
-                    confirmButtonText: "Aceptar!",   
-                    closeOnConfirm: true},
-
-                    function(isConfirm)
-                    {   
-                          if (isConfirm) 
-                          { 
-        	$.post("../ajax/exterior.php?op=activar", {idexterior : idexterior}, function(e){
+                    {
+                          if (isConfirm)
+                          {
+        	$.post("../ajax/exterior.php?op=eliminar", {idexterior : idexterior}, function(e){
         		swal(e);
 	            tabla.ajax.reload();
         	});
