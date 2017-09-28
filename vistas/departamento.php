@@ -11,7 +11,7 @@ else
 {
 require 'header.php';
 
-if ($_SESSION['compras']==1)
+if ($_SESSION['edificios']==1)
 {
 ?>
 <!--Contenido-->
@@ -43,7 +43,7 @@ if ($_SESSION['compras']==1)
                           <tbody>
                           </tbody>
                           <tfoot>
-                            
+
                           </tfoot>
                         </table>
                     </div>
@@ -67,8 +67,8 @@ if ($_SESSION['compras']==1)
                             <input type="hidden" name="total_consumo" id="total_consumo">
                           </div>
                            <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-6">
-                            <a data-toggle="modal" href="#myModal"> 
-                              <label style="color: #fff;">.</label>         
+                            <a data-toggle="modal" href="#myModal">
+                              <label style="color: #fff;">.</label>
                               <button id="btnAgregarArt" type="button" class="btn btn-primary form-control"> <span class="fa fa-plus"></span> Agregar Elemento</button>
                             </a>
                           </div>
@@ -86,9 +86,9 @@ if ($_SESSION['compras']==1)
                                     <th>T. Operacion Semanal</th>
                                     <th>Consumo Semanal Kw</th>
                                 </thead>
-                                
+
                                 <tbody>
-                                  
+
                                 </tbody>
                                 <tfoot>
                                     <th>TOTAL</th>
@@ -100,7 +100,7 @@ if ($_SESSION['compras']==1)
                                     <th></th>
                                     <th></th>
                                     <th></th>
-                                    <th><h4 id="total">KW 0.00</h4></th> 
+                                    <th><h4 id="total">KW 0.00</h4></th>
                                 </tfoot>
                             </table>
                           </div>
@@ -142,10 +142,10 @@ if ($_SESSION['compras']==1)
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-        </div>        
+        </div>
       </div>
     </div>
-  </div>  
+  </div>
 
 <?php
 }

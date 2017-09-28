@@ -15,7 +15,7 @@ if ($_SESSION['acceso']==1)
 ?>
 <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">        
+      <div class="content-wrapper">
         <!-- Main content -->
         <section class="content">
             <div class="row">
@@ -34,23 +34,19 @@ if ($_SESSION['acceso']==1)
                             <th>Opciones</th>
                             <th>Nombre</th>
                             <th>Teléfono</th>
-                            <th>Dirección</th>
-                            <th>T. de Usuario</th>
                             <th>Email</th>
-                            <th>Login</th>
+                            <th>Cargo</th>
                             <th>Foto</th>
                             <th>Estado</th>
                           </thead>
-                          <tbody>                            
+                          <tbody>
                           </tbody>
                           <tfoot>
                             <th>Opciones</th>
                             <th>Nombre</th>
-                            <th>Documento</th>
-                            <th>Número</th>
                             <th>Teléfono</th>
                             <th>Email</th>
-                            <th>Login</th>
+                            <th>Cargo</th>
                             <th>Foto</th>
                             <th>Estado</th>
                           </tfoot>
@@ -64,18 +60,6 @@ if ($_SESSION['acceso']==1)
                             <input type="text" class="form-control" name="nombre" id="nombre" maxlength="100" placeholder="Nombre" required>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label>Tipo Documento(*):</label>
-                            <select class="form-control select-picker" name="tipo_documento" id="tipo_documento" required>
-                              <option value="DNI">DNI</option>
-                              <option value="RUC">RUC</option>
-                              <option value="CEDULA">CEDULA</option>
-                            </select>
-                          </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label>Número(*):</label>
-                            <input type="text" class="form-control" name="num_documento" id="num_documento" maxlength="20" placeholder="Documento" required>
-                          </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Dirección:</label>
                             <input type="text" class="form-control" name="direccion" id="direccion" placeholder="Dirección" maxlength="70">
                           </div>
@@ -85,24 +69,33 @@ if ($_SESSION['acceso']==1)
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Email:</label>
-                            <input type="email" class="form-control" name="email" id="email" maxlength="50" placeholder="Email">
+                            <input type="email" class="form-control" name="email" id="email" maxlength="50" placeholder="Email" required>
                           </div>
+                          <!--
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Cargo:</label>
-                            <input type="text" class="form-control" name="cargo" id="cargo" maxlength="20" placeholder="Cargo">
+                            <input type="text" class="form-control" name="cargo" id="cargo" maxlength="20" placeholder="Cargo" >
+                          </div>
+                           -->
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label>Cargo:</label>
+                            <select name="cargo" id="cargo" class="form-control selectpicker" required="">
+                               <option value="Administrador">Administrador</option>
+                               <option value="Usuario">Usuario</option>
+                            </select>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label>Login (*):</label>
-                            <input type="text" class="form-control" name="login" id="login" maxlength="20" placeholder="Login" required>
+                            <label>Usuario:</label>
+                            <input type="text" class="form-control" name="login" id="login" maxlength="20" placeholder="Usuario" required>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label>Clave (*):</label>
-                            <input type="password" class="form-control" name="clave" id="clave" maxlength="64" placeholder="Clave" required>
+                            <label>Contraseña:</label>
+                            <input type="password" class="form-control" name="clave" id="clave" maxlength="64" placeholder="Contraseña" required>
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Permisos:</label>
                             <ul style="list-style: none;" id="permisos">
-                              
+
                             </ul>
                           </div>
 
@@ -137,7 +130,7 @@ require 'footer.php';
 ?>
 
 <script type="text/javascript" src="scripts/usuario.js"></script>
-<?php 
+<?php
 }
 ob_end_flush();
 ?>

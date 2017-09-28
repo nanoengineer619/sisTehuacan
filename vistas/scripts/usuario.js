@@ -7,7 +7,7 @@ function init(){
 
 	$("#formulario").on("submit",function(e)
 	{
-		guardaryeditar(e);	
+		guardaryeditar(e);
 	})
 
 	$("#imagenmuestra").hide();
@@ -21,7 +21,6 @@ function init(){
 function limpiar()
 {
 	$("#nombre").val("");
-	$("#num_documento").val("");
 	$("#direccion").val("");
 	$("#telefono").val("");
 	$("#email").val("");
@@ -67,7 +66,7 @@ function listar()
 		"aProcessing": true,//Activamos el procesamiento del datatables
 	    "aServerSide": true,//Paginación y filtrado realizados por el servidor
 	    dom: 'Bfrtip',//Definimos los elementos del control de tabla
-	    buttons: [		          
+	    buttons: [
 		            'copyHtml5',
 		            'excelHtml5',
 		            'csvHtml5',
@@ -77,9 +76,9 @@ function listar()
 				{
 					url: '../ajax/usuario.php?op=listar',
 					type : "get",
-					dataType : "json",						
+					dataType : "json",
 					error: function(e){
-						console.log(e.responseText);	
+						console.log(e.responseText);
 					}
 				},
 		"bDestroy": true,
@@ -103,8 +102,8 @@ function guardaryeditar(e)
 	    processData: false,
 
 	    success: function(datos)
-	    {                    
-	          swal(datos);	          
+	    {
+	          swal(datos);
 	          mostrarform(false);
 	          tabla.ajax.reload();
 	    }
@@ -117,13 +116,10 @@ function mostrar(idusuario)
 {
 	$.post("../ajax/usuario.php?op=mostrar",{idusuario : idusuario}, function(data, status)
 	{
-		data = JSON.parse(data);		
+		data = JSON.parse(data);
 		mostrarform(true);
 
 		$("#nombre").val(data.nombre);
-		$("#tipo_documento").val(data.tipo_documento);
-		$("#tipo_documento").selectpicker('refresh');
-		$("#num_documento").val(data.num_documento);
 		$("#direccion").val(data.direccion);
 		$("#telefono").val(data.telefono);
 		$("#email").val(data.email);
@@ -144,22 +140,22 @@ function mostrar(idusuario)
 //Función para desactivar registros
 function desactivar(idusuario)
 {
-	swal({   title: "¿Estas Seguro?",   
-                    text:"¿Desea desactivar el Usuario?",   
-                    type: "warning",   
-                    showCancelButton: true,   
-                    confirmButtonColor: "#61ABCE",   
-                    confirmButtonText: "Aceptar!",   
+	swal({   title: "¿Estas Seguro?",
+                    text:"¿Desea desactivar el Usuario?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#61ABCE",
+                    confirmButtonText: "Aceptar!",
                     closeOnConfirm: true},
 
                     function(isConfirm)
-                    {   
-                          if (isConfirm) 
-                          { 
+                    {
+                          if (isConfirm)
+                          {
         	$.post("../ajax/usuario.php?op=desactivar", {idusuario : idusuario}, function(e){
         		swal(e);
 	            tabla.ajax.reload();
-        	});	
+        	});
         }
 	})
 }
@@ -167,22 +163,22 @@ function desactivar(idusuario)
 //Función para activar registros
 function activar(idusuario)
 {
-	swal({   title: "¿Estas Seguro?",   
-                    text:"¿Desea activar el Usuario?",   
-                    type: "warning",   
-                    showCancelButton: true,   
-                    confirmButtonColor: "#61ABCE",   
-                    confirmButtonText: "Aceptar!",   
+	swal({   title: "¿Estas Seguro?",
+                    text:"¿Desea activar el Usuario?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#61ABCE",
+                    confirmButtonText: "Aceptar!",
                     closeOnConfirm: true},
 
                     function(isConfirm)
-                    {   
-                          if (isConfirm) 
-                          { 
+                    {
+                          if (isConfirm)
+                          {
         	$.post("../ajax/usuario.php?op=activar", {idusuario : idusuario}, function(e){
         		swal(e);
 	            tabla.ajax.reload();
-        	});	
+        	});
         }
 	})
 }

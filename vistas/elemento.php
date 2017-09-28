@@ -11,7 +11,7 @@ else
 {
 require 'header.php';
 
-if ($_SESSION['compras']==1)
+if ($_SESSION['edificios']==1)
 {
 ?>
 <!--Contenido-->
@@ -52,7 +52,7 @@ if ($_SESSION['compras']==1)
                           <tbody>
                           </tbody>
                           <tfoot>
-                            
+
                         </table>
                     </div>
                     <!--Fin centro -->

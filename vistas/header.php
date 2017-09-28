@@ -99,7 +99,7 @@ if (strlen(session_id()) < 1)
             {
               echo '<li>
               <a href="inicio.php">
-                <i class="fa fa-tasks"></i> <span>Inicio</span>
+                <i class="fa fa-desktop"></i> <span>Escritorio</span>
               </a>
             </li>';
             }
@@ -110,7 +110,7 @@ if (strlen(session_id()) < 1)
             {
               echo '<li class="treeview">
               <a href="#">
-                <i class="fa fa-laptop"></i>
+                <i class="fa fa-buysellads"></i>
                 <span>Almacén</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
@@ -127,7 +127,7 @@ if (strlen(session_id()) < 1)
             {
               echo '<li class="treeview">
               <a href="#">
-                <i class="fa fa-th"></i>
+                <i class="fa fa-money"></i>
                 <span>Compras</span>
                  <i class="fa fa-angle-left pull-right"></i>
               </a>
@@ -139,27 +139,11 @@ if (strlen(session_id()) < 1)
             }
             ?>
             <?php
-            if ($_SESSION['acceso']==1)
+            if ($_SESSION['edificios']==1)
             {
               echo '<li class="treeview">
               <a href="#">
-                <i class="fa fa-folder"></i> <span>Acceso</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="usuario.php"><i class="fa fa-circle-o"></i> Usuarios</a></li>
-                <li><a href="permiso.php"><i class="fa fa-circle-o"></i> Permisos</a></li>
-
-              </ul>
-            </li>';
-            }
-            ?>
-            <?php
-            if ($_SESSION['areas']==1)
-            {
-              echo '<li class="treeview">
-              <a href="#">
-                <i class="fa fa-folder"></i> <span>Edificios</span>
+                <i class="fa fa-university"></i> <span>Edificios</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
@@ -171,24 +155,50 @@ if (strlen(session_id()) < 1)
             }
             ?>
               <?php
-            if ($_SESSION['diagnostico']==1)
+            if ($_SESSION['interior']==1)
             {
               echo '<li class="treeview">
               <a href="#">
-                <i class="fa fa-folder"></i> <span>Diagnostico</span>
+                <i class="fa fa-folder"></i> <span>Interior</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="exterior.php"><i class="fa fa-circle-o"></i>Exterior</a></li>
                 <li><a href="interior.php"><i class="fa fa-circle-o"></i> Interior</a></li>
               </ul>
             </li>';
             }
             ?>
             <?php
-            if($_SESSION['graficas']==1)
+          if ($_SESSION['exterior']==1)
+          {
+            echo '<li class="treeview">
+            <a href="#">
+              <i class="fa fa-folder"></i> <span>Exterior</span>
+              <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="exterior.php"><i class="fa fa-circle-o"></i>Exterior</a></li>
+            </ul>
+          </li>';
+          }
+          ?>
+            <?php
+            if ($_SESSION['acceso']==1)
             {
               echo '<li class="treeview">
+              <a href="#">
+                <i class="fa fa-users"></i> <span>Usuarios</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="usuario.php"><i class="fa fa-circle-o"></i> Usuarios</a></li>
+                <li><a href="permiso.php"><i class="fa fa-circle-o"></i> Permisos</a></li>
+
+              </ul>
+            </li>';
+            }
+            ?>
+            <li class="treeview">
               <a href="#">
                 <i class="fa fa-bar-chart"></i> <span>Graficas</span>
                 <!--<i class="fa fa-angle-left pull-right"></i> -->
@@ -197,7 +207,7 @@ if (strlen(session_id()) < 1)
                 <li><a href="consultacompras.php"><i class="fa fa-circle-o"></i>Graficas</a></li>
               </ul>-->
             </li>';
-           }
+
             ?>
             <li>
               <a href="#">
