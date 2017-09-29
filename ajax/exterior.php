@@ -4,7 +4,7 @@ require_once "../modelos/Exterior.php";
 $exterior=new Exterior();
 
 $idexterior=isset($_POST["idexterior"])? limpiarCadena($_POST["idexterior"]):"";
-$nombre=isset($_POST["nombre"])? limpiarCadena($_POST["nombre"]):"";
+$nombre=isset($_POST["idelemento"])? limpiarCadena($_POST["idelemento"]):"";
 $cantidad=isset($_POST["cantidad"])? limpiarCadena($_POST["cantidad"]):"";
 $funcionando=isset($_POST["funcionando"])? limpiarCadena($_POST["funcionando"]):"";
 $potencia_unidad=isset($_POST["potencia_unidad"])? limpiarCadena($_POST["potencia_unidad"]):"";
@@ -17,6 +17,8 @@ $cons_mes=isset($_POST["cons_mes"])? limpiarCadena($_POST["cons_mes"]):"";
 $cons_semestre=isset($_POST["cons_semestre"])? limpiarCadena($_POST["cons_semestre"]):"";
 $fundidas=isset($_POST["fundidas"])? limpiarCadena($_POST["fundidas"]):"";
 $fecha=isset($_POST["fecha"])? limpiarCadena($_POST["fecha"]):"";
+
+
 
 switch ($_GET["op"]){
 	case 'guardaryeditar':
@@ -69,18 +71,19 @@ switch ($_GET["op"]){
 		$rspta=$exterior->eliminar($idexterior);
 		echo $rspta ? "Registro eliminado" : "Registro no se puedo eliminar";
 	break;
-/*
-	case "selectEdificio":
-		require_once "../modelos/Edificio.php";
-		$edificio = new Edificio();
 
-		$rspta = $edificio->select();
+	case "selectElemento":
+		require_once "../modelos/Elemento.php";
+		$elemento = new Elemento();
+
+		$rspta = $elemento->select();
 
 		while ($reg = $rspta->fetch_object())
 				{
-					echo '<option value=' . $reg->idedificio . '>' . $reg->nombre . '</option>';
+					echo '<option value=' . $reg->nombre . '>' . $reg->nombre . '</option>';
+
 				}
 	break;
-  */
+
 }
 ?>

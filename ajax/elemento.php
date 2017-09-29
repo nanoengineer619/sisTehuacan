@@ -65,6 +65,7 @@ switch ($_GET["op"]){
 					echo '<option value=' . $reg->idedificio . '>' . $reg->nombre . '</option>';
 				}
 	break;
+	
 	case "selectDepartamento":
 		require_once "../modelos/modulo.php";
 		$modulo = new Modulo();
@@ -76,5 +77,7 @@ switch ($_GET["op"]){
 					echo '<option value=' . $reg->nombre . '>' . $reg->nombre . '</option>';
 				}
 	break;
+
+
 }
 ?>

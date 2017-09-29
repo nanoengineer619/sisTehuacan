@@ -60,9 +60,11 @@ if ($_SESSION['exterior']==1)
                     </div>
                     <div class="panel-body" style="height: 400px;" id="formularioregistros">
                         <form name="formulario" id="formulario" method="POST">
-                          <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                            <label>Nombre Elemento:</label>
-                            <input type="text" class="form-control" name="nombre" id="nombre" >
+                          <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <label>Elemento(*):</label>
+                            <select id="idelemento" name="idelemento" class="form-control selectpicker" data-live-search="true" required="">
+
+                            </select>
                           </div>
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
                             <label>Cantidad:</label>

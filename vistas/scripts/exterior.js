@@ -9,6 +9,13 @@ function init(){
 	{
 		guardaryeditar(e);
 	})
+	//Cargamos los items al select elemento
+	$.post("../ajax/exterior.php?op=selectElemento", function(r){
+	            $("#idelemento").html(r);
+	            $('#idelemento').selectpicker('refresh');
+
+	});
+
 }
 
 //Función limpiar

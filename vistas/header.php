@@ -182,6 +182,20 @@ if (strlen(session_id()) < 1)
           </li>';
           }
           ?>
+          <?php
+          if ($_SESSION['consumo']==1)
+          {
+            echo '<li class="treeview">
+            <a href="#">
+              <i class="fa fa-bolt"></i> <span>Consumo Total</span>
+              <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="consumo.php"><i class="fa fa-circle-o"></i>Consultar</a></li>
+            </ul>
+          </li>';
+          }
+          ?>
             <?php
             if ($_SESSION['acceso']==1)
             {

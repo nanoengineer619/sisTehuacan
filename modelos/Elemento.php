@@ -1,4 +1,4 @@
-<?php 
+<?php
 //Incluímos inicialmente la conexión a la base de datos
 require "../config/Conexion.php";
 
@@ -40,14 +40,14 @@ Class Elemento
 	public function listar()
 	{
 		$sql="SELECT * FROM elemento";
-		return ejecutarConsulta($sql);	
+		return ejecutarConsulta($sql);
 	}
 
-	//Implementar un método para listar los registros activos
-	public function listarActivos()
+	//Implementar un método para listar los registros y mostrar en el select
+	public function select()
 	{
-		$sql="SELECT * FROM elemento WHERE condicion='1'";
-		return ejecutarConsulta($sql);			
+		$sql="SELECT * FROM elemento where condicion=1";
+		return ejecutarConsulta($sql);
 	}
 }
 

@@ -71,12 +71,7 @@ if ($_SESSION['acceso']==1)
                             <label>Email:</label>
                             <input type="email" class="form-control" name="email" id="email" maxlength="50" placeholder="Email" required>
                           </div>
-                          <!--
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label>Cargo:</label>
-                            <input type="text" class="form-control" name="cargo" id="cargo" maxlength="20" placeholder="Cargo" >
-                          </div>
-                           -->
+
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Cargo:</label>
                             <select name="cargo" id="cargo" class="form-control selectpicker" required="">
@@ -91,6 +86,7 @@ if ($_SESSION['acceso']==1)
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Contraseña:</label>
                             <input type="password" class="form-control" name="clave" id="clave" maxlength="64" placeholder="Contraseña" required>
+                            
                           </div>
                           <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <label>Permisos:</label>

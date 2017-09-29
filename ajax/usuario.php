@@ -150,6 +150,7 @@ switch ($_GET["op"]){
 			in_array(5,$valores)?$_SESSION['interior']=1:$_SESSION['interior']=0;
 			in_array(6,$valores)?$_SESSION['exterior']=1:$_SESSION['exterior']=0;
 			in_array(7,$valores)?$_SESSION['acceso']=1:$_SESSION['acceso']=0;
+			in_array(8,$valores)?$_SESSION['consumo']=1:$_SESSION['consumo']=0;
 
 	    }
 	    echo json_encode($fetch);
