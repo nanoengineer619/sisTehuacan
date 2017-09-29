@@ -32,7 +32,7 @@ Class Departamento
 	}
 
 	//Implementamos un método para editar registros
-	public function editar($iddepartamento,$idedificio,$nombre,$total_consumo,$fecha,$idelemento,$cantidad,$funcionando,$fundidas,$potencia_unidad,$potencia_total,$capacidad,$tiempo_operacion,$consumo)
+	public function editar($iddepartamento,$idelemento,$nombre,$total_consumo,$fecha,$idelemento,$cantidad)
 	{
 		$sql="UPDATE departamento SET  idedificio='$idedificio',nombre='$nombre',total_consumo='$total_consumo',fecha='$fecha' WHERE iddepartamento = '$iddepartamento'";
 		   ejecutarConsulta($sql);

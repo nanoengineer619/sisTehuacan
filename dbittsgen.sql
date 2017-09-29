@@ -126,9 +126,12 @@ INSERT INTO `permiso` (`idpermiso`, `nombre`) VALUES
 (1, 'Escritorio'),
 (2, 'Almacen'),
 (3, 'Compras'),
-(4, 'Acceso'),
-(5, 'Areas'),
-(6, 'Graficas');
+(4, 'Edificios'),
+(5, 'Interior'),
+(6, 'Exterior'),
+(7, 'Consumo'),
+(8, 'Acceso');
+
 -- -----------------------------------------------------
 -- Table `mydb`.`usuario_permiso`
 -- -----------------------------------------------------
@@ -145,7 +148,8 @@ INSERT INTO `usuario_permiso` (`idusuario_permiso`, `idusuario`, `idpermiso`) VA
 (4 ,1, 4),
 (5 ,1, 5),
 (6 ,1, 6),
-(7 ,1, 7);
+(7 ,1, 7),
+(8 ,1, 8);
 -- -----------------------------------------------------
 -- Table.`edificio`
 -- -----------------------------------------------------

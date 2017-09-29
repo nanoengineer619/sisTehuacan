@@ -101,6 +101,7 @@ if ($_SESSION['compras']==1)
                           </div>
                           <!--Inicio de otra nueva fila-->
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                            <button id="btnActualizar" class="btn btn-info" type="submit" ><i class="fa fa-refresh"></i> Actualizar</button>
                             <button id="btnGuardar" class="btn btn-primary" type="submit" ><i class="fa fa-save"></i> Guardar</button>
                           </div>
                           <!--Inicio de otra nueva fila-->
@@ -152,13 +153,13 @@ if ($_SESSION['compras']==1)
   <div class="modal fade" id="myDep" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" style="width: 85% !important;">
       <div class="modal-content">
+        <form name="form-elements" id="form-elements" method="POST">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title">Diagnosticar Elemento</h4>
         </div>
         <div class="modal-body">
-          <form name="form-elements" id="form-elements" method="POST">
-          <table id="tblelementos" class="table table-striped table-bordered table-condensed table-hover">
+          <table id="tblelementos" class="table table-striped table-bordered table-condensed table-hover table-responsive">
             <thead>
                 <th>Elemento</th>
                 <th>Cantidad</th>
@@ -178,12 +179,12 @@ if ($_SESSION['compras']==1)
               
             </tfoot>
           </table>
-        </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary"><i class="fa fa-save"></i>Guardar</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-        </div>        
+           <button id="btnGuardarElem" class="btn btn-primary" type="submit" ><i class="fa fa-save"></i>&nbsp; Guardar</button>
+          <button type="button" class="btn btn-default" onclick="btnGuardarhide(false);" data-dismiss="modal">Cerrar</button>
+        </div> 
+        </form>       
       </div>
     </div>
   </div>  

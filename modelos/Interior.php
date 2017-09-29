@@ -29,6 +29,32 @@ Class Interior
 		return $sw;
 	}
 
+    public function actualizar($iddepartamento,$total_consumo,$consumo_mensual,$consumo_semestral,$idelemento,$funcionando,$fundidas,$tiempo_operacion,$consumo)
+	{
+		$sql="UPDATE departamento SET  total_consumo='$total_consumo' WHERE iddepartamento = '$iddepartamento'";
+		   ejecutarConsulta($sql);
+
+		 $sql="UPDATE detalle_interiores SET  consumo_semanal='$total_consumo',consumo_mensual='$consumo_mensual',consumo_semestral='$consumo_semestral' WHERE iddepartamento = '$iddepartamento'";
+		   ejecutarConsulta($sql);
+
+		$num_elementos=0;	
+		$sw=true;
+
+		while ($num_elementos < count($idelemento))
+		{
+			$sql_detalle = "UPDATE detalle_departamento SET funcionando='$funcionando[$num_elementos]',fundidas='$fundidas[$num_elementos]',tiempo_operacion='$tiempo_operacion[$num_elementos]',consumo='$consumo[$num_elementos]' WHERE idelemento='$idelemento[$num_elementos]' AND iddepartamento='$iddepartamento'";
+			ejecutarConsulta($sql_detalle) or $sw = false;
+			$num_elementos=$num_elementos + 1;
+		}
+
+		return $sw;
+	}
+    //Implementamos un método para anular categorías
+	public function actinter($idinterior,$total_dep)
+	{
+		$sql="UPDATE interior SET consumo_total='$total_dep' WHERE idinterior='$idinterior'";
+		return ejecutarConsulta($sql);
+	}
 	
 	//Implementamos un método para anular categorías
 	public function anular($idingreso)

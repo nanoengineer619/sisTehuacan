@@ -20,8 +20,27 @@ function init(){
 
 	});
 	$("#imagenmuestra").hide();
+	btnGuardarhide(false);
+	btnActhide(true);
 }
-
+function btnGuardarhide(seg){
+  if(seg)
+  {
+       $("#btnGuardarElem").show();
+  }
+  else{
+       $("#btnGuardarElem").hide();
+  }
+}
+function btnActhide(seg){
+  if(seg)
+  {
+       $("#btnActualizar").show();
+  }
+  else{
+       $("#btnActualizar").hide();
+  }
+}
 //Función limpiar
 function limpiar()
 {
@@ -171,19 +190,60 @@ function guardarelementos(e)
 	    success: function(datos)
 	    {
 	          bootbox.alert(datos);
-	          listar();
+	          var valint = $("#idinterior").val();
+	          var valed = $("#idedificio").val();
+	          mostrar(valed,valint);
+	          btnActhide(true);
+
 	    }
 
 	});
-	limpiar();
+	$("#myDep").modal('hide');
+	btnGuardarhide(false);
 }
+function calculartelem()
+{   
+	btnGuardarhide(true);
+    var cap = document.getElementsByName("capacidad[]");
+    var top = document.getElementsByName("tiempo_operacion[]");
+    var cons = document.getElementsByName("consumo[]");
+    var sub = document.getElementsByName("subt");
+
+    for (var i = 0; i <cap.length; i++) {
+    	var inpC=cap[i];
+    	var inpT=top[i];
+    	var inpCon=cons[i];
+    	var subt=sub[i];
+
+    	inpCon.value=inpC.value * inpT.value;
+    	subt.value=inpC.value * inpT.value;
+    }
+    calcularTotelem();
+}
+function calcularTotelem(){
+  	var sub = document.getElementsByName("subt");
+  	var total = 0.0;
+  	var tmes=0.0;
+  	var tsems=0.0;
+
+  	for (var i = 0; i <sub.length; i++) {
+		total += document.getElementsByName("subt")[i].value;
+		tmes =(parseFloat(total) * 4);
+		tsems =(parseFloat(total) * 24);
+	}
+	$("#total_c_e").html("KW " + total);
+    $("#total_c_elem").val(total);
+    $("#total_c_mes").val(tmes);
+    $("#total_c_sems").val(tsems);
+    evaluar();
+  }
 function mostrar(idedificio,idinterior)
 {
 	$.post("../ajax/interior.php?op=mostrar",{idinterior : idinterior}, function(data, status)
 	{
 		data = JSON.parse(data);
 		mostrarform(true);
-
+        btnGuardarhide(false);
 		
 		$("#idedificio").val(data.idedificio);
 		$("#nombre").val(data.nombre);
