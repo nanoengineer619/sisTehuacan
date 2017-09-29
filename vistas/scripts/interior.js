@@ -4,44 +4,42 @@ var tabla;
 function init(){
 	mostrarform(false);
 	listar();
-
 	$("#formulario").on("submit",function(e)
 	{
-		guardaryeditar(e);	
+		guardaryeditar(e);
 	});
-	//Cargamos los items al select proveedor
+	$("#form-elements").on("submit",function(e)
+	{
+		guardarelementos(e);
+	})
+
+	//Cargamos los items al select categoria
 	$.post("../ajax/interior.php?op=selectEdificio", function(r){
 	            $("#idedificio").html(r);
 	            $('#idedificio').selectpicker('refresh');
+
 	});
-	
+	$("#imagenmuestra").hide();
 }
 
 //Función limpiar
 function limpiar()
 {
-	$("#idproveedor").val("");
-	$("#proveedor").val("");
-	$("#serie_comprobante").val("");
-	$("#num_comprobante").val("");
-	$("#impuesto").val("0");
+	$("#idedificio").val("");
+	$("#nombre").val("");
 
-	$("#total_compra").val("");
+	$("#total_consumo").val("");
 	$(".filas").remove();
 	$("#total").html("0");
-	
-	//Obtenemos la fecha actual
+	$("#totalmes").html("0");
+	$("#totalsem").html("0");
+
 	var now = new Date();
 	var day = ("0" + now.getDate()).slice(-2);
 	var month = ("0" + (now.getMonth() + 1)).slice(-2);
 	var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
     $('#fecha_hora').val(today);
-
-    //Marcamos el primer tipo_documento
-    $("#tipo_comprobante").val("Boleta");
-	$("#tipo_comprobante").selectpicker('refresh');
 }
-
 //Función mostrar formulario
 function mostrarform(flag)
 {
@@ -50,12 +48,11 @@ function mostrarform(flag)
 	{
 		$("#listadoregistros").hide();
 		$("#formularioregistros").show();
-		//$("#btnGuardar").prop("disabled",false);
 		$("#btnagregar").hide();
-		listarDepartamento();
-
 		$("#btnGuardar").hide();
 		$("#btnCancelar").show();
+		//listarElementos();
+		listarDepartamentos();
 		detalles=0;
 		$("#btnAgregarArt").show();
 	}
@@ -63,9 +60,8 @@ function mostrarform(flag)
 	{
 		$("#listadoregistros").show();
 		$("#formularioregistros").hide();
-		$("#btnagregar").show();
+		$("#btnagregar").hide();
 	}
-
 }
 
 //Función cancelarform
@@ -75,10 +71,9 @@ function cancelarform()
 	mostrarform(false);
 }
 
-//Función Listar
 function listar()
 {
-	tabla=$('#tbllistadoedificio').dataTable(
+	tabla=$('#tbledificioD').dataTable(
 	{
 		"aProcessing": true,//Activamos el procesamiento del datatables
 	    "aServerSide": true,//Paginación y filtrado realizados por el servidor
@@ -103,10 +98,8 @@ function listar()
 	    "order": [[ 0, "desc" ]]//Ordenar (columna,orden)
 	}).DataTable();
 }
-
-
-//Función ListarArticulos
-function listarDepartamento()
+//Función Listar Departamentos
+function listarDepartamentos()
 {
 	tabla=$('#tbldepartamentos').dataTable(
 	{
@@ -120,7 +113,7 @@ function listarDepartamento()
 				{
 					url: '../ajax/interior.php?op=listarDepartamento',
 					type : "get",
-					dataType : "json",						
+					dataType : "json",
 					error: function(e){
 						console.log(e.responseText);	
 					}
@@ -129,25 +122,32 @@ function listarDepartamento()
 		"iDisplayLength": 5,//Paginación
 	    "order": [[ 0, "desc" ]]//Ordenar (columna,orden)
 	}).DataTable();
-}
+}	
+//Función Listar 
+function listarElementos(iddepartamento)
+{
+	$.post("../ajax/interior.php?op=listarElementos&id="+iddepartamento,function(r){
+	        $("#tblelementos").html(r);
+	    });
+}	
 //Función para guardar o editar
 
 function guardaryeditar(e)
 {
 	e.preventDefault(); //No se activará la acción predeterminada del evento
-	//$("#btnGuardar").prop("disabled",true);
+	$("#btnGuardar").prop("disabled",true);
 	var formData = new FormData($("#formulario")[0]);
 
 	$.ajax({
-		url: "../ajax/ingreso.php?op=guardaryeditar",
+		url: "../ajax/interior.php?op=guardaryeditar",
 	    type: "POST",
 	    data: formData,
 	    contentType: false,
 	    processData: false,
 
 	    success: function(datos)
-	    {                    
-	          swal(datos);	          
+	    {
+	          bootbox.alert(datos);
 	          mostrarform(false);
 	          listar();
 	    }
@@ -155,35 +155,172 @@ function guardaryeditar(e)
 	});
 	limpiar();
 }
-
-function mostrar(idedificio)
+function guardarelementos(e)
 {
+	e.preventDefault(); //No se activará la acción predeterminada del evento
 
-	$.post("../ajax/interior.php?op=mostrar",{idedificio : idedificio}, function(data, status)
+	var formData = new FormData($("#form-elements")[0]);
+
+	$.ajax({
+		url: "../ajax/interior.php?op=guardarelementos",
+	    type: "POST",
+	    data: formData,
+	    contentType: false,
+	    processData: false,
+
+	    success: function(datos)
+	    {
+	          bootbox.alert(datos);
+	          listar();
+	    }
+
+	});
+	limpiar();
+}
+function mostrar(idedificio,idinterior)
+{
+	$.post("../ajax/interior.php?op=mostrar",{idinterior : idinterior}, function(data, status)
 	{
-		data = JSON.parse(data);		
+		data = JSON.parse(data);
 		mostrarform(true);
 
-        $("#idedificio").val(data.idedificio);
-		$("#edificioname").val(data.nombre);
-		$("#fecha_hora").val(data.condicion);
 		
-
+		$("#idedificio").val(data.idedificio);
+		$("#nombre").val(data.nombre);
+		$("#idinterior").val(data.idinterior);
+		$("#estado").val(data.estado);
+		$("#total_con").val(data.consumo_total);
 		//Ocultar y mostrar los botones
 		$("#btnGuardar").hide();
 		$("#btnCancelar").show();
-		$("#btnAgregarArt").hide();
-		$.post("../ajax/interior.php?op=listarDetalle&id="+idedificio,function(r){
-	        $("#detallesdep").html(r);
-	});
- 	});
-}
+		$("#btnAgregarArt").show();
 
-//Función para anular registros
-function anular(idingreso)
+
+		$.post("../ajax/interior.php?op=listarDetalle&id="+idinterior,function(r){
+	        $("#detallesdep").html(r);
+	    });
+
+ 	});
+ 	
+}
+var cont=0;
+var detalles=0;
+//$("#guardar").hide();
+$("#btnGuardar").hide();
+function agregarDetalle(iddepartamento,nombre,total_consumo)
+  {
+  	verificarDep(iddepartamento);
+  	
+    if (iddepartamento!="")
+    {
+    	
+    	var consumo_mensual=total_consumo* 4;
+    	var consumo_semestral=total_consumo * 24;
+    	var subtotal =subtotal;
+    	var fila='<tr class="filas" id="fila'+cont+'">'+
+    	'<td><button type="button" class="btn btn-danger" onclick="eliminarDetalle('+cont+')" title="Eliminar"><i class="fa fa-trash"></i></button></td>'+
+    	'<td><input type="hidden" name="iddepartamento[]" value="'+iddepartamento+'">'+nombre+'</td>'+
+    	'<td><input type="number" step="any" class="form-control" readonly name="consumo_semanal[]" id="consumo_semanal[]" value="'+total_consumo+'"></td>'+
+    	'<td><input type="number" step="any" class="form-control" readonly name="consumo_mensual[]" id="consumo_mensual" value="'+consumo_mensual+'"></td>'+
+    	'<td><input type="number" step="any" class="form-control" readonly name="consumo_semestral[]" id="consumo_semestral" value="'+consumo_semestral+'"></td>'+
+    	'<td><span style="display:none;" name="subtotal" id="subtotal'+cont+'">'+subtotal+'</span></td>'+
+    	'</tr>';
+    	cont++;
+    	detalles=detalles+1;
+    	$('#detallesdep').append(fila);
+    	modificarSubototales();
+    	
+    }
+    else
+    {
+    	alert("Error al ingresar el detalle, revisar los datos del Departamento");
+    }
+  }
+  function verificarDep(iddepartamento){
+  	var idd = document.getElementsByName("iddepartamento[]");
+  	var aidd = document.getElementsByName("iddepart[]");
+     for(i=0;i<idd.length;i++)
+	{
+		if((iddepartamento)==idd[i].value)
+    	{
+    		swal("El Departamento ya está Agregado");
+    		exit();
+    	}
+
+	}
+	for(i=0;i<aidd.length;i++)
+	{
+		if((iddepartamento)==aidd[i].value)
+    	{
+    		swal("El Departamento ya está Agregado");
+    		exit();
+    	}
+    	
+	}
+  }
+function modificarSubototales()
+  {
+  	var cant = document.getElementsByName("consumo_semanal[]");
+    var subs = document.getElementsByName("subtotal");
+
+    for (var i = 0; i <cant.length; i++) {
+    	var inpC=cant[i];
+    	var sub=subs[i];
+
+    	sub.value=inpC.value;
+
+    	document.getElementsByName("subtotal")[i].innerHTML = sub.value;
+
+    }
+    calcularTotales();
+
+  }
+ function calcularTotales(){
+  	var sub = document.getElementsByName("subtotal");
+  	var comp = $("#estado").val();
+    var ntc=0.0;
+  	var total = 0.0;
+  	var mens=0.0;
+  	var sems=0.0;
+
+  	for (var i = 0; i <sub.length; i++) {
+
+		total += parseFloat(document.getElementsByName("subtotal")[i].value);
+		mens =(parseFloat(total) * 4);
+		sems =(parseFloat(total) * 24);
+	}
+  // -----------------------------------------
+
+    if(comp!=0)
+	{
+		var nt = document.getElementById("total_con").value;
+		ntc=(parseFloat(total) + parseFloat(nt));
+		mens=(parseFloat(ntc) * 4);
+		sems =(parseFloat(ntc) * 24);
+
+	  	$("#totalss").html("KW " + ntc);
+		$("#totalmess").html("KW " + mens);
+		$("#totalsemm").html("KW " + sems);
+	    $("#total_consumo").val(ntc);
+	    evaluar();
+	}
+	else
+	{
+        $("#totalss").html("KW " + total);
+		$("#totalmess").html("KW " + mens);
+		$("#totalsemm").html("KW " + sems);
+	    $("#total_consumo").val(total);
+	    evaluar();
+	}
+  //------------------------------------------
+	
+  }
+
+//Función para desactivar registros
+function desactivar(iddepartamento)
 {
 	swal({   title: "¿Estas Seguro?",   
-                    text:"¿Desea anular el Edificio?",   
+                    text:"¿Desea desactivar el Edificio?",   
                     type: "warning",   
                     showCancelButton: true,   
                     confirmButtonColor: "#61ABCE",   
@@ -194,91 +331,37 @@ function anular(idingreso)
                     {   
                           if (isConfirm) 
                           { 
-        	$.post("../ajax/ingreso.php?op=anular", {idingreso : idingreso}, function(e){
+        	$.post("../ajax/interior.php?op=desactivar", {iddepartamento : iddepartamento}, function(e){
         		swal(e);
 	            tabla.ajax.reload();
-        	});	
+        	});
         }
 	})
 }
 
-//Declaración de variables necesarias para trabajar con las compras y
-//sus detalles
-var impuesto=18;
-var cont=0;
-var detalles=0;
-//$("#guardar").hide();
-$("#btnGuardar").hide();
-$("#tipo_comprobante").change(marcarImpuesto);
+//Función para activar registros
+function activar(iddepartamento)
+{
+	swal({   title: "¿Estas Seguro?",   
+                    text:"¿Desea desactivar el Departamento?",   
+                    type: "warning",   
+                    showCancelButton: true,   
+                    confirmButtonColor: "#61ABCE",   
+                    confirmButtonText: "Aceptar!",   
+                    closeOnConfirm: true},
 
-function marcarImpuesto()
-  {
-  	var tipo_comprobante=$("#tipo_comprobante option:selected").text();
-  	if (tipo_comprobante=='Factura')
-    {
-        $("#impuesto").val(impuesto); 
-    }
-    else
-    {
-        $("#impuesto").val("0"); 
-    }
-  }
-
-function agregarDetalle(iddepartamento,nombre,capacidad)
-  {
-  	var capacidad=1;
-    var tiempo_operacion=0;
-
-    if (iddepartamento!="")
-    {
-    	var subtotal=capacidad*tiempo_operacion;
-    	var fila='<tr class="filas" id="fila'+cont+'">'+
-    	'<td><a data-toggle="modal" href="#myDep"><button id="btnAgregarDep" type="button" class="btn btn-warning"><span class="fa fa-eye"></span></button></a>&nbsp;<button type="button" class="btn btn-danger" onclick="eliminarDetalle('+cont+')">X</button></td>'+
-    	'<td><input type="hidden" name="iddepartamento[]" value="'+iddepartamento+'">'+nombre+'</td>'+
-    	'<td><input type="number" step="any" onkeyup="modificarSubototales()" name="capacidad[]" id="capacidad[]" value="'+capacidad+'"></td>'+
-    	'<td><input type="number" step="any" onkeyup="modificarSubototales()" name="tiempo_operacion[]" id="tiempo_operacion[]" value="'+tiempo_operacion+'"></td>'+
-    	'<td><span name="subtotal" id="subtotal'+cont+'">'+subtotal+'</span> <b>kWh</b></td>';
-    	cont++;
-    	detalles=detalles+1;
-    	$('#detalles').append(fila);
-    	modificarSubototales();
-    }
-    else
-    {
-    	alert("Error al ingresar el detalle, revisar los datos del artículo");
-    }
-  }
-
-  function modificarSubototales()
-  {
-  	var cant = document.getElementsByName("capacidad[]");
-    var prec = document.getElementsByName("tiempo_operacion[]");
-    var sub = document.getElementsByName("subtotal");
-
-    for (var i = 0; i <cant.length; i++) {
-    	var inpC=cant[i];
-    	var inpP=prec[i];
-    	var inpS=sub[i];
-
-    	inpS.value=inpC.value * inpP.value;
-    	document.getElementsByName("subtotal")[i].innerHTML = inpS.value;
-    }
-    calcularTotales();
-
-  }
-  function calcularTotales(){
-  	var sub = document.getElementsByName("subtotal");
-  	var total = 0.0;
-
-  	for (var i = 0; i <sub.length; i++) {
-		total += document.getElementsByName("subtotal")[i].value;
-	}
-	$("#total").html(total + " <b>kWh</b>");
-    $("#total_compra").val(total);
-    evaluar();
-  }
-
-  function evaluar(){
+                    function(isConfirm)
+                    {   
+                          if (isConfirm) 
+                          { 
+        	$.post("../ajax/interior.php?op=activar", {iddepartamento : iddepartamento}, function(e){
+        		swal(e);
+	            tabla.ajax.reload();
+        	});
+        }
+	})
+}
+function evaluar(){
   	if (detalles>0)
     {
       $("#btnGuardar").show();
@@ -289,12 +372,11 @@ function agregarDetalle(iddepartamento,nombre,capacidad)
       cont=0;
     }
   }
-
-  function eliminarDetalle(indice){
+  
+function eliminarDetalle(indice){
   	$("#fila" + indice).remove();
   	calcularTotales();
   	detalles=detalles-1;
   	evaluar();
   }
-
 init();

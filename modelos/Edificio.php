@@ -15,6 +15,12 @@ Class Edificio
 	{
 		$sql="INSERT INTO edificio (nombre,condicion)
 		VALUES ('$nombre','1')";
+
+		$idedificio=ejecutarConsulta_retornarID($sql);
+
+		$sql="INSERT INTO interior (idedificio,fecha_hora,consumo_total,estado)
+		VALUES ('$idedificio','0000-00-00','0','0')";
+
 		return ejecutarConsulta($sql);
 	}
 

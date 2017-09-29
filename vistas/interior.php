@@ -31,13 +31,15 @@ if ($_SESSION['compras']==1)
                     <!-- /.box-header -->
                     <!-- centro -->
                     <div class="panel-body table-responsive" id="listadoregistros">
-                        <table id="tbllistadoedificio" class="table table-striped table-bordered table-condensed table-hover">
+                        <table id="tbledificioD" class="table table-striped table-bordered table-condensed table-hover">
                           <thead>
                             <th>Opciones</th>
                             <th>Edificio</th>
                             <th>Consumo Semanal</th>
                             <th>Consumo Mensual</th>
                             <th>Consumo Semestral</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
                           </thead>
                           <tbody>
                           </tbody>
@@ -47,6 +49,8 @@ if ($_SESSION['compras']==1)
                             <th>Consumo Semanal</th>
                             <th>Consumo Mensual</th>
                             <th>Consumo Semestral</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
                           </tfoot>
                         </table>
                     </div>
@@ -55,13 +59,16 @@ if ($_SESSION['compras']==1)
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <label>Edificio</label>
                             <input type="hidden" name="idedificio" id="idedificio">
-                            <input type="text" class="form-control" readonly="" name="edificioname" id="edificioname" value="">
+                            <input type="hidden" name="idinterior" id="idinterior">
+                            <input type="hidden" name="estado" id="estado">
+                            <input type="text" class="form-control" readonly="" name="name" id="nombre" value="">
                           </div>
                           <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
                             <label>Fecha</label>
-                            <input type="text" class="form-control" name="fecha_hora" id="fecha_hora" readonly="" required="">
-                          </div>
-                          
+                            <input type="hidden" class="form-control" name="total_consumo" id="total_consumo">
+                            <input type="hidden" class="form-control" name="total_con" id="total_con">
+                            <input type="text" class="form-control" name="fecha_hora" id="fecha_hora" readonly="">
+                          </div>                          
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <br>
                             <a data-toggle="modal" href="#myModal">           
@@ -70,20 +77,22 @@ if ($_SESSION['compras']==1)
                           </div>
                           
                            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
-                            <table id="detallesdep" class="table table-striped table-bordered table-condensed table-hover" style="position: relative;">
-                              <thead style="background-color:#A9D0F5">
+                            <table id="detallesdep" class="table table-striped table-bordered table-condensed table-hover">
+                              <thead style="background-color:#507384; color:#fff;">
                                     <th>Opciones</th>
                                     <th>Departamento</th>
                                     <th>Consumo Semanal</th>
                                     <th>Consumo Mensual</th>
                                     <th>Consumo Semestral</th>
+                                    <th style="display: none;"></th>
                                 </thead>
-                                <tfoot style="background-color:#EEEEEE;">
-                                    <th>TOTAL</th>
+                                <tfoot style="background-color:#A9D0F5;">
+                                    <th>Totales</th>
                                     <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th><h4 id="total">0.00 kWh</h4><input type="hidden" name="total_compra" id="total_compra"></th> 
+                                    <th><h4 id="totals">0.00 kW</h4></th>
+                                    <th><h4 id="totalmes">0.00 kW</h4></th>
+                                    <th><h4 id="totalsem">0.00 kW</h4></th>
+                                    <th style="display: none;"></th> 
                                 </tfoot>
                                 <tbody>
                                   
@@ -92,7 +101,7 @@ if ($_SESSION['compras']==1)
                           </div>
                           <!--Inicio de otra nueva fila-->
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
-                            <button id="btnGuarda" class="btn btn-primary" type="submit" ><i class="fa fa-save"></i> Guardar</button>
+                            <button id="btnGuardar" class="btn btn-primary" type="submit" ><i class="fa fa-save"></i> Guardar</button>
                           </div>
                           <!--Inicio de otra nueva fila-->
                           <div class="form-group col-lg-1 col-md-1 col-sm-6 col-xs-12">
@@ -110,19 +119,19 @@ if ($_SESSION['compras']==1)
   <!--Fin-Contenido-->
   <!-- Modal para Detalles de Departamento-->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="width: 80% !important;">
+    <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Diagnosticar Elemento</h4>
+          <h4 class="modal-title">Departamentos</h4>
         </div>
-        <div class="modal-body" style="width: 800px;">
+        <div class="modal-body">
           <table id="tbldepartamentos" class="table table-striped table-bordered table-condensed table-hover">
             <thead>
                 <th>Acción</th>
                 <th>Departamento</th>
-                <th>Consumo</th>
                 <th>Fecha</th>
+                <th>Consumo</th>
                 <th>Estado</th>
             </thead>
             <tbody>
@@ -134,7 +143,6 @@ if ($_SESSION['compras']==1)
           </table>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Guardar</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
         </div>        
       </div>
@@ -142,26 +150,26 @@ if ($_SESSION['compras']==1)
   </div>  
   <!-- Modal para agregar Departamento-->
   <div class="modal fade" id="myDep" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="width: 80% !important;">
+    <div class="modal-dialog" style="width: 85% !important;">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title">Diagnosticar Elemento</h4>
         </div>
-        <div class="modal-body" style="width: 800px;">
+        <div class="modal-body">
+          <form name="form-elements" id="form-elements" method="POST">
           <table id="tblelementos" class="table table-striped table-bordered table-condensed table-hover">
             <thead>
                 <th>Elemento</th>
                 <th>Cantidad</th>
-                <th>Potencia</th>
-                <th>P. Total</th>
-                <th>T. Operacion</th>
-                <th>Capacida KW</th>
-                <th>Consumo Semanal</th>
-                <th>Capacidad</th>
                 <th>Funcionando</th>
                 <th>Fundidos</th>
-                <th>Actualizar</th>
+                <th>Potencia/U</th>
+                <th>P. Total</th>
+                <th>Capacida KW</th>
+                <th>T. Operacion</th>
+                <th>Consumo Semanal</th>
+                <th>Opción</th>
             </thead>
             <tbody>
               
@@ -170,9 +178,10 @@ if ($_SESSION['compras']==1)
               
             </tfoot>
           </table>
+        </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Guardar</button>
+          <button type="button" class="btn btn-primary"><i class="fa fa-save"></i>Guardar</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
         </div>        
       </div>

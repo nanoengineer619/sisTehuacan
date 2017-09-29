@@ -153,7 +153,7 @@ CREATE TABLE `edificio` (
   `idedificio` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `nombre` VARCHAR(80) NOT NULL,
   `condicion` TINYINT(1) NOT NULL)
-ENGINE = InnoDB;
+ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 -- -----------------------------------------------------
 -- Table.`departamento`
@@ -162,7 +162,7 @@ CREATE TABLE `elemento` (
   `idelemento` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `nombre` VARCHAR(80) NOT NULL,
   `condicion` TINYINT(1) NOT NULL)
-ENGINE = InnoDB;
+ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 -- -----------------------------------------------------
 -- Table `departamento`
 -- -----------------------------------------------------
@@ -173,7 +173,7 @@ CREATE TABLE `departamento` (
   `total_consumo` Decimal(7,3)Not Null,
   `fecha` Date Not Null,
   `estado` TINYINT(1) NOT NULL)
-ENGINE = InnoDB;
+ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 -- -----------------------------------------------------
 -- Table `departamento`
 -- -----------------------------------------------------
@@ -195,30 +195,35 @@ CREATE TABLE `detalle_departamento` (
     REFERENCES `departamento` (`iddepartamento`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `interior` (
   `idinterior` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `idedificio` int(11) NOT NULL,
-  `idusuario` int(11) NOT NULL,
   `fecha_hora` date NOT NULL,
-  `consumo_total` decimal(11,2) NOT NULL,
-  `estado` varchar(20) NOT NULL)
-  ENGINE = InnoDB;
+  `consumo_total` decimal(11,3) NOT NULL,
+  `estado` TINYINT(1) NOT NULL)
+  ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `detalle_interiores` (
   `iddetalle_interiores` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `idinterior` INT(11) NOT NULL,
   `iddepartamento` INT(11) NOT NULL,
-  `operacion_semanal` int(11) NOT NULL,
-  `operacion_semanal` int(11) NOT NULL,
-  `operacion_semanal` int(11) NOT NULL)
-ENGINE = InnoDB;
+  `consumo_semanal` DECIMAL(11,3) NOT NULL,
+  `consumo_mensual` DECIMAL(11,3) NOT NULL,
+  `consumo_semestral` DECIMAL(11,3) NOT NULL,
+  INDEX `fk_detalle_interior_idx` (`idinterior` ASC),
+  CONSTRAINT `fk_interiores_departamentos`
+    FOREIGN KEY (`idinterior`)
+    REFERENCES `interior` (`idinterior`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 -- -----------------------------------------------------
 -- Table `mydb`.`exterior`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `exterior` (
- `idexterior` int(11) NOT NULL AUTO_INCREMENT,
+ `idexterior` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
  `nombre` varchar(50) NOT NULL,
  `cantidad` int(7) NOT NULL,
  `funcionando` int(5) NOT NULL,
@@ -231,8 +236,7 @@ CREATE TABLE IF NOT EXISTS `exterior` (
  `cons_mes` decimal(8,4) NOT NULL,
  `cons_semestre` decimal(8,4) NOT NULL,
  `fundidas` int(11) NOT NULL,
- `fecha` date NOT NULL,
- PRIMARY KEY (`idexterior`)
+ `fecha` date NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 -- -----------------------------------------------------
 -- Table `mydb`.`detalle_interiores`
