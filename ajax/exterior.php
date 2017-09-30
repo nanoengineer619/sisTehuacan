@@ -45,10 +45,8 @@ switch ($_GET["op"]){
 
  		while ($reg=$rspta->fetch_object()){
 			$data[]=array(
- 			"0"=>'
-						<button class="btn btn-success" onclick="mostrar('.$reg->idexterior.')"><i class="fa fa-pencil"></i></button>
-						<button class="btn btn-warning" onclick="mostrar('.$reg->idexterior.')"><i class="fa fa-eye"></i></button>
-						<button class="btn btn-danger" onclick="eliminar('.$reg->idexterior.')"><i class="fa fa-trash"></i></button>',
+ 			"0"=>'<button class="btn btn-success" onclick="mostrar('.$reg->idexterior.')"><i class="fa fa-pencil"></i></button>'.
+					 '<button class="btn btn-danger" onclick="eliminar('.$reg->idexterior.')"><i class="fa fa-trash"></i></button>',
 			"1"=>$reg->nombre,
 			"2"=>$reg->cantidad,
 			"3"=>$reg->funcionando,
