@@ -166,7 +166,7 @@ function guardaryeditar(e)
 
 	    success: function(datos)
 	    {
-	          bootbox.alert(datos);
+	          swal(datos);
 	          mostrarform(false);
 	          listar();
 	    }
@@ -189,7 +189,7 @@ function guardarelementos(e)
 
 	    success: function(datos)
 	    {
-	          bootbox.alert(datos);
+	          swal(datos);
 	          var valint = $("#idinterior").val();
 	          var valed = $("#idedificio").val();
 	          mostrar(valed,valint);
@@ -200,6 +200,21 @@ function guardarelementos(e)
 	});
 	$("#myDep").modal('hide');
 	btnGuardarhide(false);
+}
+function actualizaredificio(){
+           var total_dep = document.getElementById("total_dep").value; 
+           var idinterior = document.getElementById("idinterior").value;
+
+           $.ajax({  
+                url: "../ajax/interior.php?op=upDep",  
+                method:"POST",  
+                data:{idinterior:idinterior, total_dep:total_dep},  
+              success: function(datos){
+                  swal(datos);
+                  mostrarform(false);
+	              listar();
+              } 
+           }); 
 }
 function calculartelem()
 {   

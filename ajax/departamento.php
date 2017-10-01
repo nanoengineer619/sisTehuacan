@@ -117,7 +117,7 @@ switch ($_GET["op"]){
 		require_once "../modelos/Elemento.php";
 		$elemento=new Elemento();
 
-		$rspta=$elemento->listarActivos();
+		$rspta=$elemento->listar();
  		//Vamos a declarar un array
  		$data= Array();
 

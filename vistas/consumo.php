@@ -24,25 +24,26 @@ if ($_SESSION['consumo']==1)
                   <div class="box">
                     <div class="box-header with-border">
                       <h2 style="font-family:bold; text-align: center;">Consultar Consumo Total</h2></br>
-                          <button class="btn btn-success" id="btnagregar" onclick="mostrarform(true)"><i class="fa fa-plus-circle"></i> Agregar</button>
                         <div class="box-tools pull-right">
                         </div>
                     </div>
                     <!-- /.box-header -->
                     <!-- centro -->
                     <div class="panel-body table-responsive" id="listadoregistros">
-                        <table id="tbledificios" class="table table-striped table-bordered table-condensed table-hover">
+                        <table id="tblconsumo" class="table table-striped table-bordered table-condensed table-hover">
                           <thead>
-                            <th>Opciones</th>
-                            <th>Nombre</th>
-                            <th>Estado</th>
+                              <th>Area</th>
+                              <th>Consumo Semanal</th>
+                              <th>Consumo Mensual</th>
+                              <th>Consumo Semestral</th>
                           </thead>
                           <tbody>
                           </tbody>
                           <tfoot>
-                            <th>Opciones</th>
-                            <th>Nombre</th>
-                            <th>Estado</th>
+                              <th>Area</th>
+                              <th>Consumo Semanal</th>
+                              <th>Consumo Mensual</th>
+                              <th>Consumo Semestral</th>
                           </tfoot>
                         </table>
                     </div>
@@ -78,7 +79,7 @@ else
 
 require 'footer.php';
 ?>
-<script type="text/javascript" src="scripts/edificio.js"></script>
+<script type="text/javascript" src="scripts/consumo.js"></script>
 <?php
 }
 ob_end_flush();

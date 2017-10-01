@@ -35,10 +35,10 @@ switch ($_GET["op"]){
 		}
 	break;
     case 'upDep':
-         $idinterior=$_GET["idi"];
-         $total_dep=$_GET["idt"];
+         $idinterior=$_POST["idinterior"];
+         $total_dep=$_POST["total_dep"];
 		$rspta=$interior->actinter($idinterior,$total_dep);
- 		echo $rspta ? "Ingreso anulado" : "Ingreso no se puede anular";
+ 		echo $rspta ? "Datos Actualizados" : "No se Actualizaron los Datos";
 	break;
 	case 'anular':
 		$rspta=$interior->anular($idinterior);
@@ -76,7 +76,7 @@ switch ($_GET["op"]){
 				}
 		echo '<tfoot style="background-color:#77BAAD; color:#fff;">
                                     <th><h4>Totales</h4></th>
-                                    <th><input type="number" name="total_dep" id="total_dep" value="'.$ts.'"></th>
+                                    <th><input type="hidden" name="total_dep" id="total_dep" value="'.$ts.'"></th>
                                     <th><h4 id="totalss">'.$ts.' kW</h4></th>
                                     <th><h4 id="totalmess">'.$tm.' kW</h4></th>
                                     <th><h4 id="totalsemm">'.$tsm.' kW</h4></th>

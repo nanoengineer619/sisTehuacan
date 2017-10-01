@@ -101,7 +101,7 @@ if ($_SESSION['compras']==1)
                           </div>
                           <!--Inicio de otra nueva fila-->
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
-                            <button id="btnActualizar" class="btn btn-info" type="submit" ><i class="fa fa-refresh"></i> Actualizar</button>
+                            <button id="btnActualizar" onclick="actualizaredificio();" class="btn btn-info" type="submit" ><i class="fa fa-refresh"></i> Actualizar</button>
                             <button id="btnGuardar" class="btn btn-primary" type="submit" ><i class="fa fa-save"></i> Guardar</button>
                           </div>
                           <!--Inicio de otra nueva fila-->
