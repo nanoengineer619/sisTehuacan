@@ -57,7 +57,7 @@ else
 }
 require 'footer.php';
 ?>
-<script type="text/javascript" src="scripts/Permiso.js"></script>
+<script type="text/javascript" src="scripts/permiso.js"></script>
 <?php 
 }
 ob_end_flush();

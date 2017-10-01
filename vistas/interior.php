@@ -11,7 +11,7 @@ else
 {
 require 'header.php';
 
-if ($_SESSION['compras']==1)
+if ($_SESSION['interior']==1)
 {
 ?>
 <!--Contenido-->
