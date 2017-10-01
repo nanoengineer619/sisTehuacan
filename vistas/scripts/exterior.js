@@ -135,11 +135,19 @@ function mostrar(idexterior)
 		$("#nombre").val(data.nombre);
 		$("#cantidad").val(data.cantidad);
 		$("#funcionando").val(date.funcionando);
-		$("#instalada_watts").val(data.instalada_watts);
-		$("#cons_semana").val(data.cons_semana);
-		$("#cons_mes").val(data.cons_mes);
-		$("#cons_semestre").val(data.cons_semestre);
-		$("#fecha").val(data.fecha);
+		$("#potencia_unidad").val(date.potencia_unidad);
+
+		$("#instalada_watts").val(date.instalada_watts);
+		$("#instalada_kw").val(date.instalada_kw);
+		$("#t_operacion_sem").val(date.t_operacion_sem);
+		$("#cons_semana").val(date.cons_semana);
+		$("#t_op_mensual").val(date.t_op_mensual);
+
+		$("#cons_mes").val(date.cons_mes);
+		$("#cons_semestre").val(date.cons_semestre);
+		$("#fundidas").val(date.fundidas);
+		$("#fecha").val(date.fecha);
+		$("#estado").val(date.estado);
  	})
 }
 
