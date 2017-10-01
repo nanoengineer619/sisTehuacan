@@ -166,7 +166,7 @@ function guardaryeditar(e)
 
 	    success: function(datos)
 	    {
-	          swal(datos);
+	          bootbox.alert(datos);
 	          mostrarform(false);
 	          listar();
 	    }
@@ -296,8 +296,8 @@ function agregarDetalle(iddepartamento,nombre,total_consumo)
     	'<td><button type="button" class="btn btn-danger" onclick="eliminarDetalle('+cont+')" title="Eliminar"><i class="fa fa-trash"></i></button></td>'+
     	'<td><input type="hidden" name="iddepartamento[]" value="'+iddepartamento+'">'+nombre+'</td>'+
     	'<td><input type="number" step="any" class="form-control" readonly name="consumo_semanal[]" id="consumo_semanal[]" value="'+total_consumo+'"></td>'+
-    	'<td><input type="number" step="any" class="form-control" readonly name="consumo_mensual[]" id="consumo_mensual" value="'+consumo_mensual+'"></td>'+
-    	'<td><input type="number" step="any" class="form-control" readonly name="consumo_semestral[]" id="consumo_semestral" value="'+consumo_semestral+'"></td>'+
+    	'<td><input type="number" step="any" class="form-control" readonly name="consumo_mensual[]" id="consumo_mensual[]" value="'+consumo_mensual+'"></td>'+
+    	'<td><input type="number" step="any" class="form-control" readonly name="consumo_semestral[]" id="consumo_semestral[]" value="'+consumo_semestral+'"></td>'+
     	'<td><span style="display:none;" name="subtotal" id="subtotal'+cont+'">'+subtotal+'</span></td>'+
     	'</tr>';
     	cont++;

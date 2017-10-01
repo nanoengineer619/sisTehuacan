@@ -92,7 +92,7 @@ switch ($_GET["op"]){
  		while ($reg=$rspta->fetch_object()){
 
  			$data[]=array(
- 				"0"=>($reg->estado)?'<button class="btn btn-info" title="Detalle" onclick="mostrar('.$reg->idedificio.','.$reg->idinterior.'); btnActhide(false);"><i class="fa fa-eye"></i></button>':'<button class="btn btn-info" title="Agregar" onclick="mostrar('.$reg->idedificio.','.$reg->idinterior.')">Activar</button>',
+ 				"0"=>($reg->estado)?'<button class="btn btn-info" title="Detalle" onclick="mostrar('.$reg->idedificio.','.$reg->idinterior.'); btnActhide(false);"><i class="fa fa-eye"></i></button>':'<button class="btn btn-info" title="Agregar" onclick="mostrar('.$reg->idedificio.','.$reg->idinterior.'); btnActhide(false);">Activar</button>',
  				"1"=>$reg->nombre,
  				"2"=>($reg->consumo_total==0.000)?'<span><i>Sin Datos</i></span>':$reg->consumo_total,
  				"3"=>($reg->mes==0.000)?'<span><i>Sin Datos</i></span>':$reg->mes,

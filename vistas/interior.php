@@ -101,7 +101,6 @@ if ($_SESSION['compras']==1)
                           </div>
                           <!--Inicio de otra nueva fila-->
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
-                            <button id="btnActualizar" onclick="actualizaredificio();" class="btn btn-info" type="submit" ><i class="fa fa-refresh"></i> Actualizar</button>
                             <button id="btnGuardar" class="btn btn-primary" type="submit" ><i class="fa fa-save"></i> Guardar</button>
                           </div>
                           <!--Inicio de otra nueva fila-->
@@ -109,6 +108,9 @@ if ($_SESSION['compras']==1)
                             <button id="btnCancelar" class="btn btn-danger" onclick="cancelarform()" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
                           </div>
                         </form>
+                        <div class="col-lg-1 col-md-1 col-sm-6 col-xs-12" style="left: 20px;">
+                          <button id="btnActualizar" onclick="actualizaredificio();" class="btn btn-info"><i class="fa fa-refresh"></i> Actualizar</button>
+                          </div>
                     </div>
                     <!--Fin centro -->
                   </div><!-- /.box -->
