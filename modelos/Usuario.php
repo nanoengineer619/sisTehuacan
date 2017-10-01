@@ -31,10 +31,10 @@ Class Usuario
 	}
 
 	//Implementamos un método para editar registros
-	public function editar($idusuario,$nombre,$direccion,$telefono,$email,$cargo,$login,$clave,$imagen,$permisos)
+	public function editar($idusuario,$nombre,$direccion,$telefono,$email,$cargo,$login,$imagen,$permisos)
 	{
 		$sql="UPDATE usuario SET nombre='$nombre',direccion='$direccion',telefono='$telefono'
-		,email='$email',cargo='$cargo',login='$login',clave='$clave',imagen='$imagen' WHERE idusuario='$idusuario'";
+		,email='$email',cargo='$cargo',login='$login',imagen='$imagen' WHERE idusuario='$idusuario'";
 		ejecutarConsulta($sql);
 
 		//Eliminamos todos los permisos asignados para volverlos a registrar

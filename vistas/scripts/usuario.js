@@ -39,6 +39,7 @@ function mostrarform(flag)
 	if (flag)
 	{
 		$("#listadoregistros").hide();
+		document.getElementById('clavepass').style.display = "block";
 		$("#formularioregistros").show();
 		$("#btnGuardar").prop("disabled",false);
 		$("#btnagregar").hide();
@@ -125,11 +126,11 @@ function mostrar(idusuario)
 		$("#email").val(data.email);
 		$("#cargo").val(data.cargo);
 		$("#login").val(data.login);
-		$("#clave").val(data.clave);
 		$("#imagenmuestra").show();
 		$("#imagenmuestra").attr("src","../files/usuarios/"+data.imagen);
 		$("#imagenactual").val(data.imagen);
 		$("#idusuario").val(data.idusuario);
+		document.getElementById('clavepass').style.display = "none";
 
  	});
  	$.post("../ajax/usuario.php?op=permisos&id="+idusuario,function(r){

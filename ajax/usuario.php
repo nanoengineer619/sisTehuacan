@@ -38,7 +38,7 @@ switch ($_GET["op"]){
 			echo $rspta ? "Usuario registrado" : "No se pudieron registrar todos los datos del usuario";
 		}
 		else {
-			$rspta=$usuario->editar($idusuario,$nombre,$direccion,$telefono,$email,$cargo,$login,$clavehash,$imagen,$_POST['permiso']);
+			$rspta=$usuario->editar($idusuario,$nombre,$direccion,$telefono,$email,$cargo,$login,$imagen,$_POST['permiso']);
 			echo $rspta ? "Usuario actualizado" : "Usuario no se pudo actualizar";
 		}
 	break;

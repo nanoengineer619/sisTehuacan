@@ -83,7 +83,7 @@ if ($_SESSION['acceso']==1)
                             <label>Usuario:</label>
                             <input type="text" class="form-control" name="login" id="login" maxlength="20" placeholder="Usuario" required>
                           </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12" id="clavepass" style="display: none;">
                             <label>Contraseña:</label>
                             <input type="password" class="form-control" name="clave" id="clave" maxlength="64" placeholder="Contraseña" required>
                             
