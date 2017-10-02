@@ -3,6 +3,7 @@ var tabla;
 //Función que se ejecuta al inicio
 function init(){
 	mostrarform(false);
+	mostrarform1(false);
 	listar();
 
 	$("#formulario").on("submit",function(e)
@@ -52,6 +53,27 @@ function mostrarform(flag)
 	}
 }
 
+function mostrarform1(flag)
+{
+	limpiar();
+	if (flag)
+	{
+		$("#listadoregistros").hide();
+		document.getElementById('clavepass').style.display = "block";
+		$("#formularioregistros").show();
+		$("#btnGuardar").prop("disabled",false);
+		$("#btnagregar").hide();
+		$("#cambiarPass").show();
+	}
+	else
+	{
+		$("#listadoregistros").show();
+		$("#formularioregistros").hide();
+		$("#btnagregar").show();
+	  $("#cambiarPass").hide();
+
+	}
+}
 //Función cancelarform
 function cancelarform()
 {
@@ -138,6 +160,30 @@ function mostrar(idusuario)
 	});
 }
 
+function mostrar1(idusuario)
+{
+	$.post("../ajax/usuario.php?op=mostrar",{idusuario : idusuario}, function(data, status)
+	{
+		data = JSON.parse(data);
+		mostrarform1(true);
+
+		$("#nombre").val(data.nombre);
+		$("#direccion").val(data.direccion);
+		$("#telefono").val(data.telefono);
+		$("#email").val(data.email);
+		$("#cargo").val(data.cargo);
+		$("#login").val(data.login);
+		$("#imagenmuestra").show();
+		$("#imagenmuestra").attr("src","../files/usuarios/"+data.imagen);
+		$("#imagenactual").val(data.imagen);
+		$("#idusuario").val(data.idusuario);
+		document.getElementById('clavepass').style.display = "none";
+
+ 	});
+ 	$.post("../ajax/usuario.php?op=permisos&id="+idusuario,function(r){
+	        $("#permisos").html(r);
+	});
+}
 //Función para desactivar registros
 function desactivar(idusuario)
 {
