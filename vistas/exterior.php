@@ -68,15 +68,16 @@ if ($_SESSION['exterior']==1)
                           </div>
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
                             <label>Cantidad:</label>
+                              <input type="number" class="form-control" name="idexterior" id="idexterior" maxlength="7" >
                               <input type="text" class="form-control" name="cantidad" id="cantidad" maxlength="7" >
                           </div>
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
                               <label>En Funcionamiento:</label>
-                              <input type="text" class="form-control" name="funcionando" onchange="calcular();" on id="funcionando" >
+                              <input type="text" class="form-control" name="funcionando" onchange="calcular();" id="funcionando" >
                           </div>
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
                             <label>Potencia U/(Watts):</label>
-                            <input type="text" class="form-control" name="potencia_unidad" onchange="calcular();" on id="potencia_unidad" maxlength="7" >
+                            <input type="text" class="form-control" name="potencia_unidad" onchange="calcular();" id="potencia_unidad" maxlength="7" >
                           </div>
                           <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
                             <label>P.Instalada(Watts):</label>
@@ -89,7 +90,7 @@ if ($_SESSION['exterior']==1)
                           </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <label>T/Operación Semanal(Hrs):</label>
-                            <input type="text" class="form-control" name="t_operacion_sem" onchange="calcular();" on id="t_operacion_sem" >
+                            <input type="text" class="form-control" name="t_operacion_sem" onchange="calcular();" id="t_operacion_sem" >
                           </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <label>Consumo Semana(Kwh):</label>
@@ -115,7 +116,7 @@ if ($_SESSION['exterior']==1)
                           </div>
                           <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <label>Fecha:</label>
-                            <input type="date" class="form-control" name="fecha" id="fecha" >
+                            <input type="date" class="form-control" readonly="" name="fecha" id="fecha" >
                           </div>
                           <!--Inicio de otra nueva fila
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">

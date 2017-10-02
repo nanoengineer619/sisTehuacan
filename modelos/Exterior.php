@@ -21,8 +21,7 @@ Class Exterior
 	//Implementamos un método para editar registros
 	public function editar($idexterior,$nombre,$cantidad,$funcionando,$potencia_unidad,$instalada_watts,$instalada_kw,$t_operacion_sem,$cons_semana,$t_op_mensual,$cons_mes,$cons_semestre,$fundidas,$fecha)
 	{
-		$sql="UPDATE exterior SET nombre='$nombre',cantidad='$cantidad',funcionando='$funcionando',potencia_unidad='$potencia_unidad,instalada_watts='$instalada_watts',instalada_kw='$instalada_kw',
-		t_operacion_sem='$t_operacion_sem'cons_semana='$cons_semana',t_op_mensual='$t_op_mensual',cons_mes='$cons_mes',cons_semestre='$cons_semestre',fundidas='$fundidas',fecha='$fecha' WHERE idexterior='$idexterior'";
+		$sql="UPDATE exterior SET nombre='$nombre',cantidad='$cantidad',funcionando='$funcionando',potencia_unidad='$potencia_unidad',instalada_watts='$instalada_watts',instalada_kw='$instalada_kw',t_operacion_sem='$t_operacion_sem',cons_semana='$cons_semana',t_op_mensual='$t_op_mensual',cons_mes='$cons_mes',cons_semestre='$cons_semestre',fundidas='$fundidas',fecha='$fecha' WHERE idexterior='$idexterior'";
 		return ejecutarConsulta($sql);
 	}
 	//Implementamos un método para eliminar un registro
