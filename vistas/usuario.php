@@ -109,36 +109,36 @@ if ($_SESSION['acceso']==1)
                         </form>
                     </div>
                     <!--Boton para lanzar el modal del cambio de contraseña-->
-<div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12">
-  <br>
-  <a data-toggle="modal" href="#myModal">
-    <button  id="cambiarPass" type="button" class="btn btn-warning form-control"> <span class="fa fa-plus"></span>Cambiar Contraseña</button>
-  </a>
-</div>
+                    <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                      <br>
+                      <a data-toggle="modal" href="#myModal">
+                        <button  id="cambiarPass" type="button" class="btn btn-warning form-control"> <span class="fa fa-plus"></span>Cambiar Contraseña</button>
+                      </a>
+                    </div>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Cambiar contraseña</h4>
-      </div>
-      <div class="modal-body">
-          <form name="formularioCambiarPassword" id="formularioCambiarPassword" method="POST">
-            <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <input type="password" class="form-control" name="clave" id="clave" maxlength="64" placeholder="Contraseña">
-            </div>
-            <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <button class="btn btn-primary" type="submit" id="btnGuardarPass"><i class="fa fa-save"></i> Guardar</button>
-            </div>
-          </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-      </div>
-    </div>
-  </div>
-</div>
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Cambiar contraseña</h4>
+                          </div>
+                          <div class="modal-body">
+                              <form name="formularioCambiarPassword" id="formularioCambiarPassword" method="POST">
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                  <input type="password" class="form-control" name="clave" id="clave" maxlength="64" placeholder="Contraseña">
+                                </div>
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                  <button class="btn btn-primary" type="submit" id="btnGuardarPass"><i class="fa fa-save"></i> Guardar</button>
+                                </div>
+                              </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     <!--Fin centro -->
                   </div><!-- /.box -->
               </div><!-- /.col -->

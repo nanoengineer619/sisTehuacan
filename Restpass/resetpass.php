@@ -8,7 +8,10 @@
     <link rel="stylesheet" href="../public/css/bootstrap.min.css">
     <link rel="stylesheet" href="../public/css/font-awesome.css">
   </head>
-  <body>
+  <body style="background: #4B8A72;">
+   <br>
+   <br>
+   <br>
    <br>
    <br>
    <br>
@@ -20,7 +23,7 @@
             <div class="panel-heading"> Restaurar contraseña </div>
             <div class="panel-body">
               <div class="form-group">
-                <label for="email"> Escribe el email asociado a tu cuenta para recuperar tu contraseña </label>
+                <label for="email"> <span>Escribe el email asociado a tu cuenta para recuperar tu contraseña </span></label>
                 <input type="email" id="email" class="form-control" name="email" placeholder="Email">
               </div>
               <div class="form-group col-xs-6">
